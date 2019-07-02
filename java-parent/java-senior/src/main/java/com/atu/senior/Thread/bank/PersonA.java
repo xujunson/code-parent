@@ -1,4 +1,4 @@
-package com.atu.senior.thread.bank;
+package com.atu.senior.Thread.bank;
 
 /**
  * @Author : xsy
@@ -6,20 +6,22 @@ package com.atu.senior.thread.bank;
  * @Description :
  */
 
-public class PersonB extends Thread {
+public class PersonA extends Thread {
+
     Bank bank;
 
     String mode;
 
-    public PersonB(Bank bank, String mode) {
-        this.bank = bank;
+    public PersonA(Bank bank, String mode) {
         this.mode = mode;
+        this.bank = bank;
     }
 
     public void run() {
-        while (bank.money >= 200) {
+
+        while (bank.money >= 100) {
             try {
-                bank.outMoney(200, mode);
+                bank.outMoney(100, mode);
             } catch (Exception e1) {
                 // TODO Auto-generated catch block
                 e1.printStackTrace();
@@ -31,7 +33,6 @@ public class PersonB extends Thread {
                 e.printStackTrace();
             }
         }
-
     }
 }
 

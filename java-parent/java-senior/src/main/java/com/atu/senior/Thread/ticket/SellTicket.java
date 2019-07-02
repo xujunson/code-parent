@@ -1,4 +1,4 @@
-package com.atu.senior.thread.ticket;
+package com.atu.senior.Thread.ticket;
 
 /**
  * @Author : xsy

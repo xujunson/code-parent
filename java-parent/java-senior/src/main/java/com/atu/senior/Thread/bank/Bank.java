@@ -1,4 +1,4 @@
-package com.atu.senior.thread.bank;
+package com.atu.senior.Thread.bank;
 
 import java.util.Objects;
 
