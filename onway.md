@@ -360,3 +360,17 @@ https://www.runoob.com/kotlin/kotlin-tutorial.html
 
 4、Java多线程
 https://blog.csdn.net/wanliguodu/article/details/81005560
+
+-----------------------------2019-07-08--------------------------------
+1、List分组
+  1) Map<String, List<T>> map = new HashMap<>();
+  Iterator iterator = refundGroupBank.map().iterator();
+  while (iterator.hasNext()) {...}
+  
+  2)Collectors.groupingBy
+  Map<String, List<Map<String, Object>>> glist = mapList.stream().collect(Collectors.groupingBy(e -> e.get("XXX").toString() + e.get("BBB")));
+  
+2、Spring IOC
+	控制反转是一种通过描述（XML或注解）并通过第三方去生产或获取特定对象的方式。
+	在Spring中实现控制反转的是IoC容器，其实现方法是依赖注入（Dependency Injection,DI）。
+https://www.cnblogs.com/wang-meng/p/5597490.html
