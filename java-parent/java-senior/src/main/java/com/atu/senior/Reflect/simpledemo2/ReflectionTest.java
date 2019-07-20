@@ -13,7 +13,7 @@ public class ReflectionTest {
 
     @Test
     public void testGetParentField() throws Exception{
-        Class c1 = Class.forName("com.jqka.simpledemo2.Son");
+        Class c1 = Class.forName("com.atu.senior.Reflect.simpledemo2.Son");
         //获取父类私有属性值
         System.out.println(getFieldValue(c1.newInstance(),"privateField"));
     }

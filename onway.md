@@ -374,3 +374,30 @@ https://blog.csdn.net/wanliguodu/article/details/81005560
 	控制反转是一种通过描述（XML或注解）并通过第三方去生产或获取特定对象的方式。
 	在Spring中实现控制反转的是IoC容器，其实现方法是依赖注入（Dependency Injection,DI）。
 https://www.cnblogs.com/wang-meng/p/5597490.html
+
+-----------------------------2019-07-15--------------------------------
+1、事务（Transactional）
+    默认情况下，只有来自外部的方法调用才会被AOP代理捕获，
+也就是，类内部方法调用本类内部的其他方法并不会引起事务行为，
+即使被调用方法使用@Transactional注解进行修饰。
+status.isNewTransaction()如果是新的事务，才会提交！！
+
+2、死锁
+--查看锁表sql
+select sess.sid, 
+    sess.serial#, 
+    lo.oracle_username, 
+    lo.os_user_name, 
+    ao.object_name, 
+    lo.locked_mode,
+    logon_time
+    from v$locked_object lo, 
+    dba_objects ao, 
+    v$session sess 
+where ao.object_id = lo.object_id and lo.session_id = sess.sid;
+
+--杀掉进程
+alter system kill session '7927, 5231';
+
+oracle中“ORA-00060: 等待资源时检测到死锁” 或存储过程编译卡死 解决方法：
+https://www.cnblogs.com/xielong/p/10716640.html

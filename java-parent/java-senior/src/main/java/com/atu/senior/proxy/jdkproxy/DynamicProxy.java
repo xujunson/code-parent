@@ -1,0 +1,33 @@
+package com.atu.senior.proxy.jdkproxy;
+
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
+
+/**
+ * @Author: ta0567
+ * @Date: 2019/7/20 11:09
+ * @Description: JDK自带的动态代理
+ */
+public class DynamicProxy implements InvocationHandler {
+    private Object object;
+
+    public DynamicProxy(Object animal) {
+        this.object = animal;
+    }
+
+    @Override
+    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        if (method.getName().equals("makeFood")) {
+            System.out.println("动态代理帮你做饭");
+            return null;
+        } else {
+            return method.invoke(object, args);
+        }
+
+    }
+
+    public Object getAnimalProxy() {
+        return Proxy.newProxyInstance(this.getClass().getClassLoader(), object.getClass().getInterfaces(), this);
+    }
+}
