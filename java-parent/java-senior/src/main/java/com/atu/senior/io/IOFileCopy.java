@@ -14,7 +14,7 @@ public class IOFileCopy {
         //writeFile();
 
         //按照单个字符读取
-        readByCharacter();
+        //readByCharacter();
 
         //按照字符组读取
         //readByCharacterArray();
@@ -22,9 +22,11 @@ public class IOFileCopy {
         //对已存在的文件进行续写(不会覆盖原来的数据但是,只能写一次)
         //writeFileContinue();
 
-        //将F盘的文件拷贝到D盘
-        //copyFileFromFtoD();
+        //将E盘的文件拷贝到F盘
+        //copyFileFromEtoF();
 
+        //字符缓冲流的写
+        //bufferedWriter();
         //字符缓冲流的读取
 		/*缓冲区的出现时为了提高流的操作效率而出现的.
 		需要被提高效率的流作为参数传递给缓冲区的构造函数
@@ -35,27 +37,26 @@ public class IOFileCopy {
 				--李白*/
         //bufferedReader();
 
-        //字符缓冲流的写
-        //bufferedWriter();
+
 
 
         //媒体流的时候就会用到字节流
-        //将F盘的图片拷贝到D盘
-        //copyPictureFromDtoF();
+        //将F盘的图片拷贝到E盘
+        copyPictureFromEtoF();
 
-        //将F盘的音乐复制到D盘
-        //copyMP3FromFtoD();
+        //将F盘的音乐复制到E盘
+        //copyMP3FromFtoE();
 
 
     }
 
 
-    private static void copyMP3FromFtoD() {
+    private static void copyMP3FromFtoE() {
         FileInputStream fi = null;
         FileOutputStream fo = null;
         try {
             fi = new FileInputStream("F:\\aa\\guoge.mp3");
-            fo = new FileOutputStream("D:/guoge_copy.mp3");
+            fo = new FileOutputStream("E:/guoge_copy.mp3");
             byte[] buf = new byte[1024];
             int n = 0;
             while ((n = (fi.read(buf))) != -1) {
@@ -76,13 +77,13 @@ public class IOFileCopy {
     }
 
 
-    private static void copyPictureFromDtoF() {
+    private static void copyPictureFromEtoF() {
         FileInputStream fi = null;
         FileOutputStream fo = null;
 
         try {
-            fi = new FileInputStream("F:\\aa\\004.png");
-            fo = new FileOutputStream("D:\\004_copy.png");
+            fi = new FileInputStream("F:\\aa\\001.jpg");
+            fo = new FileOutputStream("E:\\001_copy.jpg");
             byte[] buf = new byte[1024];
             int n = 0;
             while ((n = fi.read(buf)) != -1) {
@@ -108,7 +109,7 @@ public class IOFileCopy {
         FileWriter file = null;
         BufferedWriter bw = null;
         try {
-            file = new FileWriter("F:\\aa\\bb.txt", true);
+            file = new FileWriter("E:\\aa\\bb.txt", true);
             bw = new BufferedWriter(file);
 
             //跨平台的换行符
@@ -135,7 +136,7 @@ public class IOFileCopy {
     private static void bufferedReader() {
         FileReader file = null;
         try {
-            file = new FileReader("F:\\aa\\bb.txt");
+            file = new FileReader("E:\\aa\\bb.txt");
 
             BufferedReader br = new BufferedReader(file);
             while (true) {
@@ -161,12 +162,12 @@ public class IOFileCopy {
         }
     }
 
-    private static void copyFileFromFtoD() {
+    private static void copyFileFromEtoF() {
         FileWriter fw = null;
         FileReader fr = null;
         try {
-            fw = new FileWriter("D:\\test20180224.txt", true);
-            fr = new FileReader("F:\\aa\\test.txt");
+            fw = new FileWriter("F:\\test20190724.txt", true);
+            fr = new FileReader("E:\\aa\\test.txt");
             char[] buf = new char[11];
             int n = 0;
             while ((n = fr.read(buf)) != -1) {
@@ -189,7 +190,7 @@ public class IOFileCopy {
     private static void writeFileContinue() {
         FileWriter file = null;
         try {
-            file = new FileWriter("F:\\aa\\test.txt", true);
+            file = new FileWriter("E:\\aa\\test.txt", true);
             file.write("(这是续写内容)");
             file.flush();
         } catch (IOException e) {
@@ -232,7 +233,7 @@ public class IOFileCopy {
         FileReader file = null;
         try {
             //创建FileReader并指定要读取的文件
-            file = new FileReader("F:\\aa\\test.txt");
+            file = new FileReader("E:\\aa\\test.txt");
             char[] buf = new char[11];
 
             int n = 0;
