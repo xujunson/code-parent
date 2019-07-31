@@ -401,3 +401,20 @@ alter system kill session '7927, 5231';
 
 oracle中“ORA-00060: 等待资源时检测到死锁” 或存储过程编译卡死 解决方法：
 https://www.cnblogs.com/xielong/p/10716640.html
+
+-----------------------------2019-07-31--------------------------------
+https://mp.weixin.qq.com/s/dlVXW6aW4wLcLpey9NxPig
+https://mp.weixin.qq.com/s/9LnAcITnQM7O8A3ziLqZDA
+https://mp.weixin.qq.com/s?__biz=MjM5NzMyMjAwMA==&mid=2651482688&idx=1&sn=e2b51a4597c461ba1a2eb2c715733c96&chksm=bd25063f8a528f2974540cc9461bd2d45c6546029a612fb864b5e5bf6a0ad0e97db812ba5dd5&scene=0#rd
+https://mp.weixin.qq.com/s/NGwrWwazycqtbFOZSV1Arw
+https://mp.weixin.qq.com/s/g41txKIWYmEUWwR_xCF71Q
+https://mp.weixin.qq.com/s/M8RNnmHS-N8pZC9TbY2IJw
+https://mp.weixin.qq.com/s/dYzClrr65L_p_deFDvCwVQ
+https://mp.weixin.qq.com/s/S9jiO_e-_CKRgNnzAU5Z0Q
+https://mp.weixin.qq.com/s/evYERBgR5vV_hir2r_N85Q
+
+
+多线程：
+https://mp.weixin.qq.com/s/WNrcvlfJr8sYF9uuQFFHvQ
+https://mp.weixin.qq.com/s/KfIQYdvH0lxJYIxMILq9fQ
+https://mp.weixin.qq.com/s/dYzClrr65L_p_deFDvCwVQ
