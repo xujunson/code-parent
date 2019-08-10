@@ -30,7 +30,7 @@ public class RedisTest {
     public void testSpringRedis() {
         // stringRedisTemplate的操作
         // String读写
-        //redisTemplate.delete("myStr");
+        redisTemplate.delete("myStr");
         redisTemplate.opsForValue().set("myStr", "skyLine");
         System.out.println(redisTemplate.opsForValue().get("myStr"));
         System.out.println("---------------");
