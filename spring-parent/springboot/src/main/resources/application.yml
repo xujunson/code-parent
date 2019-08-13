@@ -1,0 +1,20 @@
+#server
+server:
+  port: 9090
+  tomcat:
+    uri-encoding: UTF-8  
+
+#spring
+spring:
+  #redis
+  redis:
+    #database:9
+    host: 127.0.0.1
+    port: 6379
+    ##password: 111111
+    database: 9
+    pool:
+      max-idle: 8
+      min-idle: 0
+      max-active: 8 
+      max-wait: -1
