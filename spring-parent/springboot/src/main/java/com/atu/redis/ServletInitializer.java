@@ -1,5 +1,6 @@
 package com.atu.redis;
 
+import com.atu.SpringBootDemoHelloApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
