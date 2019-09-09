@@ -16,8 +16,7 @@ import java.math.BigDecimal;
 @RestController
 public class ProductController {
 
-    @RequestMapping("/get_product1")
-    @ResponseBody
+    @GetMapping("/get_product1")
     public Product get_product1() {
         return new Product(1, "ProductA", BigDecimal.valueOf(6666.0));
     }
@@ -31,7 +30,6 @@ public class ProductController {
     public String get_product3(Product product) {
         return product.toString();
     }
-
 
     @PostMapping("/post_product1")
     public String post_product1(Product product) {
