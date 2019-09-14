@@ -6,6 +6,8 @@ import com.emo.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 /**
  * @author ：ta0567
  * @date ：Created in 2019/9/12 10:56
@@ -19,7 +21,8 @@ public class TestServiceImpl implements TestService {
     @Override
     public int addInfo() {
         User user = new User();
-
+        user.setUserId(UUID.randomUUID().toString());
+        user.setUsername("khoou");
         return testDaoImpl.addInfo(user);
     }
 }
