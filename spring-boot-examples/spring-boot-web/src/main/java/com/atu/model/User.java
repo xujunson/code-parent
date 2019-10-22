@@ -10,6 +10,9 @@ import java.io.Serializable;
 
 @Data
 @Entity
+/**
+ * Entity 中不映射成列的字段得加 @Transient 注解，不加注解也会映射成列
+ */
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
