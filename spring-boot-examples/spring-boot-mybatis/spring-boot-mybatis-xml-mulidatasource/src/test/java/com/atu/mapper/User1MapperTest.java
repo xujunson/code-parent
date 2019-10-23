@@ -1,8 +1,8 @@
 package com.atu.mapper;
 
-import com.atu.enums.UserSexEnum;
 import com.atu.mapper.test1.User1Mapper;
 import com.atu.model.User;
+import com.atu.enums.UserSexEnum;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -43,9 +43,9 @@ public class User1MapperTest {
     public void testUpdate() throws Exception {
         User user = userMapper.getOne(6l);
         System.out.println(user.toString());
-        user.setNickName("atu");
+        user.setNickName("neo");
         userMapper.update(user);
-        Assert.assertTrue(("atu".equals(userMapper.getOne(6l).getNickName())));
+        Assert.assertTrue(("neo".equals(userMapper.getOne(6l).getNickName())));
     }
 
 }

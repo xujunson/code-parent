@@ -36,13 +36,13 @@ public class TestRedis {
         operations.set("com.atu", user);
         operations.set("com.atu.f", user, 1, TimeUnit.SECONDS);
         Thread.sleep(1000);
-        //redisTemplate.delete("com.neo.f");
+        //redisTemplate.delete("com.atu.f");
         boolean exists = redisTemplate.hasKey("com.atu.f");
         if (exists) {
             System.out.println("exists is true");
         } else {
             System.out.println("exists is false");
         }
-        // Assert.assertEquals("aa", operations.get("com.neo.f").getUserName());
+        // Assert.assertEquals("aa", operations.get("com.atu.f").getUserName());
     }
 }

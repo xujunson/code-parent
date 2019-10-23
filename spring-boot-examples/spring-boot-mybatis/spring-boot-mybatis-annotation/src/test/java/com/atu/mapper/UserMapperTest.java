@@ -39,9 +39,9 @@ public class UserMapperTest {
     public void testUpdate() throws Exception {
         User user = userMapper.getOne(30l);
         System.out.println(user.toString());
-        user.setNickName("neo");
+        user.setNickName("atu");
         userMapper.update(user);
-        Assert.assertTrue(("neo".equals(userMapper.getOne(30l).getNickName())));
+        Assert.assertTrue(("atu".equals(userMapper.getOne(30l).getNickName())));
     }
 
 }
