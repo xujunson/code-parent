@@ -10,7 +10,6 @@
     <modules>
         <module>java-basic</module>
         <module>java-senior</module>
-        <module>java-senior</module>
     </modules>
     <packaging>pom</packaging>
 
