@@ -19,7 +19,7 @@ import java.util.Set;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:applicationContext-*.xml")
+@ContextConfiguration("classpath:applicationContext-redis.xml")
 @SuppressWarnings("all")
 public class RedisTest {
 
