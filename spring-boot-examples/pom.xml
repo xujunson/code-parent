@@ -10,10 +10,21 @@
     <name>spring-boot-examples</name>
     <description>spring-boot-examples parent!</description>
     <modules>
-        <module>spring-boot-web</module>
-        <module>spring-boot-redis</module>
+        <module>spring-boot-async</module>
+        <module>spring-boot-file-upload</module>
+        <module>spring-boot-mail</module>
         <module>spring-boot-mybatis/spring-boot-mybatis-annotation</module>
         <module>spring-boot-mybatis/spring-boot-mybatis-annotation-mulidatasource</module>
+        <module>spring-boot-mybatis/spring-boot-mybatis-xml</module>
+        <module>spring-boot-mybatis/spring-boot-mybatis-xml-mulidatasource</module>
+        <module>spring-boot-rabbitmq</module>
+        <module>spring-boot-redis</module>
+        <module>spring-boot-scheduler</module>
+        <module>spring-boot-shiro</module>
+        <module>spring-boot-web</module>
+        <module>sprint-boot-jpa-thymeleaf-crud</module>
+        <module>sprint-boot-ws</module>
     </modules>
+
 
 </project>
