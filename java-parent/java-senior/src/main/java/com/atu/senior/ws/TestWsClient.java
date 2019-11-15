@@ -29,7 +29,7 @@ public class TestWsClient {
         String receive_str = "";
         try {
             call = (Call) serv.createCall();
-            call.setTargetEndpointAddress("http://192.162.130.160:9002/cmbagent-web/AgentCustomerService?wsdl");
+            call.setTargetEndpointAddress("http://127.0.0.1:7001/cmbagent-web/AgentCustomerService?wsdl");
             call.setOperationName(new QName("http://com/wtkj/zwgl/agent/web/webservice", "RequestByClient"));
             call.addParameter(new QName("http://com/wtkj/zwgl/agent/web/webservice", "Request_Type"), org.apache.axis.encoding.XMLType.XSD_STRING, javax.xml.rpc.ParameterMode.IN);
             call.addParameter(new QName("http://com/wtkj/zwgl/agent/web/webservice", "Request_Content"), org.apache.axis.encoding.XMLType.XSD_STRING, javax.xml.rpc.ParameterMode.IN);
@@ -112,29 +112,13 @@ public class TestWsClient {
 
     public static void main(String[] args) {
 
-        sendToTrafficSys("1401","<?xml version=\"1.0\" encoding=\"GB2312\"?><Message xmlns=\"http://www.zwgl.wtkj.com/CustomerRequest1401\">\n" +
+        sendToTrafficSys("1404","<?xml version=\"1.0\" encoding=\"GB2312\"?><Message xmlns=\"http://www.zwgl.wtkj.com/CustomerRequest1404\">\n" +
                 "<AuthInfo><UserName>sa</UserName><Password>CF79AE6ADDBA60AD018347359BD144D2</Password>\n" +
                 "</AuthInfo><Detail>\n" +
-                "<ClientNo>600000001</ClientNo>\n" +
-                "<Complainant>BBB</Complainant>\n" +
-                "<ComplainantTel>13218191011</ComplainantTel>\n" +
-                "<EtcCardType>ABC</EtcCardType>\n" +
-                "<ClientType>0</ClientType>\n" +
-                "<CarNumber>¾©A99999</CarNumber>\n" +
-                "<VehColor>0</VehColor>\n" +
-                "<HasObu>1</HasObu>\n" +
-                "<ObuNumber>11111111111</ObuNumber>\n" +
-                "<ComplainType>1</ComplainType>\n" +
-                "<ComplainLevel>1</ComplainLevel>\n" +
-                "<TollStationType>1</TollStationType>\n" +
-                "<TollStation>111111</TollStation>\n" +
-                "<CashPayment>1</CashPayment>\n" +
-                "<InvoiceNumber>111111111</InvoiceNumber>\n" +
-                "<OccurredOn>2019-10-02T16:26:46</OccurredOn>\n" +
-                "<EtcCardNumber>1111111111</EtcCardNumber>\n" +
-                "<Description>hhhhhhhhhhhh</Description>\n" +
-                "<Type>1</Type>\n" +
-                "<ComplainId>C055028B-D0DD-C3D2-1BB3-20AF4719C050</ComplainId>\n" +
+                "<Tel>\n" +
+                "13000000000</Tel>\n" +
+                "<CurrentPage>1</CurrentPage>\n" +
+                "<PageSize>6</PageSize>\n" +
                 "</Detail></Message>");
 
     }
