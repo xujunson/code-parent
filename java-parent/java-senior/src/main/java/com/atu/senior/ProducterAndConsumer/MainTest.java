@@ -4,9 +4,9 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 /**
- * @author £ºmark
- * @date £ºCreated in 2019/10/24 17:41
- * @description£ºhttps://www.cnblogs.com/hankzhouAndroid/p/8693278.html
+ * @author ï¼šmark
+ * @date ï¼šCreated in 2019/10/24 17:41
+ * @descriptionï¼šhttps://www.cnblogs.com/hankzhouAndroid/p/8693278.html
  */
 public class MainTest {
     public static void main(String[] args) {
@@ -16,16 +16,16 @@ public class MainTest {
     private static final long waitTime = 3000;
 
     private static void test() {
-        Queue<Integer> queue = new LinkedList<>();// ¶ÓÁĞ¶ÔÏó,Ëü¾ÍÊÇËùÎ½µÄ¡°Ëø¡±
-        int maxsize = 2;// ¶ÓÁĞÖĞµÄ×î´óÔªËØ¸öÊıÏŞÖÆ
+        Queue<Integer> queue = new LinkedList<>();// é˜Ÿåˆ—å¯¹è±¡,å®ƒå°±æ˜¯æ‰€è°“çš„â€œé”â€
+        int maxsize = 2;// é˜Ÿåˆ—ä¸­çš„æœ€å¤§å…ƒç´ ä¸ªæ•°é™åˆ¶
 
-        // ÏÂÃæ4¸öÏß³Ì£¬Ò»Ë²¼äÖ»ÄÜÓĞÒ»¸öÏß³Ì»ñµÃ¸Ã¶ÔÏóµÄËø£¬¶ø½øÈëÍ¬²½´úÂë¿é
+        // ä¸‹é¢4ä¸ªçº¿ç¨‹ï¼Œä¸€ç¬é—´åªèƒ½æœ‰ä¸€ä¸ªçº¿ç¨‹è·å¾—è¯¥å¯¹è±¡çš„é”ï¼Œè€Œè¿›å…¥åŒæ­¥ä»£ç å—
         Producer producer = new Producer(queue, maxsize, "Producer");
         Consumer consumer1 = new Consumer(queue, maxsize, "Consumer1");
         Consumer consumer2 = new Consumer(queue, maxsize, "Consumer2");
         Consumer consumer3 = new Consumer(queue, maxsize, "Consumer3");
 
-        // ÆäÊµËæ±ãÏÈÆô¶¯ÄÄ¸ö¶¼ÎŞËùÎ½£¬ÒòÎªÖ»ÓĞÒ»¸öËø£¬Ã¿Ò»´ÎÖ»»áÓĞÒ»¸öÏß³ÌÄÜ³ÖÓĞÕâ¸öËø£¬À´²Ù×÷queue
+        // å…¶å®éšä¾¿å…ˆå¯åŠ¨å“ªä¸ªéƒ½æ— æ‰€è°“ï¼Œå› ä¸ºåªæœ‰ä¸€ä¸ªé”ï¼Œæ¯ä¸€æ¬¡åªä¼šæœ‰ä¸€ä¸ªçº¿ç¨‹èƒ½æŒæœ‰è¿™ä¸ªé”ï¼Œæ¥æ“ä½œqueue
         producer.start();
         consumer2.start();
         consumer1.start();
@@ -33,11 +33,11 @@ public class MainTest {
     }
 
     /**
-     * Éú²úÕßÏß³Ì
+     * ç”Ÿäº§è€…çº¿ç¨‹
      */
     public static class Producer extends Thread {
-        Queue<Integer> queue;// queue,¶ÔÏóËø
-        int maxsize;// Ã²ËÆÊÇ¶ÓÁĞµÄ×î´ó²úÁ¿
+        Queue<Integer> queue;// queue,å¯¹è±¡é”
+        int maxsize;// è²Œä¼¼æ˜¯é˜Ÿåˆ—çš„æœ€å¤§äº§é‡
 
         Producer(Queue<Integer> queue, int maxsize, String name) {
             this.queue = queue;
@@ -47,35 +47,35 @@ public class MainTest {
 
         @Override
         public void run() {
-            while (true) {// ÎŞÏŞÑ­»·,²»Í£Éú²úÔªËØ£¬Ö±µ½´ïµ½ÉÏÏŞ£¬Ö»Òª´ïµ½ÉÏÏŞ£¬ÄÇ¾ÍwaitµÈ´ı¡£
-                synchronized (queue) {// Í¬²½´úÂë¿é,Ö»ÓĞ³ÖÓĞqueueÕâ¸öËøµÄ¶ÔÏó²ÅÄÜ·ÃÎÊÕâ¸ö´úÂë¿é
+            while (true) {// æ— é™å¾ªç¯,ä¸åœç”Ÿäº§å…ƒç´ ï¼Œç›´åˆ°è¾¾åˆ°ä¸Šé™ï¼Œåªè¦è¾¾åˆ°ä¸Šé™ï¼Œé‚£å°±waitç­‰å¾…ã€‚
+                synchronized (queue) {// åŒæ­¥ä»£ç å—,åªæœ‰æŒæœ‰queueè¿™ä¸ªé”çš„å¯¹è±¡æ‰èƒ½è®¿é—®è¿™ä¸ªä»£ç å—
                     try {
                         Thread.sleep(waitTime);
-                        // sleepºÍwaitµÄÇø±ğ£¬sleep»áÈÃµ±Ç°Ö´ĞĞµÄÏß³Ì×èÈûÒ»¶ÎÊ±¼ä£¬µ«ÊÇ²»»áÊÍ·ÅËø£¬
-                        // µ«ÊÇwait£¬»á×èÈû£¬²¢ÇÒ»áÊÍ·ÅËø
+                        // sleepå’Œwaitçš„åŒºåˆ«ï¼Œsleepä¼šè®©å½“å‰æ‰§è¡Œçš„çº¿ç¨‹é˜»å¡ä¸€æ®µæ—¶é—´ï¼Œä½†æ˜¯ä¸ä¼šé‡Šæ”¾é”ï¼Œ
+                        // ä½†æ˜¯waitï¼Œä¼šé˜»å¡ï¼Œå¹¶ä¸”ä¼šé‡Šæ”¾é”
                     } catch (Exception e) {
                     }
 
-                    System.out.println(this.getName() + "»ñµÃ¶ÓÁĞµÄËø");// Ö»ÓĞÄã»ñµÃÁËqueue¶ÔÏóµÄËø£¬Äã²ÅÄÜÖ´ĞĞµ½ÕâÀï
-                    // Ìõ¼şµÄÅĞ¶ÏÒ»¶¨ÒªÊ¹ÓÃwhile¶ø²»ÊÇif
-                    while (queue.size() == maxsize) {// ÅĞ¶ÏÉú²úÓĞÃ»ÓĞ´ïµ½ÉÏÏŞ,Èç¹û´ïµ½ÁËÉÏÏŞ£¬¾ÍÈÃµ±Ç°Ïß³ÌµÈ´ı
-                        System.out.println("¶ÓÁĞÒÑÂú£¬Éú²úÕß" + this.getName() + "µÈ´ı");
+                    System.out.println(this.getName() + "è·å¾—é˜Ÿåˆ—çš„é”");// åªæœ‰ä½ è·å¾—äº†queueå¯¹è±¡çš„é”ï¼Œä½ æ‰èƒ½æ‰§è¡Œåˆ°è¿™é‡Œ
+                    // æ¡ä»¶çš„åˆ¤æ–­ä¸€å®šè¦ä½¿ç”¨whileè€Œä¸æ˜¯if
+                    while (queue.size() == maxsize) {// åˆ¤æ–­ç”Ÿäº§æœ‰æ²¡æœ‰è¾¾åˆ°ä¸Šé™,å¦‚æœè¾¾åˆ°äº†ä¸Šé™ï¼Œå°±è®©å½“å‰çº¿ç¨‹ç­‰å¾…
+                        System.out.println("é˜Ÿåˆ—å·²æ»¡ï¼Œç”Ÿäº§è€…" + this.getName() + "ç­‰å¾…");
                         try {
-                            queue.wait();// ÈÃµ±Ç°Ïß³ÌµÈ´ı£¬Ö±µ½ÆäËûÏß³Ìµ÷ÓÃnotifyAll
+                            queue.wait();// è®©å½“å‰çº¿ç¨‹ç­‰å¾…ï¼Œç›´åˆ°å…¶ä»–çº¿ç¨‹è°ƒç”¨notifyAll
                         } catch (Exception e) {
                         }
                     }
 
-                    // ÏÂÃæĞ´µÄ¾ÍÊÇÉú²ú¹ı³Ì
+                    // ä¸‹é¢å†™çš„å°±æ˜¯ç”Ÿäº§è¿‡ç¨‹
                     int num = (int) (Math.random() * 100);
-                    queue.offer(num);// ½«Ò»¸öintÊı×Ö²åÈëµ½¶ÓÁĞÖĞ
+                    queue.offer(num);// å°†ä¸€ä¸ªintæ•°å­—æ’å…¥åˆ°é˜Ÿåˆ—ä¸­
 
-                    System.out.println(this.getName() + "Éú²úÒ»¸öÔªËØ£º" + num);
-                    // »½ĞÑÆäËûÏß³Ì£¬ÔÚÕâÀï°¸ÀıÖĞÊÇ "µÈ´ıÖĞ"µÄÏû·ÑÕßÏß³Ì
-                    queue.notifyAll();// (×¢£ºnotifyAllµÄ×÷ÓÃÊÇ
-                    // »½ĞÑËùÓĞ³ÖÓĞqueue¶ÔÏóËøµÄÕıÔÚµÈ´ıµÄÏß³Ì)
+                    System.out.println(this.getName() + "ç”Ÿäº§ä¸€ä¸ªå…ƒç´ ï¼š" + num);
+                    // å”¤é†’å…¶ä»–çº¿ç¨‹ï¼Œåœ¨è¿™é‡Œæ¡ˆä¾‹ä¸­æ˜¯ "ç­‰å¾…ä¸­"çš„æ¶ˆè´¹è€…çº¿ç¨‹
+                    queue.notifyAll();// (æ³¨ï¼šnotifyAllçš„ä½œç”¨æ˜¯
+                    // å”¤é†’æ‰€æœ‰æŒæœ‰queueå¯¹è±¡é”çš„æ­£åœ¨ç­‰å¾…çš„çº¿ç¨‹)
 
-                    System.out.println(this.getName() + "ÍË³öÒ»´ÎÉú²ú¹ı³Ì£¡");
+                    System.out.println(this.getName() + "é€€å‡ºä¸€æ¬¡ç”Ÿäº§è¿‡ç¨‹ï¼");
                 }
             }
         }
@@ -94,29 +94,29 @@ public class MainTest {
         @Override
         public void run() {
             while (true) {
-                synchronized (queue) {// ÒªÏë½øÈëÏÂÃæµÄ´úÂë£¬¾Í±ØĞëÏÈ»ñµÃËø¡£
+                synchronized (queue) {// è¦æƒ³è¿›å…¥ä¸‹é¢çš„ä»£ç ï¼Œå°±å¿…é¡»å…ˆè·å¾—é”ã€‚
                     try {
-                        Thread.sleep(waitTime);// sleep£¬ÈÃµ±Ç°Ïß³Ì×èÈûÖ¸¶¨Ê±³¤£¬µ«ÊÇ²¢²»»áÊÍ·ÅqueueËø
+                        Thread.sleep(waitTime);// sleepï¼Œè®©å½“å‰çº¿ç¨‹é˜»å¡æŒ‡å®šæ—¶é•¿ï¼Œä½†æ˜¯å¹¶ä¸ä¼šé‡Šæ”¾queueé”
                     } catch (Exception e) {
                     }
 
-                    System.out.println(this.getName() + "»ñµÃ¶ÓÁĞµÄËø");// ÄÃµ½ÁËËø£¬²ÅÄÜÖ´ĞĞµ½ÕâÀï
-                    // Ìõ¼şµÄÅĞ¶ÏÒ»¶¨ÒªÊ¹ÓÃwhile¶ø²»ÊÇif,
-                    while (queue.isEmpty()) {// whileÅĞ¶Ï¶ÓÁĞÊÇ·ñÎª¿Õ£¬Èç¹ûÎª¿Õ£¬µ±Ç°Ïû·ÑÕßÏß³Ì¾Í±ØĞëwait£¬µÈÉú²úÕßÏÈÉú²úÔªËØ
-                        // ÕâÀï£¬Ïû·ÑÕßÓĞ¶à¸ö£¨ÒòÎªÓĞ¶à¸öconsumerÏß³Ì£©£¬Ã¿Ò»¸öÏû·ÑÕßÈç¹û·¢ÏÖÁË¶ÓÁĞ¿ÕÁË£¬¾Í»áwait¡£
-                        System.out.println("¶ÓÁĞÎª¿Õ£¬Ïû·ÑÕß" + this.getName() + "µÈ´ı");
+                    System.out.println(this.getName() + "è·å¾—é˜Ÿåˆ—çš„é”");// æ‹¿åˆ°äº†é”ï¼Œæ‰èƒ½æ‰§è¡Œåˆ°è¿™é‡Œ
+                    // æ¡ä»¶çš„åˆ¤æ–­ä¸€å®šè¦ä½¿ç”¨whileè€Œä¸æ˜¯if,
+                    while (queue.isEmpty()) {// whileåˆ¤æ–­é˜Ÿåˆ—æ˜¯å¦ä¸ºç©ºï¼Œå¦‚æœä¸ºç©ºï¼Œå½“å‰æ¶ˆè´¹è€…çº¿ç¨‹å°±å¿…é¡»waitï¼Œç­‰ç”Ÿäº§è€…å…ˆç”Ÿäº§å…ƒç´ 
+                        // è¿™é‡Œï¼Œæ¶ˆè´¹è€…æœ‰å¤šä¸ªï¼ˆå› ä¸ºæœ‰å¤šä¸ªconsumerçº¿ç¨‹ï¼‰ï¼Œæ¯ä¸€ä¸ªæ¶ˆè´¹è€…å¦‚æœå‘ç°äº†é˜Ÿåˆ—ç©ºäº†ï¼Œå°±ä¼šwaitã€‚
+                        System.out.println("é˜Ÿåˆ—ä¸ºç©ºï¼Œæ¶ˆè´¹è€…" + this.getName() + "ç­‰å¾…");
                         try {
                             queue.wait();
                         } catch (Exception e) {
                         }
                     }
 
-                    // Èç¹û¶ÓÁĞ²»ÊÇ¿Õ£¬ÄÇÃ´¾Íµ¯³öÒ»¸öÔªËØ
+                    // å¦‚æœé˜Ÿåˆ—ä¸æ˜¯ç©ºï¼Œé‚£ä¹ˆå°±å¼¹å‡ºä¸€ä¸ªå…ƒç´ 
                     int num = queue.poll();
-                    System.out.println(this.getName() + "Ïû·ÑÒ»¸öÔªËØ£º" + num);
-                    queue.notifyAll();// È»ºóÔÙ»½ĞÑËùÓĞÏß³Ì,»½ĞÑ²»»áÊÍ·Å×Ô¼ºµÄËø
+                    System.out.println(this.getName() + "æ¶ˆè´¹ä¸€ä¸ªå…ƒç´ ï¼š" + num);
+                    queue.notifyAll();// ç„¶åå†å”¤é†’æ‰€æœ‰çº¿ç¨‹,å”¤é†’ä¸ä¼šé‡Šæ”¾è‡ªå·±çš„é”
 
-                    System.out.println(this.getName() + "ÍË³öÒ»´ÎÏû·Ñ¹ı³Ì£¡");
+                    System.out.println(this.getName() + "é€€å‡ºä¸€æ¬¡æ¶ˆè´¹è¿‡ç¨‹ï¼");
                 }
             }
         }

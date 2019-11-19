@@ -3,7 +3,7 @@ package com.atu.senior.Regular;
 /**
  * @Author: ta0567
  * @Date: 2019/7/5 17:37
- * @Description: ÕıÔò±í´ïÊ½
+ * @Description: æ­£åˆ™è¡¨è¾¾å¼
  */
 public class Test {
     public static void main(String[] args) {

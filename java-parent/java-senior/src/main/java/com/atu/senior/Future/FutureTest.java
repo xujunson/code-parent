@@ -5,15 +5,15 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
 
 /**
- * @author £ºta0567
- * @date £ºCreated in 2019/9/25 22:07
- * @description£º${description}
+ * @author ï¼šta0567
+ * @date ï¼šCreated in 2019/9/25 22:07
+ * @descriptionï¼š${description}
  */
 public class FutureTest {
     public static void main(String[] args) throws InterruptedException, ExecutionException {
         long start = System.currentTimeMillis();
 
-        // µÈÁ¹²Ë
+        // ç­‰å‡‰èœ
         Callable ca1 = new Callable() {
 
             @Override
@@ -23,13 +23,13 @@ public class FutureTest {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                return "Á¹²Ë×¼±¸Íê±Ï";
+                return "å‡‰èœå‡†å¤‡å®Œæ¯•";
             }
         };
         FutureTask<String> ft1 = new FutureTask<String>(ca1);
         new Thread(ft1).start();
 
-        // µÈ°ü×Ó -- ±ØĞëÒªµÈ´ı·µ»ØµÄ½á¹û£¬ËùÒÔÒªµ÷ÓÃjoin·½·¨
+        // ç­‰åŒ…å­ -- å¿…é¡»è¦ç­‰å¾…è¿”å›çš„ç»“æœï¼Œæ‰€ä»¥è¦è°ƒç”¨joinæ–¹æ³•
         Callable ca2 = new Callable() {
 
             @Override
@@ -39,7 +39,7 @@ public class FutureTest {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                return "°ü×Ó×¼±¸Íê±Ï";
+                return "åŒ…å­å‡†å¤‡å®Œæ¯•";
             }
         };
         FutureTask<String> ft2 = new FutureTask<String>(ca2);
@@ -49,6 +49,6 @@ public class FutureTest {
         System.out.println(ft2.get());
 
         long end = System.currentTimeMillis();
-        System.out.println("×¼±¸Íê±ÏÊ±¼ä£º" + (end - start));
+        System.out.println("å‡†å¤‡å®Œæ¯•æ—¶é—´ï¼š" + (end - start));
     }
 }

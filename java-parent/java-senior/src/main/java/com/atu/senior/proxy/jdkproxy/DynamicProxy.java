@@ -28,6 +28,7 @@ public class DynamicProxy implements InvocationHandler {
     }
 
     public Object getAnimalProxy() {
+        System.out.println(object.getClass().getInterfaces());
         return Proxy.newProxyInstance(this.getClass().getClassLoader(), object.getClass().getInterfaces(), this);
     }
 }

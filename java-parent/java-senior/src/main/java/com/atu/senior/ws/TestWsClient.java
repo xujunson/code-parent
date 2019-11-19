@@ -35,7 +35,7 @@ public class TestWsClient {
             call.addParameter(new QName("http://com/wtkj/zwgl/agent/web/webservice", "Request_Content"), org.apache.axis.encoding.XMLType.XSD_STRING, javax.xml.rpc.ParameterMode.IN);
             call.setReturnClass(String.class);
             receive_str = (String) call.invoke(new Object[]{request_type, str});
-            System.out.println("返回结果报文" + receive_str);
+            System.out.println("杩斿洖缁撴灉鎶ユ枃" + receive_str);
         } catch (ServiceException e) {
             LOG.error(e.getMessage(), e);
         } catch (RemoteException e) {

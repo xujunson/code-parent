@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:ehcache-spring="http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring"
+       xsi:schemaLocation="http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring/ehcache-spring-1.2.xsd
+
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!-- Spring提供的基于的Ehcache实现的缓存管理器 -->
+    
+    <!-- 如果有多个ehcacheManager要在bean加上p:shared="true" -->
+    <bean id="ehcacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+        <property name="configLocation" value="classpath:ehcache.xml"/>
+    </bean>
+    
+    <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
+        <property name="cacheManager" ref="ehcacheManager"/>
+        <property name="transactionAware" value="true"/>
+    </bean>
+    
+    <!-- cache注解，和spring-redis.xml中的只能使用一个 -->
+    <!--<cache:annotation-driven cache-manager="cacheManager" proxy-target-class="true"/>  -->
+ 	<!--googlecode注解类型的缓存管理器  -->
+    <ehcache-spring:annotation-driven cache-manager="ehcacheManager" proxy-target-class="true"/>
+     <!-- 配置xml扫描方法，实现查询缓存 -->
+ <!--   <cache:advice id="cacheAdvice" cache-manager="cacheManager">
+      <cache:caching cache="myQueryCache">
+      	 <cache:cacheable method="query*" key="#root.targetClass+#root.methodName + #p0"/>
+      	 <cache:cacheable method="get*" key="#root.targetClass+#root.methodName + #p0"/>
+      	 <cache:cacheable method="select*" key="#root.targetClass+#root.methodName + #p0"/>
+      	 <cache:cacheable method="find*" key="#root.targetClass+#root.methodName + #p0"/>
+         <cache:cache-evict method="getDiagramByProDefinitionId_noTrace" all-entries="true"/>
+         <cache:cache-evict method="delete*" all-entries="true"/>
+         <cache:cache-evict method="edit*" all-entries="true"/>
+         <cache:cache-evict method="update*" all-entries="true"/>
+         <cache:cache-evict method="execute*" all-entries="true"/>
+         <cache:cache-evict method="insert*" all-entries="true"/>
+         <cache:cache-evict method="save*" all-entries="true"/>
+      </cache:caching>
+   </cache:advice>
+    
+    <aop:config proxy-target-class="true">
+      <aop:advisor advice-ref="cacheAdvice" pointcut="execution(* com.atuu.service..*Impl.*(..))" />
+   </aop:config>  -->
+     
+</beans>

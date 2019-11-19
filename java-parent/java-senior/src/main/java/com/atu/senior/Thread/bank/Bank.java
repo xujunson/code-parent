@@ -5,29 +5,29 @@ import java.util.Objects;
 /**
  * @Author : xsy
  * @Date : Created in 2018/12/21 10:05
- * @Description : È¡Ç®Àà
+ * @Description : å–é’±ç±»
  */
 public class Bank {
-    // ¼ÙÉèÒ»¸öÕË»§ÓĞ1000¿éÇ®
+    // å‡è®¾ä¸€ä¸ªè´¦æˆ·æœ‰1000å—é’±
     static double money = 1000;
 
-    // ¹ñÌ¨CounterÈ¡Ç®µÄ·½·¨
+    // æŸœå°Counterå–é’±çš„æ–¹æ³•
     private void Counter(double money) {
         Bank.money -= money;
-        System.out.println("¹ñÌ¨È¡Ç®" + money + "Ôª£¬»¹Ê£" + Bank.money + "Ôª£¡");
+        System.out.println("æŸœå°å–é’±" + money + "å…ƒï¼Œè¿˜å‰©" + Bank.money + "å…ƒï¼");
     }
 
-    // ATMÈ¡Ç®µÄ·½·¨
+    // ATMå–é’±çš„æ–¹æ³•
     private void ATM(double money) {
         Bank.money -= money;
-        System.out.println("ATMÈ¡Ç®" + money + "Ôª£¬»¹Ê£" + Bank.money + "Ôª£¡");
+        System.out.println("ATMå–é’±" + money + "å…ƒï¼Œè¿˜å‰©" + Bank.money + "å…ƒï¼");
     }
 
-    //Ìá¹©Ò»¸ö¶ÔÍâÈ¡¿îÍ¾¾¶£¬·ÀÖ¹Ö±½Óµ÷È¡·½·¨Í¬Ê±È¡¿îÊ±£¬²¢·¢Óà¶îÏÔÊ¾´íÎó
+    //æä¾›ä¸€ä¸ªå¯¹å¤–å–æ¬¾é€”å¾„ï¼Œé˜²æ­¢ç›´æ¥è°ƒå–æ–¹æ³•åŒæ—¶å–æ¬¾æ—¶ï¼Œå¹¶å‘ä½™é¢æ˜¾ç¤ºé”™è¯¯
     public synchronized void outMoney(double money, String mode) throws Exception {
         if (money > Bank.money) {
-            //Ğ£ÑéÓà¶îÊÇ·ñ³ä×ã
-            throw new Exception("È¡¿î½ğ¶î" + money + ",Óà¶îÖ»Ê£" + Bank.money + "£¬È¡¿îÊ§°Ü");
+            //æ ¡éªŒä½™é¢æ˜¯å¦å……è¶³
+            throw new Exception("å–æ¬¾é‡‘é¢" + money + ",ä½™é¢åªå‰©" + Bank.money + "ï¼Œå–æ¬¾å¤±è´¥");
         }
         if (Objects.equals(mode, "ATM")) {
             ATM(money);
