@@ -379,7 +379,7 @@
                 </div>
             </div>
         </div>
-        <div data-options="region:'south',border:false" style="height: 30px;line-height:30px; overflow: hidden;text-align: center;background-color: #eee" >Copyright © 2018 power by <a href="#" target="_blank"></a>
+        <div data-options="region:'south',border:false" style="height: 30px;line-height:30px; overflow: hidden;text-align: center;background-color: #eee" >Copyright © 2019 power by <a href="#" target="_blank">atu</a>
            <a  href="javascript:void(0);" style="float:right;margin-right:5px;margin-top:3px;" class="easyui-linkbutton" data-options="iconCls:'fi-rss icon-blue'" onclick="msgRss()"></a>
         </div>
     </div>
