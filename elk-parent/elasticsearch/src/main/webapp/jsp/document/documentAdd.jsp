@@ -84,9 +84,11 @@
                 <td>
                     <select name="classicId" id="docAdd_classicId" class="easyui-text easyui-validatebox" data-options="required:true">
                         <option value="">请选择</option>
+                        <option value="1">1</option>
                     </select>
                     <select name="typeId" id="docAdd_typeId" class="easyui-text">
                         <option value="">请选择</option>
+                        <option value="2">2</option>
                     </select>&nbsp;&nbsp;&nbsp;
                 </td>
             </tr>
