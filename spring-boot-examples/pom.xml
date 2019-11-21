@@ -11,6 +11,7 @@
     <description>spring-boot-examples parent!</description>
     <modules>
         <module>spring-boot-async</module>
+        <module>spring-boot-extensible</module>
         <module>spring-boot-file-upload</module>
         <module>spring-boot-mail</module>
         <module>spring-boot-mybatis/spring-boot-mybatis-annotation</module>
@@ -25,6 +26,4 @@
         <module>sprint-boot-jpa-thymeleaf-crud</module>
         <module>sprint-boot-ws</module>
     </modules>
-
-
 </project>

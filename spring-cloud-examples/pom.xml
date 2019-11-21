@@ -10,8 +10,36 @@
     <description>Demo project for Spring Cloud</description>
 
     <modules>
+        <module>eureka-producer-consumer/spring-cloud-consumer</module>
+        <module>eureka-producer-consumer/spring-cloud-pc-eureka</module>
+        <module>eureka-producer-consumer/spring-cloud-producer</module>
+        <module>gateway-service-zuul</module>
+        <module>hystrix-dashboard-turbine/hystrix-dashboard-turbine</module>
+        <module>hystrix-dashboard-turbine/spring-cloud-consumer-hystrix-dashboard</module>
+        <module>hystrix-dashboard-turbine/spring-cloud-consumer-node1</module>
+        <module>hystrix-dashboard-turbine/spring-cloud-consumer-node2</module>
+        <module>hystrix-dashboard-turbine/spring-cloud-eureka-turbine</module>
+        <module>spring-cloud-config-eureka/spring-cloud-config-client</module>
+        <module>spring-cloud-config-eureka/spring-cloud-config-eureka</module>
+        <module>spring-cloud-config-eureka/spring-cloud-config-server</module>
+        <module>spring-cloud-config-git/spring-cloud-config-git-client</module>
+        <module>spring-cloud-config-git/spring-cloud-config-git-server</module>
+        <module>spring-cloud-consul/spring-cloud-consul-consumer</module>
+        <module>spring-cloud-consul/spring-cloud-consul-producer</module>
+        <module>spring-cloud-consul/spring-cloud-consul-producer-2</module>
         <module>spring-cloud-eureka/spring-cloud-eureka</module>
         <module>spring-cloud-eureka/spring-cloud-eureka-cluster</module>
         <module>spring-cloud-eureka/spring-cloud-eureka-two</module>
+
+        <module>spring-cloud-gateway/cloud-gateway</module>
+        <module>spring-cloud-gateway/cloud-gateway-eureka</module>
+        <module>spring-cloud-gateway/spring-cloud-gateway-eureka</module>
+        <module>spring-cloud-gateway/spring-cloud-gateway-producer</module>
+        <module>spring-cloud-gateway/spring-cloud-producer-1</module>
+        <module>spring-cloud-hystrix/spring-cloud-consumer-hystrix</module>
+        <module>spring-cloud-hystrix/spring-cloud-eureka-hystrix</module>
+        <module>spring-cloud-hystrix/spring-cloud-producer-hystrix</module>
+        <module>spring-cloud-sleuth-zipkin</module>
+        <module>spring-cloud-zuul</module>
     </modules>
 </project>
