@@ -4,7 +4,7 @@ import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 
 /**
- * @Author: ta0567
+ * @Author: Tom
  * @Date: 2019/8/9 11:34
  * @Description: 获取MQ的连接
  */

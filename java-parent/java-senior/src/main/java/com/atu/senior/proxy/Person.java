@@ -3,7 +3,7 @@ package com.atu.senior.proxy;
 import com.atu.senior.proxy.Animal;
 
 /**
- * @Author: ta0567
+ * @Author: Tom
  * @Date: 2019/7/20 10:32
  * @Description: 人类，继承动物接口，实现每个方法
  */

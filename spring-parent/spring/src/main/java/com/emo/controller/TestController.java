@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * @author ：ta0567
+ * @author ：Tom
  * @date ：Created in 2019/9/12 10:55
  * @description：测试控制层
  */

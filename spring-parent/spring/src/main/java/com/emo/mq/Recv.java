@@ -5,7 +5,7 @@ import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.QueueingConsumer;
 
 /**
- * @Author: ta0567
+ * @Author: Tom
  * @Date: 2019/8/9 11:36
  * @Description: 消费者从队列中获取消息
  */

@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 
 */
 /**
- * @Author: ta0567
+ * @Author: Tom
  * @Date: 2019/8/9 11:50
  * @Description: Redis工具类采用的是spring集成的redisTemplate操作缓存
  * <p>

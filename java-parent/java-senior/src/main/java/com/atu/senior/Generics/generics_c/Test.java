@@ -1,7 +1,7 @@
 package com.atu.senior.Generics.generics_c;
 
 /**
- * @author ：ta0567
+ * @author ：Tom
  * @date ：Created in 2019/9/3 21:36
  * @description：${description}
  */

@@ -4,7 +4,7 @@ import com.atu.senior.proxy.Animal;
 import com.atu.senior.proxy.Person;
 
 /**
- * @Author: ta0567
+ * @Author: Tom
  * @Date: 2019/7/20 11:14
  * @Description:
  */

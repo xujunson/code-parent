@@ -48,8 +48,8 @@ public class ElasticSearchTest {
     public void addDataTest() {
         // 添加一些测试数据
         List<Goods> goodsList = new ArrayList<>();
-        Goods goods1 = new Goods(1,"智能機器人","小米", new Date());
-        Goods goods2 = new Goods(2,"智能牙刷","小米", new Date());
+        Goods goods1 = new Goods(6,"智能機器人","小米", new Date());
+        Goods goods2 = new Goods(2,"智1能牙刷","小米", new Date());
         Goods goods3 = new Goods(3,"測試機器","測試", new Date());
         Goods goods4 = new Goods(4,"测试电脑","测试", new Date());
         Goods goods5 = new Goods(5,"杯子","测试", new Date());

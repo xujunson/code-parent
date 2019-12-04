@@ -4,7 +4,7 @@ import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 
 /**
- * @Author: ta0567
+ * @Author: Tom
  * @Date: 2019/8/9 11:35
  * @Description: 生产者发送消息到队列
  */

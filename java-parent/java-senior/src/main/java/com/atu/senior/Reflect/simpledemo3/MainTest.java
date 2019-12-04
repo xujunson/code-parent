@@ -3,7 +3,7 @@ package com.atu.senior.Reflect.simpledemo3;
 import java.lang.reflect.*;
 
 /**
- * @Author: ta0567
+ * @Author: Tom
  * @Date: 2019/7/16 11:38
  * @Description:
  */

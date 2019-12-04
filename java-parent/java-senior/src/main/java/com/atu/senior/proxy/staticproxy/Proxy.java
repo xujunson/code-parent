@@ -3,7 +3,7 @@ package com.atu.senior.proxy.staticproxy;
 import com.atu.senior.proxy.Animal;
 
 /**
- * @Author: ta0567
+ * @Author: Tom
  * @Date: 2019/7/20 10:33
  * @Description: 代理类，可以看作是饭馆，他代理人类makeFood的过程，但是吃还是使用的人类的吃方法。
  */
