@@ -1,1 +1,1 @@
-spring boot教程:http://www.ityouknow.com/spring-boot.html
+spring boot教程：http://www.ityouknow.com/spring-boot.html
