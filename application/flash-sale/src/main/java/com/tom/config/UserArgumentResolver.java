@@ -25,6 +25,11 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
     @Autowired
     MiaoShaUserService userService;
 
+    /**
+     * 判断Controller层中的参数，是否满足条件，满足条件则执行resolveArgument方法，不满足则跳过
+     * @param methodParameter
+     * @return
+     */
     @Override
     public boolean supportsParameter(MethodParameter methodParameter) {
         Class<?> clazz = methodParameter.getParameterType();
@@ -32,6 +37,16 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
         return clazz == MiaoshaUser.class;
     }
 
+    /**
+     * 在supportsParameter方法返回true的情况下才会被调用。
+     * 用于处理一些业务，将返回值赋值给Controller层中的这个参数
+     * @param methodParameter
+     * @param modelAndViewContainer
+     * @param nativeWebRequest
+     * @param webDataBinderFactory
+     * @return
+     * @throws Exception
+     */
     @Override
     public Object resolveArgument(MethodParameter methodParameter, ModelAndViewContainer modelAndViewContainer, NativeWebRequest nativeWebRequest, WebDataBinderFactory webDataBinderFactory) throws Exception {
 
