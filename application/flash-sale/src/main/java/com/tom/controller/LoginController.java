@@ -3,13 +3,11 @@ package com.tom.controller;
 import com.tom.result.CodeMsg;
 import com.tom.result.Result;
 import com.tom.service.MiaoShaUserService;
-import com.tom.util.ValidatorUtil;
 import com.tom.vo.LoginVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -39,8 +37,11 @@ public class LoginController {
     public Result<Boolean> doLogin(HttpServletResponse response, @Valid LoginVo loginVo) {
         log.info(loginVo.toString());
 
-        String passInput = loginVo.getPassword();
+        //使用jsr参数校验
+          /*String passInput = loginVo.getPassword();
         String mobile = loginVo.getMobile();
+
+        //参数校验
         if (StringUtils.isEmpty(passInput)) {
             return Result.error(CodeMsg.PASSWORD_EMPTY);
         }
@@ -49,12 +50,9 @@ public class LoginController {
         }
         if (!ValidatorUtil.isMobile(mobile)) {
             return Result.error(CodeMsg.MOBILE_ERROR);
-        }
+        }*/
         //登录
-        CodeMsg cm = userService.login(response, loginVo);
-        if (cm.getCode() == 0)
-            return Result.success(true);
-        else
-            return Result.error(cm);
+       userService.login(response, loginVo);
+       return Result.success(true);
     }
 }

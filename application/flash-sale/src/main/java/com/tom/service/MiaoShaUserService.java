@@ -2,6 +2,7 @@ package com.tom.service;
 
 import com.tom.dao.MiaoShaUserDao;
 import com.tom.domain.MiaoshaUser;
+import com.tom.exception.GlobalException;
 import com.tom.result.CodeMsg;
 import com.tom.util.MD5Util;
 import com.tom.vo.LoginVo;
@@ -23,15 +24,15 @@ public class MiaoShaUserService {
         return miaoShaUserDao.getById(id);
     }
 
-    public CodeMsg login(HttpServletResponse response, LoginVo loginVo) {
+    public boolean login(HttpServletResponse response, LoginVo loginVo) {
         if(loginVo == null)
-            return CodeMsg.SERVER_ERROR;
+            throw new GlobalException(CodeMsg.SERVER_ERROR);
         String mobile = loginVo.getMobile();
         String fromPass = loginVo.getPassword();
         MiaoshaUser miaoshaUser = getById(Long.parseLong(mobile));
         //1、判断手机号是否存在
         if(miaoshaUser == null) {
-            return CodeMsg.MOBILE_NOT_EXIST;
+            throw new GlobalException(CodeMsg.MOBILE_NOT_EXIST);
         }
 
         //2、验证密码
@@ -40,9 +41,9 @@ public class MiaoShaUserService {
         String calcPass = MD5Util.formPassToDBPass(fromPass,saltDb);
 
         if(!dbPass.equals(calcPass)) {
-            return CodeMsg.PASSWORD_ERROR;
+            throw new GlobalException(CodeMsg.PASSWORD_ERROR);
         }
-        return CodeMsg.SUCCESS;
+        return true;
     }
 
 }

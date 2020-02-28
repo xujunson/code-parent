@@ -1,12 +1,21 @@
 package com.tom.vo;
 
+import javax.validation.constraints.NotNull;
+
+import com.tom.validator.IsMobile;
+import org.hibernate.validator.constraints.Length;
+
 /**
  * @author: Tom
  * @date: 2020-02-27 21:02
  * @description:
  */
 public class LoginVo {
+    @NotNull
+    @IsMobile
     private String mobile;
+    @NotNull
+    @Length(min = 32)
     private String password;
 
     public String getMobile() {
