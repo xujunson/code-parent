@@ -34,7 +34,7 @@ public class MiaoshaController {
     @Autowired
     MiaoshaService miaoshaService;
 
-    //QPS: 1269-1901
+    //QPS: 本机 2126
     // 5000 * 10
     @RequestMapping(value = "/do_miaosha")
     public String miaoshad(Model model, MiaoshaUser user,
