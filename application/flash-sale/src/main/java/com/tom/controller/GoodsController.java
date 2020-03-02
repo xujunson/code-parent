@@ -3,8 +3,10 @@ package com.tom.controller;
 import com.tom.domain.MiaoshaUser;
 import com.tom.redis.GoodsKey;
 import com.tom.redis.RedisService;
+import com.tom.result.Result;
 import com.tom.service.GoodsService;
 import com.tom.service.MiaoShaUserService;
+import com.tom.vo.GoodsDetailVo;
 import com.tom.vo.GoodsVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -177,7 +179,7 @@ public class GoodsController {
      * @param goodsId
      * @return
      */
-    @RequestMapping(value = "/to_detail/{goodsId}", produces = "text/html")
+    /*@RequestMapping(value = "/to_detail/{goodsId}", produces = "text/html")
     @ResponseBody
     public String detail(HttpServletRequest request, HttpServletResponse response, Model model, MiaoshaUser user,
                          @PathVariable("goodsId") long goodsId) {
@@ -220,7 +222,47 @@ public class GoodsController {
         if (!StringUtils.isEmpty(html)) {
             redisService.set(GoodsKey.getGoodsDetail, "" + goodsId, html);
         }
-
         return html;
+    }*/
+
+    /**
+     * url缓存
+     *
+     * @param request
+     * @param response
+     * @param model
+     * @param user
+     * @param goodsId
+     * @return
+     */
+    @RequestMapping(value = "/detail/{goodsId}")
+    @ResponseBody
+    public Result<GoodsDetailVo> detail(HttpServletRequest request, HttpServletResponse response, Model model, MiaoshaUser user,
+                                        @PathVariable("goodsId") long goodsId) {
+
+        GoodsVo goods = goodsService.getGoodsVoByGoodsId(goodsId);
+        model.addAttribute("goods", goods);
+        long startAt = goods.getStartDate().getTime();
+        long endAt = goods.getEndDate().getTime();
+        long now = System.currentTimeMillis();
+
+        int miaoshaStatus = 0;
+        int remainSeconds = 0;
+        if (now < startAt) {//秒杀还没开始，倒计时
+            miaoshaStatus = 0;
+            remainSeconds = (int) ((startAt - now) / 1000);
+        } else if (now > endAt) {//秒杀已经结束
+            miaoshaStatus = 2;
+            remainSeconds = -1;
+        } else {//秒杀进行中
+            miaoshaStatus = 1;
+            remainSeconds = 0;
+        }
+        GoodsDetailVo vo = new GoodsDetailVo();
+        vo.setGoods(goods);
+        vo.setUser(user);
+        vo.setRemainSeconds(remainSeconds);
+        vo.setMiaoshaStatus(miaoshaStatus);
+        return Result.success(vo);
     }
 }
