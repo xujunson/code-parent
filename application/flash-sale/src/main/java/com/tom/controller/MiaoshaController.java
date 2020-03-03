@@ -71,6 +71,15 @@ public class MiaoshaController {
     }*/
 
     /**
+     * 优化版
+     * 优化思路（解决并发大的问题-瓶颈就在数据库）：最有效的解决方法-加缓存
+     * 1、浏览器做页面静态化，可以直接把页面缓存到用户的浏览器端
+     * 2、请求到达网站之前，可以部署CDN节点，
+     * 3、到达网站时，可以在Nginx加缓存
+     * 4、页面缓存
+     * 5、对象缓存
+     * 6、数据库
+     * 通过访问不同粒度，不同层面的缓存，逐步削减访问数据库的数量。
      * GET POST 区别？
      * GET 幂等：从服务端获取数据，无论掉多少次 产生的结果是一样的，不会对服务端数据产生影响
      * POST 向服务端提交数据
@@ -97,7 +106,6 @@ public class MiaoshaController {
         if (stock <= 0) {
             return Result.error(CodeMsg.MIAO_SHA_OVER);
         }
-        System.out.println(stock);
         //判断是否已经秒杀到
         MiaoshaOrder miaoshaOrder = orderService.getMiaoshaOrderByUserIdGoodsId(user.getId(), goodsId);
         if (miaoshaOrder != null) {
