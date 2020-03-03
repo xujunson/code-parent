@@ -66,7 +66,7 @@ public class SampleController {
         return Result.success(true);
     }
 
-    @RequestMapping("/mq")
+    /*@RequestMapping("/mq")
     @ResponseBody
     public Result<String> mq(Model model) {
         mqSender.send("hello tom");
@@ -91,5 +91,5 @@ public class SampleController {
     public Result<String> header(Model model) {
         mqSender.sendHeader("hello tom");
         return Result.success("hello world");
-    }
+    }*/
 }

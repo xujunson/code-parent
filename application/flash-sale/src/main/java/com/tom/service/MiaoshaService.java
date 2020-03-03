@@ -1,10 +1,10 @@
 package com.tom.service;
 
-import com.tom.dao.GoodsDao;
-import com.tom.dao.OrderDao;
-import com.tom.domain.Goods;
+import com.tom.domain.MiaoshaOrder;
 import com.tom.domain.MiaoshaUser;
 import com.tom.domain.OrderInfo;
+import com.tom.redis.MiaoshaKey;
+import com.tom.redis.RedisService;
 import com.tom.vo.GoodsVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +22,10 @@ public class MiaoshaService {
 
     @Autowired
     OrderService orderService;
+
+    @Autowired
+    RedisService redisService;
+
     /**
      * 原子操作
      *
@@ -32,7 +36,37 @@ public class MiaoshaService {
     @Transactional
     public OrderInfo miaosha(MiaoshaUser user, GoodsVo goods) {
         //减库存 下订单 写入秒杀订单
-        goodsService.reduceStock(goods);
-        return orderService.createOrder(user, goods);
+        boolean success = goodsService.reduceStock(goods);
+        if (success) {
+            return orderService.createOrder(user, goods);
+        } else {
+            setGoodsOver(goods.getId());
+            return null;
+        }
+
+    }
+
+
+    public long getMiaoshaResult(Long id, long goodsId) {
+
+        MiaoshaOrder order = orderService.getMiaoshaOrderByUserIdGoodsId(id, goodsId);
+        if (order != null) { //秒杀成功
+            return order.getOrderId();
+        } else {
+            boolean isOver = getGoodsOver(goodsId);
+            if (isOver) {
+                return -1;
+            } else {
+                return 0;
+            }
+        }
+    }
+
+    private void setGoodsOver(Long goodsId) {
+        redisService.set(MiaoshaKey.isGoodsOver, "" + goodsId, true);
+    }
+
+    private boolean getGoodsOver(long goodsId) {
+        return redisService.exists(MiaoshaKey.isGoodsOver, "" + goodsId);
     }
 }

@@ -107,45 +107,34 @@ public class RedisService {
         }
     }
 
+
     /**
      * 增加值
-     *
-     * @param prefix
-     * @param key
-     * @param value
-     * @param <T>
-     * @return
      */
-    public <T> Long decr(KeyPrefix prefix, String key, T value) {
+    public <T> Long incr(KeyPrefix prefix, String key) {
         Jedis jedis = null;
         try {
-            jedis = jedisPool.getResource(); //获取jedis对象
+            jedis = jedisPool.getResource();
             //生成真正的key
             String realKey = prefix.getPrefix() + key;
-            return jedis.decr(realKey);
+            return jedis.incr(realKey);
         } finally {
-            returnToPool(jedis); //用完返回到连接池里
+            returnToPool(jedis);
         }
     }
 
     /**
      * 减少值
-     *
-     * @param prefix
-     * @param key
-     * @param value
-     * @param <T>
-     * @return
      */
-    public <T> Long incr(KeyPrefix prefix, String key, T value) {
+    public <T> Long decr(KeyPrefix prefix, String key) {
         Jedis jedis = null;
         try {
-            jedis = jedisPool.getResource(); //获取jedis对象
+            jedis = jedisPool.getResource();
             //生成真正的key
             String realKey = prefix.getPrefix() + key;
-            return jedis.incr(realKey);
+            return jedis.decr(realKey);
         } finally {
-            returnToPool(jedis); //用完返回到连接池里
+            returnToPool(jedis);
         }
     }
 

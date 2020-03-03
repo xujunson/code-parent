@@ -44,10 +44,10 @@ public class OrderService {
         orderInfo.setOrderChannel(1);
         orderInfo.setStatus(0); //未支付状态
         orderInfo.setUserId(user.getId());
-        long orderId = orderDao.insert(orderInfo); //保存订单信息
+        orderDao.insert(orderInfo); //保存订单信息
         MiaoshaOrder miaoshaOrder = new MiaoshaOrder();
         miaoshaOrder.setGoodsId(goods.getId());
-        miaoshaOrder.setOrderId(orderId);
+        miaoshaOrder.setOrderId(orderInfo.getId());
         miaoshaOrder.setUserId(user.getId());
         orderDao.insertMiaoshaOrder(miaoshaOrder);
 

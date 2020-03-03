@@ -14,6 +14,7 @@ import java.util.Map;
  */
 @Configuration
 public class MQConfig {
+    public static final String MIAOSHA_QUEUE = "miaosha.queue";
     public static final String QUEUE = "queue";
     public static final String TOPIC_QUEUE1 = "topic.queue1";
     public static final String TOPIC_QUEUE2 = "topic.queue2";
@@ -28,18 +29,18 @@ public class MQConfig {
      *
      * @return
      */
-    @Bean
+    /*@Bean
     public Queue queue() {
         //1、队列名称，2、持久化
         return new Queue(QUEUE, true);
-    }
+    }*/
 
     /**
      * Topic模式 交换机Exchange
      *
      * @return
      */
-    @Bean
+    /*@Bean
     public Queue topicQueue1() {
         //1、队列名称，2、持久化
         return new Queue(TOPIC_QUEUE1, true);
@@ -65,13 +66,13 @@ public class MQConfig {
     public Binding topicBinding2() {
         return BindingBuilder.bind(topicQueue2()).to(topicExchange()).with("topic.#");
     }
-
+*/
     /**
      * Fanout模式-广播模式 交换机Exchange
      *
      * @return
      */
-    @Bean
+    /*@Bean
     public FanoutExchange fanoutExchange() {
         return new FanoutExchange(FANOUT_EXCHANGE);
     }
@@ -84,14 +85,14 @@ public class MQConfig {
     @Bean
     public Binding fanoutBinding2() {
         return BindingBuilder.bind(topicQueue2()).to(fanoutExchange());
-    }
+    }*/
 
     /**
      * Header模式 交换机Exchange
      *
      * @return
      */
-    @Bean
+    /*@Bean
     public HeadersExchange headersExchange() {
         return new HeadersExchange(HEADERS_EXCHANGE);
     }
@@ -108,5 +109,10 @@ public class MQConfig {
         map.put("header1", "value1");
         map.put("header2", "value2");
         return BindingBuilder.bind(headersQueue()).to(headersExchange()).whereAll(map).match();
+    }*/
+
+    @Bean
+    public Queue miaoshaQueue() {
+        return new Queue("miaosha.queue", true);
     }
 }

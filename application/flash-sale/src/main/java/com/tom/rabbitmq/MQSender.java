@@ -21,7 +21,7 @@ public class MQSender {
     AmqpTemplate amqpTemplate;
     private static Logger log = LoggerFactory.getLogger(MQSender.class);
 
-    public void send(Object message) {
+    /*public void send(Object message) {
 
         String msg = RedisService.beanToString(message);
         log.info("send message:" + msg);
@@ -52,5 +52,11 @@ public class MQSender {
         properties.setHeader("header2", "value2");
         Message obj = new Message(msg.getBytes(), properties);
         amqpTemplate.convertAndSend(MQConfig.HEADERS_EXCHANGE, "", obj);
+    }
+*/
+    public void sendMiaoshaMessage(MiaoshaMessage m) {
+        String msg = RedisService.beanToString(m);
+        log.info("send miaosha message:" + msg);
+        amqpTemplate.convertAndSend(MQConfig.MIAOSHA_QUEUE, msg);
     }
 }
