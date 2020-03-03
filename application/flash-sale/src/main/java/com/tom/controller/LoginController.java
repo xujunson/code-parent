@@ -34,7 +34,7 @@ public class LoginController {
 
     @RequestMapping("/do_login")
     @ResponseBody
-    public Result<Boolean> doLogin(HttpServletResponse response, @Valid LoginVo loginVo) {
+    public String doLogin(HttpServletResponse response, @Valid LoginVo loginVo) {
         log.info(loginVo.toString());
 
         //使用jsr参数校验
@@ -52,7 +52,7 @@ public class LoginController {
             return Result.error(CodeMsg.MOBILE_ERROR);
         }*/
         //登录
-        userService.login(response, loginVo);
-        return Result.success(true);
+        String token = userService.login(response, loginVo);
+        return token;
     }
 }
