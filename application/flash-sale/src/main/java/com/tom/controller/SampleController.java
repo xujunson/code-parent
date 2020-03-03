@@ -1,6 +1,7 @@
 package com.tom.controller;
 
 import com.tom.domain.User;
+import com.tom.rabbitmq.MQSender;
 import com.tom.redis.RedisService;
 import com.tom.redis.UserKey;
 import com.tom.result.Result;
@@ -25,13 +26,16 @@ public class SampleController {
     @Autowired
     private RedisService redisService;
 
+    @Autowired
+    private MQSender mqSender;
+
     @RequestMapping("thymeleaf")
     public String thymeleaf(Model model) {
         model.addAttribute("name", "Tom");
         return "hello";
     }
 
-    @RequestMapping("db/get")
+    @RequestMapping("/db/get")
     @ResponseBody
     public Result<User> doGet() {
         User user = userService.getId(3);
@@ -60,5 +64,32 @@ public class SampleController {
         user.setName("1111");
         redisService.set(UserKey.getById, "" + 1, user); //UserKey:id1
         return Result.success(true);
+    }
+
+    @RequestMapping("/mq")
+    @ResponseBody
+    public Result<String> mq(Model model) {
+        mqSender.send("hello tom");
+        return Result.success("hello world");
+    }
+
+    @RequestMapping("/mq/topic")
+    @ResponseBody
+    public Result<String> topic(Model model) {
+        mqSender.sendTopic("hello tom");
+        return Result.success("hello world");
+    }
+    @RequestMapping("/mq/fanout")
+    @ResponseBody
+    public Result<String> fanout(Model model) {
+        mqSender.sendFanout("hello tom");
+        return Result.success("hello world");
+    }
+
+    @RequestMapping("/mq/header")
+    @ResponseBody
+    public Result<String> header(Model model) {
+        mqSender.sendHeader("hello tom");
+        return Result.success("hello world");
     }
 }

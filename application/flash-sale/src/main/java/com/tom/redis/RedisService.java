@@ -73,16 +73,16 @@ public class RedisService {
 
     /**
      * 删除
-     * */
+     */
     public boolean delete(KeyPrefix prefix, String key) {
         Jedis jedis = null;
         try {
-            jedis =  jedisPool.getResource();
+            jedis = jedisPool.getResource();
             //生成真正的key
-            String realKey  = prefix.getPrefix() + key;
-            long ret =  jedis.del(realKey);
+            String realKey = prefix.getPrefix() + key;
+            long ret = jedis.del(realKey);
             return ret > 0;
-        }finally {
+        } finally {
             returnToPool(jedis);
         }
     }
@@ -156,7 +156,7 @@ public class RedisService {
      * @param <T>
      * @return
      */
-    private <T> String beanToString(T value) {
+    public static <T> String beanToString(T value) {
         if (value == null) {
             return null;
         }
@@ -181,7 +181,7 @@ public class RedisService {
      * @param <T>
      * @return
      */
-    private <T> T stringToBean(String str, Class<T> clazz) {
+    public static <T> T stringToBean(String str, Class<T> clazz) {
         //验证必不可少
         if (str == null || str.length() <= 0 || clazz == null) {
             return null;
