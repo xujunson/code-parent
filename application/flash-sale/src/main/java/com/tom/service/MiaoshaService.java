@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * @author: Tom
  * @date: 2020-02-28 15:20
@@ -68,5 +70,10 @@ public class MiaoshaService {
 
     private boolean getGoodsOver(long goodsId) {
         return redisService.exists(MiaoshaKey.isGoodsOver, "" + goodsId);
+    }
+
+    public void reset(List<GoodsVo> goodsList) {
+        goodsService.resetStock(goodsList);
+        orderService.deleteOrders();
     }
 }

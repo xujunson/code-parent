@@ -6,6 +6,8 @@ import com.tom.domain.OrderInfo;
 import com.tom.rabbitmq.MQSender;
 import com.tom.rabbitmq.MiaoshaMessage;
 import com.tom.redis.GoodsKey;
+import com.tom.redis.MiaoshaKey;
+import com.tom.redis.OrderKey;
 import com.tom.redis.RedisService;
 import com.tom.result.CodeMsg;
 import com.tom.result.Result;
@@ -222,6 +224,26 @@ public class MiaoshaController implements InitializingBean {
         }
         long result = miaoshaService.getMiaoshaResult(user.getId(), goodsId);
         return Result.success(result);
+    }
+
+    /**
+     * 数据还原
+     * @param model
+     * @return
+     */
+    @RequestMapping(value="/reset", method=RequestMethod.GET)
+    @ResponseBody
+    public Result<Boolean> reset(Model model) {
+        List<GoodsVo> goodsList = goodsService.listGoodsVo();
+        for(GoodsVo goods : goodsList) {
+            goods.setStockCount(10);
+            redisService.set(GoodsKey.getMiaoshaGoodsStock, ""+goods.getId(), 10);
+            localOverMap.put(goods.getId(), false);
+        }
+        redisService.delete(OrderKey.getMiaoshaOrderByUidGid);
+        redisService.delete(MiaoshaKey.isGoodsOver);
+        miaoshaService.reset(goodsList);
+        return Result.success(true);
     }
 
 }

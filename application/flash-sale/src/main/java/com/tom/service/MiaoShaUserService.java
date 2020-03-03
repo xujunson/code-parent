@@ -63,7 +63,7 @@ public class MiaoShaUserService {
         toBeUpdate.setPassword(MD5Util.formPassToDBPass(formPass, user.getSalt()));
         miaoShaUserDao.update(toBeUpdate);
         //处理缓存
-        redisService.delete(MiaoshaUserKey.getById, "" + id);
+        //redisService.delete(MiaoshaUserKey.getById, "" + id);
         user.setPassword(toBeUpdate.getPassword());
         redisService.set(MiaoshaUserKey.token, token, user);
         return true;
