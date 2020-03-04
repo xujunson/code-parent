@@ -1,5 +1,6 @@
 package com.tom.controller;
 
+import com.tom.access.AccessLimit;
 import com.tom.domain.MiaoshaOrder;
 import com.tom.domain.MiaoshaUser;
 import com.tom.rabbitmq.MQSender;
@@ -213,7 +214,7 @@ public class MiaoshaController implements InitializingBean {
         return Result.success(0); //0-排队中
     }
 
-    //@AccessLimit(seconds=5, maxCount=5, needLogin=true)
+    @AccessLimit(seconds=5, maxCount=5, needLogin=true)
     @RequestMapping(value = "/path", method = RequestMethod.GET)
     @ResponseBody
     public Result<String> getMiaoshaPath(HttpServletRequest request, MiaoshaUser user,
@@ -222,20 +223,6 @@ public class MiaoshaController implements InitializingBean {
         if (user == null) {
             return Result.error(CodeMsg.SESSION_ERROR);
         }
-
-        //防刷 查询访问次数 5s 访问5次
-        String uri = request.getRequestURI(); //访问路径
-        String key = uri +user.getId();
-        Integer count = redisService.get(AccessKey.access,key,Integer.class);
-
-        if(count == null) {
-            redisService.set(AccessKey.access,key,1);
-        } else if(count < 5) {
-            redisService.incr(AccessKey.access,key);
-        } else {
-            return Result.error(CodeMsg.ACCESS_LIMIT_REACHED);
-        }
-
         //验证
         boolean check = miaoshaService.checkVerifyCode(user, goodsId, verifyCode);
         if (!check) {
