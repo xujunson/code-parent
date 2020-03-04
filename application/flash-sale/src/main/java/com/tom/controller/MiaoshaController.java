@@ -2,7 +2,6 @@ package com.tom.controller;
 
 import com.tom.domain.MiaoshaOrder;
 import com.tom.domain.MiaoshaUser;
-import com.tom.domain.OrderInfo;
 import com.tom.rabbitmq.MQSender;
 import com.tom.rabbitmq.MiaoshaMessage;
 import com.tom.redis.GoodsKey;
@@ -19,12 +18,9 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
-import javax.security.auth.login.CredentialException;
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -173,16 +169,22 @@ public class MiaoshaController implements InitializingBean {
      * @param goodsId
      * @return
      */
-    @RequestMapping(value = "/do_miaosha", method = RequestMethod.POST)
+    @RequestMapping(value = "/{path}/do_miaosha", method = RequestMethod.POST)
     @ResponseBody
     public Result<Integer> miaosha(Model model, MiaoshaUser user,
-                                   @RequestParam("goodsId") long goodsId) {
+                                   @RequestParam("goodsId") long goodsId, @PathVariable("path") String path) {
         model.addAttribute("user", user);
 
         if (user == null) {
             return Result.error(CodeMsg.SESSION_ERROR);
         }
 
+        //验证path
+         boolean check = miaoshaService.checkPath(user, goodsId,path);
+
+        if(!check) {
+            return Result.error(CodeMsg.REQUEST_ILLEGAL);
+        }
         //内存标记，减少内存访问
         boolean over = localOverMap.get(goodsId);
         if (over) {
@@ -209,6 +211,24 @@ public class MiaoshaController implements InitializingBean {
         return Result.success(0); //0-排队中
     }
 
+    //@AccessLimit(seconds=5, maxCount=5, needLogin=true)
+    @RequestMapping(value = "/path", method = RequestMethod.GET)
+    @ResponseBody
+    public Result<String> getMiaoshaPath(HttpServletRequest request, MiaoshaUser user,
+                                         @RequestParam("goodsId") long goodsId,
+                                         @RequestParam(value = "verifyCode", defaultValue = "0") int verifyCode
+    ) {
+        if (user == null) {
+            return Result.error(CodeMsg.SESSION_ERROR);
+        }
+        /*boolean check = miaoshaService.checkVerifyCode(user, goodsId, verifyCode);
+        if (!check) {
+            return Result.error(CodeMsg.REQUEST_ILLEGAL);
+        }*/
+        String path = miaoshaService.createMiaoshaPath(user, goodsId);
+        return Result.success(path);
+    }
+
     /**
      * orderId：成功
      * -1：秒杀失败
@@ -228,16 +248,17 @@ public class MiaoshaController implements InitializingBean {
 
     /**
      * 数据还原
+     *
      * @param model
      * @return
      */
-    @RequestMapping(value="/reset", method=RequestMethod.GET)
+    @RequestMapping(value = "/reset", method = RequestMethod.GET)
     @ResponseBody
     public Result<Boolean> reset(Model model) {
         List<GoodsVo> goodsList = goodsService.listGoodsVo();
-        for(GoodsVo goods : goodsList) {
+        for (GoodsVo goods : goodsList) {
             goods.setStockCount(10);
-            redisService.set(GoodsKey.getMiaoshaGoodsStock, ""+goods.getId(), 10);
+            redisService.set(GoodsKey.getMiaoshaGoodsStock, "" + goods.getId(), 10);
             localOverMap.put(goods.getId(), false);
         }
         redisService.delete(OrderKey.getMiaoshaOrderByUidGid);
@@ -245,5 +266,6 @@ public class MiaoshaController implements InitializingBean {
         miaoshaService.reset(goodsList);
         return Result.success(true);
     }
+
 
 }
