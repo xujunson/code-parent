@@ -4,10 +4,7 @@ import com.tom.domain.MiaoshaOrder;
 import com.tom.domain.MiaoshaUser;
 import com.tom.rabbitmq.MQSender;
 import com.tom.rabbitmq.MiaoshaMessage;
-import com.tom.redis.GoodsKey;
-import com.tom.redis.MiaoshaKey;
-import com.tom.redis.OrderKey;
-import com.tom.redis.RedisService;
+import com.tom.redis.*;
 import com.tom.result.CodeMsg;
 import com.tom.result.Result;
 import com.tom.service.GoodsService;
@@ -225,10 +222,26 @@ public class MiaoshaController implements InitializingBean {
         if (user == null) {
             return Result.error(CodeMsg.SESSION_ERROR);
         }
+
+        //防刷 查询访问次数 5s 访问5次
+        String uri = request.getRequestURI(); //访问路径
+        String key = uri +user.getId();
+        Integer count = redisService.get(AccessKey.access,key,Integer.class);
+
+        if(count == null) {
+            redisService.set(AccessKey.access,key,1);
+        } else if(count < 5) {
+            redisService.incr(AccessKey.access,key);
+        } else {
+            return Result.error(CodeMsg.ACCESS_LIMIT_REACHED);
+        }
+
+        //验证
         boolean check = miaoshaService.checkVerifyCode(user, goodsId, verifyCode);
         if (!check) {
             return Result.error(CodeMsg.REQUEST_ILLEGAL);
         }
+
         String path = miaoshaService.createMiaoshaPath(user, goodsId);
         return Result.success(path);
     }
