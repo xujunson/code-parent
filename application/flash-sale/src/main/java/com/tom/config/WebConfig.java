@@ -12,7 +12,8 @@ import java.util.List;
 /**
  * @author: Tom
  * @date: 2020-02-28 10:59
- * @description:
+ * @description: WebMvcConfigurerAdapter：Spring内部的一种配置方式，
+ * 采用JavaBean的形式来代替传统的xml配置文件形式进行针对框架个性化定制。
  */
 @Configuration
 public class WebConfig extends WebMvcConfigurerAdapter {

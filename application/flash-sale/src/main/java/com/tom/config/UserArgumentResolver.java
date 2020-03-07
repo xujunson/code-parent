@@ -15,6 +15,9 @@ import org.springframework.web.method.support.ModelAndViewContainer;
  * @author: Tom
  * @date: 2020-02-28 11:04
  * @description: 统一管理
+ *
+ * HandlerMethodArgumentResolver 是一个参数解析器，
+ * 我们可以通过写一个类实现 HandlerMethodArgumentResolver 接口来实现对Controller层中方法参数的修改。
  */
 @Service
 public class UserArgumentResolver implements HandlerMethodArgumentResolver {
