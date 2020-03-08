@@ -10,6 +10,7 @@
     <modules>
         <module>java-basic</module>
         <module>java-senior</module>
+        <module>java-high-concurrency/java-high-concurrency-synchronized</module>
     </modules>
     <packaging>pom</packaging>
 
