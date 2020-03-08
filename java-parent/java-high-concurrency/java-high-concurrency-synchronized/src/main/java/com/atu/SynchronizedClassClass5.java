@@ -14,8 +14,8 @@ public class SynchronizedClassClass5 implements Runnable {
         method();
     }
 
-    public  void method() {
-        synchronized(SynchronizedClassClass5.class) {
+    public void method() {
+        synchronized (SynchronizedClassClass5.class) {
             System.out.println("我是类锁的第二种形式：synchronized(*.class)形式。我叫" + Thread.currentThread().getName());
             try {
                 Thread.sleep(3000);
@@ -24,7 +24,7 @@ public class SynchronizedClassClass5 implements Runnable {
             }
             System.out.println(Thread.currentThread().getName() + "，运行结束");
         }
-      }
+    }
 
     public static void main(String[] args) {
         Thread t1 = new Thread(instance1);

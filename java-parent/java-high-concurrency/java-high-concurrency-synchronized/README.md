@@ -31,3 +31,29 @@
 对象锁：如果是不同的实例创建出来，互相锁是不影响的，你也可以运行，我也可以运行，我们可以同时运行。
 形式1：synchronized加在static方法上
 形式2：synchronized (*.class)代码块
+
+7、多线程访问同步方法的7种情况。
+1)、两个线程同时访问一个对象的同步方法
+参考 SynchronizedObjectMethod3.class; 同一个实例，锁是同一把锁；
+
+2)、两个线程同时访问两个对象的同步方法
+参考 SynchronizedObjectCodeBlock2.class;同时并行执行，锁对象不是同一个，互不干扰；
+
+3)、两个线程访问的是synchronized的静态方法
+参考 SynchronizedClassStatic4.class; 会一个一个执行，锁生效；
+
+4)、同时访问同步方法与非同步方法
+参考 SynchronizedYesAndNo6.class;
+同时开始，同时结束；synchronized关键字，只作用于指定的那个方法中，
+对于其他没有加synchronized关键字的方法，根本不受到影响。
+
+5)、访问同一个对象的不同的普通同步方法
+参考 SynchronizedDifferentMethod7.class;
+串行执行，对于同一个实例来讲，两个方法拿到的this是一样的，所以这两个方法没办法同时运行；
+
+6)、同时访问静态synchronized和非静态synchronized方法
+参考 SynchronizedStaticAndNormal8.class;
+同时运行，因为指定的锁对象不是同一个锁；
+
+7)、方法抛出异常后，会释放锁
+参考 SynchronizedException9.class
