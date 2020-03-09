@@ -1,4 +1,4 @@
-package com.atu.wrongways;
+package com.atu.createthread.wrongways;
 
 /**
  * @author: Tom

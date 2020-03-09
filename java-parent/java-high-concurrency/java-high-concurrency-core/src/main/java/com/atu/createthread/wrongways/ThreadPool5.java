@@ -1,4 +1,4 @@
-package com.atu.wrongways;
+package com.atu.createthread.wrongways;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
