@@ -158,9 +158,10 @@ RightWayStopThreadInProduct2.java
 
 3.4 停止线程的错误方法
 3.4.1 被弃用的stop、suspend和resume方法
+suspend和resume 不会释放锁，会造成死锁；
 
 3.4.2 用volatile设置boolean标记位
-
+参考 volatiledemo下文件
 4、线程的一生————6个状态（生命周期）
 
 5、Thread类和Object类中的重要方法详解
