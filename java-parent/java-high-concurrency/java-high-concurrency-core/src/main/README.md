@@ -324,23 +324,52 @@ c)、Java版本升级都包括了哪些东西的升级？
 d)、Java8和Java1.8和JDK8关系，是同一个东西吗？
 是同一个东西。
 
-7)、注意点
-8)、常见面试问题
-
 5.3 sleep方法详解
+a、作用：我执行让线程在预期我的时间执行，其他时候不要占用CPU资源。
+b、特点：(1)、不释放锁，包括synchronized和lock；(2)、和wait不同
+c、sleep方法响应中断：
+1)、抛出InterruptedException
+2)、清除中断状态
+
+d、总结：
+sleep可以让线程进入Waiting状态，并且不占用CPU资源，但是不释放锁，直到规定时间后在执行，休眠期间如果被中断，会抛出异常病清楚中断状态。
+
+e、wait/notify、sleep异同（方法属于哪个对象，线程状态怎么切换）
+相同： 阻塞：Wait和sleep方法都可以使线程阻塞，对应线程状态是Waiting或Time_Waiting。响应中断： wait和sleep方法都可以响应中断Thread.interrupt()。 
+不同： 同步方法中：wait方法的执行必须在同步方法中进行，而sleep则不需要。释放锁： 在同步方法里执行sleep方法时，不会释放monitor锁，但是wait方法会释放monitor锁。 
+指定时间：sleep方法短暂休眠之后会主动退出阻塞，而没有指定时间的 wait方法则需要被其他线程中断后才能退出阻塞。 
+所属类：wait()和notify(),notifyAll()是Object类的方法，sleep()和yield()是Thread类的方法
 
 5.4 join方法
+5.4.1 join作用、用法
+作用：因为新的线程加入我们，所以我们要等他（新线程）执行完再出发。
+用法：main等待thread1执行完毕，注意谁等谁
+
+5.4.2 三个例子 
+a、普通用法：Join.java
+b、遇到中断：JoinInterrupt.java
+c、在join期间，线程到底是什么状态？
+WAITING
+
+5.4.3 join注意点
+CountDownLatch或CyclicBarrier类
+注意：每一个Thread类在run()结束后，会自动的执行notify()方法。
 
 5.5 yield方法
+5.5.1 作用：释放我的CPU时间片，释放之后，线程状态依然是Runnable状态，因为它不会释放锁，也不会陷入阻塞。
+5.5.2 定位：JVM不保证遵循
+5.5.3 yield和sleep区别：
+sleep期间线程调度器认为它已经被阻塞了，不会再把它调度起来，但是yield不同，它只是暂时把自己的调度去让给别人，但是立刻又可以
+处于竞争状态，随时可以被调度。
 
 5.6 获取当前执行线程的引用：Thread.currentThread()方法
 
 5.7 start和run方法
 
 5.8 stop、suspend、resume方法
-
+已被弃用。
 5.9 面试常见问题
-
+参考上述总结。wait和sleep较多。
 6、线程的各个属性
 
 7、未捕获异常如何处理？
