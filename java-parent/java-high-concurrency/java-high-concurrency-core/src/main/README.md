@@ -285,6 +285,45 @@ WaitNotifyPrintOddEvenSyn.java
 WaitNotifyPrintOddEvenWait.java
 基本思路：synchronized
 更好的方法：wait/notify
+
+b、为什么wait()需要在同步代码块内使用，而sleep()不需要？
+主要是让通信变得可靠，防止死锁或者永久等待的发生；
+如果我们把wait()和sleep()都放到同步代码块里面的话，
+那么很有可能在执行wait()之前，线程突然切过去，切到另外一个执行notify()的线程，这个线程回来执行这个wait()。。。
+
+c、为什么线程通信的方法wait()、notify()和notifyAll()被定义在Object类里？而sleep定义在Thread类里？
+主要是因为在Java中wait、notify和notifyAll是一个锁级别的操作，而这个锁是属于某一个对象的，每个对象的对象头中都含有几位用来保存当前锁的状态的，
+所以这个锁是绑定到某一个对象中，而并不是线程中；
+假设我们把wait、notify和notifyAll定义到线程中，就会造成很大的局限性，这样一来我们每一个线程是可以休眠，但是如果我们使用某一个线程持有多个锁，
+并且这些锁之间是相互配合的，那么这样一个某一个线程可以持有多把锁，但是不能实现灵活地逻辑了。
+
+d、wait方法是属于Object对象的，那调用Thread.wait会怎么样？
+Thread比较特殊，就是线程退出的时候，它会自动的执行notify()，这样会使我们设计的流程受到干扰，所以在调用wait方法或者创建某一个锁对象时不要用Thread类。
+
+e、如何选择用notify还是notifyAll?
+主要根据业务，是要唤醒多个线程还是只唤醒一个线程。
+
+f、notifyAll之后所有的线程都会再次抢夺锁，如果某线程抢夺失败怎么办？
+进入阻塞状态，等待释放。
+
+g、用suspend()和resume()来阻塞线程可以吗？为什么？
+不可以。由于安全问题已经被弃用了。推荐用wait和notify来实现相应的休眠和唤醒的功能。
+8)、菜单 Java相关概念
+a)、JavaSE、JavaEE、JavaME是什么？
+JavaSE：标准版—————平时开发使用
+JavaEE：企业版
+JavaME：移动版
+
+b)、JRE和JDK和JVM是什么关系？
+JRE:Java Runtime Environment java运行环境，主要是运行用，包含JVM和一些类库
+JDK:Java Development Kit java开发工具包，主要是开发用
+JVM:Java Virtual Machine Java虚拟机，JRE的一部分
+服务器一般是JRE，不见得一定有JDK，JDK包含JRE。
+
+c)、Java版本升级都包括了哪些东西的升级？
+d)、Java8和Java1.8和JDK8关系，是同一个东西吗？
+是同一个东西。
+
 7)、注意点
 8)、常见面试问题
 
