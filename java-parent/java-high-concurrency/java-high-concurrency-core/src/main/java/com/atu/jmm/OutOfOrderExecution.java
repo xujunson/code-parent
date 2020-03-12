@@ -59,7 +59,14 @@ public class OutOfOrderExecution {
             two.join();
             String result = "第" + i + "次（" + x + "," + y + ")";
 
-            if (x == 1 && y == 1) {
+            /*if (x == 1 && y == 1) {
+                System.out.println(result); //多次执行可以达到 x = 1, y = 1
+                break;
+            } else {
+                System.out.println(result);
+            }*/
+
+            if (x == 0 && y == 0) {
                 System.out.println(result); //多次执行可以达到 x = 1, y = 1
                 break;
             } else {
