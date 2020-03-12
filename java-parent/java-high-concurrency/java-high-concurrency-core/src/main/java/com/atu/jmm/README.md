@@ -158,7 +158,37 @@ FieldVisibility.java
   f、CyclicBarrier
 
 5.5 volatile关键字：和synchronized一样，在并发中起到保护作用的关键字
+5.5.1 volatile是什么？
+1)、volatile是一种同步机制，比synchronized或者Lock相关类更轻量，因为使用volatile并不会发生上下文切换等开销很大的行为。
+2)、如果一个变量被修饰成volatile，那么JVM就知道了这个变量可能会被并发修改。
+3)、但是开销小，相应的能力也小，虽然说volatile是用来同步的保证线程安全，但是volatile做不到synchronized那样的原子保护，volatile仅在很有限的场景下才能发挥作用。
 
+5.5.2 volatile的适用场景
+1)、不使用：a++; NoVolatile.java NoVolatile2.java
+2)、适用场合1：boolean flag UseVolatile1.java
+如果一个共享变量自始至终只被各个线程赋值，而没有其他操作，那么就可以用volatile来代替synchronized或者代替原子变量，
+因为赋值自身是有原子性的，而volatile又保证了可见性，所以就足以保证线程安全。
+3)、适用场合2：作为刷新之前变量的触发器
+
+5.5.3 volatile的两点作用
+1)、可见性：读一个volatile变量之前，需要先使相应的本地缓存失效，这样就必须到主内存读取最新值，
+写一个volatile属性会立即刷入到主内存
+2)、禁止指令重排序优化：解决单利双重锁乱序问题
+
+5.5.4 volatile和synchronized的关系
+volatile在这方面可以看做是轻量版的synchronized：如果一个共享变量自始至终纸杯各个线程赋值，
+而没有其他的操作，那么就可以用volatile来代替synchronized或者代替原子变量，因为赋值自身是由原子性的，而volatile又保证了可见性，所以就足以保证线程安全。
+
+5.5.5 用volatile修正重排序问题
+OutOfOrderExecution.java 
+
+5.5.6 volatile小结
+1)、volatile修饰符适用于以下场景：某个属性被多个线程共享，其中一个线程修改了此属性，其他线程可以立即得到修改后的值，比如boolean flag；或者作为触发器，实现轻量级同步。
+2)、volatile属性的读写操作都是无锁的，它不能替代synchronized，因为它没有提供原子性和互斥性。因为无锁，不需要花费时间在获取锁和释放锁上，所以说它是低成本的。
+3)、volatile只能作用于属性，我们用volatile修饰属性，这样compilers就不会对这个属性做指令重排序。
+4)、volatile提供了可见性，任何一个线程对其的修改将立马对其他线程可见。volatile属性不会被线程缓存，始终从主存中读取。
+5)、volatile提供了happens-before保证，一旦写入，其他所有线程后续都可以读到最新的值
+6)、volatile可以使得long和double的赋值是原子的
 5.6 能保证可见性的措施
 
 5.7 升华：对synchronized可见性的正确理解
