@@ -189,9 +189,14 @@ OutOfOrderExecution.java
 4)、volatile提供了可见性，任何一个线程对其的修改将立马对其他线程可见。volatile属性不会被线程缓存，始终从主存中读取。
 5)、volatile提供了happens-before保证，一旦写入，其他所有线程后续都可以读到最新的值
 6)、volatile可以使得long和double的赋值是原子的
+
 5.6 能保证可见性的措施
+除了volatile可以让变量保证可见性外，synchronized、Lock、并发集合、Thread.join()和Thread.start()等都可以保证可见性。
+具体看happens-before原则我的规定
 
 5.7 升华：对synchronized可见性的正确理解
+1)、synchronized不仅保证了原子性，还保证了可见性；
+2)、synchronized不仅让被保护的代码安全，还近朱者赤，也就是说保证了之前的代码写入主存。
 
 6、原子性(*)
 
