@@ -7,8 +7,10 @@ package com.atu.jmm;
  */
 public class FieldVisibility {
     //volatile 强制每一次读取的时候，读取到的都是线程已经修改过的最新的值
-    volatile int a = 1;
+    int a = 1;
     volatile int b = 2;
+    //只需要在 变量b 增加 volatile
+    //后面想读取b的时候就能看到b写入之前的所有操作，其中就包括a=3，所以在读取b的时候就一定能看到a的最新情况。
 
     private void print() {
         System.out.println("b= " + b + ", a = " + a);

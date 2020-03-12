@@ -135,6 +135,27 @@ JMM有以下规定：
 总结：所有的共享变量存在于主内存中，每个线程有自己的本地内存，而且线程读写共享数据也是通过本地内存交换的，所以才导致了可见性问题。
 
 5.4 Happens-Before原则
+5.4.1 什么是Happens-Before？
+FieldVisibility.java
+(1) Happens-Before规则是用来解决可见性问题的：在时间上，动作A发生在动作B之前，B保证能看见A，这就是Happens-Before.
+(2) 两个操作可以用happens-before来确定它们的执行顺序，如果一个操作happens-before于另一个操作，那么我们说第一个操作对于第二个操作是可见的。
+
+5.4.2 Happens-Before规则有哪些？
+(1) 单线程规则
+(2) 锁操作(synchronized和Lock)（*）
+(3) volatile变量（*）FieldVisibility.java
+(4) 线程启动
+(5) 线程join
+(6) 传递性
+(7) 中断
+(8) 构造方法
+(9) 工具类的Happens-Before原则
+  a、线程安全稳定容器get一定能看到在此之前的put等存入动作
+  b、CountDownLatch
+  c、Semaphore
+  d、Future
+  e、线程池
+  f、CyclicBarrier
 
 5.5 volatile关键字：和synchronized一样，在并发中起到保护作用的关键字
 
