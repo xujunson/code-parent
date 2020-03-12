@@ -332,7 +332,7 @@ c、sleep方法响应中断：
 2)、清除中断状态
 
 d、总结：
-sleep可以让线程进入Waiting状态，并且不占用CPU资源，但是不释放锁，直到规定时间后在执行，休眠期间如果被中断，会抛出异常病清楚中断状态。
+sleep可以让线程进入Waiting状态，并且不占用CPU资源，但是不释放锁，直到规定时间后在执行，休眠期间如果被中断，会抛出异常并清除中断状态。
 
 e、wait/notify、sleep异同（方法属于哪个对象，线程状态怎么切换）
 相同： 阻塞：Wait和sleep方法都可以使线程阻塞，对应线程状态是Waiting或Time_Waiting。响应中断： wait和sleep方法都可以响应中断Thread.interrupt()。 
