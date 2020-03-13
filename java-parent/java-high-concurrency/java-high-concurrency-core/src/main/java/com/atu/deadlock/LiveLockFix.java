@@ -1,11 +1,13 @@
 package com.atu.deadlock;
 
+import java.util.Random;
+
 /**
  * @author: Tom
  * @date: 2020-03-13 21:52
  * @description: 演示活锁问题
  */
-public class LiveLock {
+public class LiveLockFix {
     static class Spoon {
         private Diner owner; //就餐者
 
@@ -46,12 +48,14 @@ public class LiveLock {
                     }
                     continue;
                 }
+                Random random = new Random();
                 //问题在此处：一直再谦让
-                if (spouse.isHungry) {
+                if (spouse.isHungry && random.nextInt(10) < 9) {
                     System.out.println(name + ": 亲爱的" + spouse.name + "你先吃吧");
                     spoon.setOwner(spouse);
                     continue;
                 }
+
 
                 spoon.use();
                 isHungry = false;
