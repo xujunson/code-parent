@@ -11,9 +11,8 @@ public class WaitNotifyPrintOddEvenWait {
     private static int count = 0;
 
     public static void main(String[] args) {
-        new Thread(new TurningRunner(), "偶数").start();
-        new Thread(new TurningRunner(), "奇数").start();
-
+        new Thread(new TurningRunner()).start();
+        new Thread(new TurningRunner()).start();
     }
 
     //1.拿到锁就打印，不去判断是否为奇偶数

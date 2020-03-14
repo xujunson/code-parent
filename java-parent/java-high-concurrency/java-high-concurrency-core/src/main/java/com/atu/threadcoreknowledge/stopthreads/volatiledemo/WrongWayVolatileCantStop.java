@@ -7,7 +7,7 @@ import java.util.concurrent.BlockingQueue;
  * @author: Tom
  * @date: 2020-03-09 18:16
  * @description: 演示用volatile的局限part2
- * 当陷入阻塞时，volatile时无法停止线程的
+ * 当陷入阻塞时，volatile是无法停止线程的
  * 此例中，生产者的生产速度很快，消费者的消费速度很慢
  * 所以就会出现阻塞队列满的情况，一旦满了之后，生产者会阻塞，等待消费者进一步消费
  */
