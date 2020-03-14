@@ -11,7 +11,7 @@ JVM会自动通过使用monitor来加锁和解锁，保证了同时只有一个�
 直到这个方法结束或者一定条件之后，它才会释放这把锁；在这把锁释放之前，其他的线程只能是等待阻塞，直到
 这把锁释放了，其他的线程才可以去执行这段代码。
 
-4、不使用并发手段，两个线程同时 a++,最后结果比预计少。
+4、不使用并发手段，两个线程同时 a++,最后结果比预计少：DisappearRequest1.java。
 原因：a++ 看上去是一个操作，实际包含了三个动作：
 1)、读取a
 2)、将a加一
@@ -22,8 +22,8 @@ JVM会自动通过使用monitor来加锁和解锁，保证了同时只有一个�
 就是因为这样的原因在多线程的情况下，出现不符合我们的预期这种行为我们称之为 线程不安全。
 
 5、Synchronized的两个用法。
-1)、对象锁：包括方法锁（默认锁对象为this当前实例对象）和同步代码块锁（自己指定锁对象）；
-2)、类锁：指synchronized修饰静态的方法或指定锁为Class对象。
+1)、对象锁：包括方法锁（默认锁对象为this当前实例对象）和同步代码块锁（自己指定锁对象）SynchronizedObjectCodeBlock2.java，SynchronizedObjectMethod3.java；
+2)、类锁：指synchronized修饰静态的方法或指定锁为Class对象：SynchronizedClassStatic4.java，SynchronizedClassClass5.java。
 
 6、类锁用法。
 概念：Java类可能有很多个对象，但只有1个Class对象，效果是全局锁定。
@@ -37,29 +37,29 @@ JVM会自动通过使用monitor来加锁和解锁，保证了同时只有一个�
 
 7、多线程访问同步方法的7种情况。
 1)、两个线程同时访问一个对象的同步方法：串行执行
-参考 SynchronizedObjectMethod3.class; 同一个实例，锁是同一把锁；
+参考 SynchronizedObjectMethod3.java; 同一个实例，锁是同一把锁；
 
 2)、两个线程同时访问两个对象的同步方法
-参考 SynchronizedObjectCodeBlock2.class;同时并行执行，锁对象不是同一个，互不干扰；
+参考 SynchronizedObjectCodeBlock2.java;同时并行执行，锁对象不是同一个，互不干扰；
 
 3)、两个线程访问的是synchronized的静态方法
-参考 SynchronizedClassStatic4.class; 会一个一个执行，锁生效；
+参考 SynchronizedClassStatic4.java; 会一个一个执行，锁生效；
 
 4)、同时访问同步方法与非同步方法
-参考 SynchronizedYesAndNo6.class;
+参考 SynchronizedYesAndNo6.java;
 同时开始，同时结束；synchronized关键字，只作用于指定的那个方法中，
 对于其他没有加synchronized关键字的方法，根本不受到影响。
 
 5)、访问同一个对象的不同的普通同步方法
-参考 SynchronizedDifferentMethod7.class;
+参考 SynchronizedDifferentMethod7.java;
 串行执行，对于同一个实例来讲，两个方法拿到的this是一样的，所以这两个方法没办法同时运行；
 
 6)、同时访问静态synchronized和非静态synchronized方法
-参考 SynchronizedStaticAndNormal8.class;
+参考 SynchronizedStaticAndNormal8.java;
 同时运行，因为指定的锁对象不是同一个锁；
 
 7)、方法抛出异常后，会释放锁
-参考 SynchronizedException9.class
+参考 SynchronizedException9.java
 
 总结：
 1)、一把锁只能同时被一个线程获取，没有拿到锁的线程必须等待（对应第1、5种情况）；
@@ -82,7 +82,7 @@ JVM会自动通过使用monitor来加锁和解锁，保证了同时只有一个�
 
 9、Synchronized原理
 9.1 加锁和释放锁的原理：深入JVM看字节码
-MonitorEnter（加锁）：在执行是会让对象的锁计数加1，每个对象都和一个Monitor相关联，
+MonitorEnter（加锁）：在执行时会让对象的锁计数加1，每个对象都和一个Monitor相关联，
 而一个Monitor的lock锁只能被一个线程在同一时间获得，一个线程在尝试获得与这个对象关联的Monitor所有权时，只会发生以下三种情况之一：
 1)、如果monitor计数器为0，这意味着目前还没有被获得，所以这个线程会立刻获得，然后把计数器加1，
 一旦加1之后，别人在想进来就会看到这个信号，就知道它已经被别人所持有了；所以加1也就意味着当前线程是这个Monitor的所有者；
@@ -100,15 +100,15 @@ MonitorExit（释放）：作用是释放对于monitor的所有权，也就是�
 每当任务离开时，计数递减，当计数为0的时候，锁被完全释放。
 
 9.3 可见性原理：Java内存模型(JMM)
-本地内存：保存的变量是一个副本，也就是说是把主内存中的变量复制一份放到，本地内存。
+本地内存：保存的变量是一个副本，也就是说是把主内存中的变量复制一份，放到本地内存。
 这样的好处就是可以加速程序运行。
 线程A 向 线程B 发送数据的步骤（线程之间想通信必须通过主内存）：
 首先本地内存A会把自己修改过的变量内容放到主内存中，然后线程B从主内存中读取，整个过程是由JMM控制;
 JMM正是通过控制主内存与每个线程的本地内存之间的交互，来为我们的提供了内存可见性的保证。
 
-Synchronized是如何做到可见性的实现的？
+9.4 Synchronized是如何做到可见性的实现的？
 一旦一个代码块或者方法被我们Synchronized关键字所修饰，那么它在执行完毕之后，
-被锁住的对象所做的任何修改都要在释放锁之前从线程内存写回到主内存当中，就是说不会存在一种情况叫做线程内存和主内存内容不一致；
+被锁住的对象所做的任何修改都要在释放锁之前从线程内存写回到主内存当中，就是说不会存在一种情况叫做线程内存和主内存内容不一致。
 
 10、Synchronized缺陷
 1)、效率低：锁的释放情况少、试图获得锁时不能设定超时、不能中断一个正在试图获得锁的线程。
@@ -129,7 +129,7 @@ c)、不能中断一个正在试图获得锁的线程：相比之下lock有中�
 2)、如何选择Lock和synchronized关键字？
 如果说synchronized关键字在程序中适用，那就优先适用，可以减少我们编写的代码。
 3)、多线程访问同步方法的各种具体情况。
-参考 7。
+参考 ：(7、多线程访问同步方法的7种情况)。
 
 12、思考题
 1)、多个线程等待同一个synchronized锁的时候，JVM如何选择下一个获取锁的是哪个线程？
