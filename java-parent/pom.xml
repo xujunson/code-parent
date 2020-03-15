@@ -12,6 +12,7 @@
         <module>java-senior</module>
         <module>java-high-concurrency/java-high-concurrency-synchronized</module>
         <module>java-high-concurrency/java-high-concurrency-core</module>
+        <module>java-high-concurrency/java-high-concurrency-tools</module>
     </modules>
     <packaging>pom</packaging>
 
