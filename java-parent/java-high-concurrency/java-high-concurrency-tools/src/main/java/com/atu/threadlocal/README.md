@@ -96,3 +96,21 @@ JDK已经考虑到了这个问题，所以在set、remove、rehash方法中会�
 
 3)、如何避免内存泄露（阿里规约）
 调用remove方法，就会删除对应的Entry对象，可以避免内存泄露，所以使用完ThreadLocal之后，应该调用remove方法；
+
+2.7.2 空指针异常 ：ThreadLocalNPE.java
+在进行get之前，必须先set，否则可能会报空指针异常？
+并不是，是由于装箱拆箱导致的。
+
+2.7.3 共享对象
+如果在每个线程中ThreadLocal.set()进去的东西本来就是多线程共享的同一个对象，比如static对象，
+那么多个线程的ThreadLocal.get()取得的还是这个共享对象本身，还是有并发访问问题。
+
+2.7.4 如果可以不使用ThreadLocal就解决问题，那么就不要强行使用
+比如说，我们在任务数很少的时候，在局部变量中新建对象就可以解决问题，那么就不需要使用到ThreadLocal；
+
+2.7.5 优先使用框架的支持，而不是自己创造
+例如在Spring中，如果可以使用RequestContextHolder，那么就不需要自己维护ThreadLocal，因为自己可能会忘记调用remove()方法等，造成内存泄露。
+
+2.8 实际应用场景————在Spring中的实例分析
+1)、DateTimeContextHolder类，看到里面用了ThreadLocal；
+2)、每次HTTP请求都对应一个线程，线程之间相互隔离，这就是ThreadLocal的典型应用场景；
