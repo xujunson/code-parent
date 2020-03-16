@@ -99,12 +99,17 @@ b)、用version控制数据库就是乐观锁
  c)、临界区竞争非常激烈
 乐观锁：适合并发写入少，大部分是读取的场景，不加锁的能让读取性能大幅提高。
 
-
-
 3.2.2、可重入锁和非可重入锁，以ReentrantLock为例(*)
-可重入锁使用案例：
+1)、可重入锁使用案例：
 普通用法1：预定电影院座位 CinemaBookSeat.java
-普通用法2：打印字符串 
+普通用法2：打印字符串 LockDemo.java
+
+2)、什么是可重入？
+可重入锁也叫递归锁，指的是同一个线程可以多次获取同一把锁；synchronized和ReentrantLock都是可重入锁；
+好处：可以避免死锁；提升封装性；
+GetHoldCount.java
+RecursionDemo.java
+
 3.5、公平锁和非公平锁
 3.6、共享锁和排它锁：以ReentrantReadWriteLock读写锁为例(*)
 3.7、自旋锁和阻塞锁
