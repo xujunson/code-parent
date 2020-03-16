@@ -27,9 +27,17 @@ b、相比于lock，这样恶毒方法显然功能更强大了，我们可以根
 c、该方法会立即返回，即便在拿不到锁时不会一直在那等；
 
 3)、tryLock(long time, TimeUnit unit)：超时就放弃
+TryLockDeadlock.java
 
+4)、lockInterruptibly：try(long time, TimeUnit unit)把超时时间设置为无限。在等待锁的过程中，线程可以被中断；
+5)、unlock()：解锁
+注意，要写在finally里面，获取锁之后的第一件事就是把unlock放到finally里面，在写业务代码。
 
 3.1.4 可见性保证
+指的是线程与线程之间并不是随时能看到对方最新的动态的；
+happens-before原则：我们这件事发生了，如果其他线程一定能看到我们做的其他修改的话，就代表拥有happens-before；
+
+Lock的加解锁和synchronized有同样的内存语义，也就是说，下一个线程加锁后可以看到所有前一个线程解锁前发生恶毒所有操作；
 
 3.2、锁的分类
 3.3、乐观锁和悲观锁
