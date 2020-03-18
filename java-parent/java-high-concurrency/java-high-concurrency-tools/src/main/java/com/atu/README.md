@@ -70,3 +70,12 @@ https://naotu.baidu.com/file/89fb28b05e3395800f9dc2d332d2b198?token=9b45e08e5528
 5.3、应用场景
 5.4、以AtomicInteger为例，分析在Java中是如何利用CAS实现原子操作的？
 5.5、缺点
+
+6、以不变应万变：final关键字和不变性
+6.1 什么是不变性(Immutable)
+6.2 final的作用
+6.3 3种用法：修饰变量、方法、类
+6.4 注意点
+6.5 不变性和final的关系
+
+栈封闭
