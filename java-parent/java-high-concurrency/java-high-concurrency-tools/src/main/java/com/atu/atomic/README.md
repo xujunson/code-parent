@@ -22,6 +22,8 @@ java.util.concurrent.atomic
 
 AtomicIntegerDemo1.java
 
+如果说在做账务系统或者财务管理的时候，经常会有并发的修改，这种修改需要保证原子性，可以利用AtomicIntegerArray来保障线程安全。
+
 4.3.2 AtomicLong：原子类
 
 4.3.3 AtomicBoolean：布尔型原子类
