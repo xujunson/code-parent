@@ -5,7 +5,7 @@ java.util.concurrent.atomic
 
 作用：原子类的作用和锁类似，是为了保证并发情况下的线程安全。
 不过原子类相比于锁，有一定的优势：
-1)、锁的粒度更细：原子变量可以把竞争范围缩小到变量级别，这是我们可以获得的最细粒度的情况了，通常锁的粒度都要大于原子变量的粒度；
+1)、粒度更细：原子操作可以把竞争范围缩小到变量级别，这是我们可以获得的最细粒度的情况了，通常锁的粒度都要大于原子变量的粒度；
 2)、效率更高：通常，使用原子类的效率会比使用锁的效率更高，除了高度竞争的情况。
 
 4.2、6类原子类纵览
@@ -31,7 +31,7 @@ AtomicIntegerDemo1.java
 AtomicArrayDemo.java
 
 4.5、Atomic*Reference引用类型原子类
-4.5.1、AtomicReference：AtomicReference类的作用，课AtomicInteger并没有本质区别。AtomicInteger可以让一个整数保证原子性，而AtomicReference可以让一个对象保证原子性，
+4.5.1、AtomicReference：AtomicReference类的作用，与AtomicInteger并没有本质区别。AtomicInteger可以让一个整数保证原子性，而AtomicReference可以让一个对象保证原子性，
 当然，AtomicReference的功能明显比AtomicInteger强，因为一个对象里可以包含很多属性。用法和AtomicInteger类似。
 SpinLock.java
 
@@ -62,6 +62,7 @@ LongAdderDemo.java
 4.7.2 LongAdder带来的改进和原理
 1)、在内部，这个LongAdder的实现原理和刚才的AtomicLong是有不同的，刚才的AtomicLong的实现原理是：
 每一次加法都需要做同步，所以在高并发的时候会导致冲突比较多，也就降低了效率；
+而LongAdder不需要在每一次计算的时候都同步，而是说只有在最后求和的时候才需要把最后整个的值进行汇总。
 2)、而此时的LongAdder，每个线程会有自己的一个计数器，仅用来在自己线程内计数，这样一来就不会和其他线程的计数器干扰；
 3)、如图中所示，第一个线程的计数器数值也就是ctr‘，为1的时候，可能线程2的计数器ctr’‘已经是3了，它们之间并不存在竞争关系，所以在加和的过程中，
 根本不需要同步机制，也不需要刚才的flush和refresh。这里也没有一个公共的counter来给所有线程统一计数。
