@@ -48,7 +48,7 @@ FinalMethodDemo.java
 
 6.3.3. final修饰类
 不可被继承.
-例如典型的String类就是final的，我们从没见过哪个类是继承String类的。
+例如：典型的String类就是final的，我们从没见过哪个类是继承String类的。
 
 6.4 注意点
 1)、final修饰对象的时候，只是对象的引用不可变，而对象本身的属性是可以变化的。
@@ -75,3 +75,5 @@ FinalMethodDemo.java
 而每个栈的栈空间是不能被其他线程所访问到的，所以不会有线程安全问题。这就是著名的"栈封闭"技术。是"线程封闭"技术的一种情况。
 StackConfinement.java
 
+6.7 面试题
+真假美猴王
