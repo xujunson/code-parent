@@ -17,8 +17,8 @@ public class GetHoldCount {
         lock.lock();
         System.out.println(lock.getHoldCount());
         lock.lock();
-
         System.out.println(lock.getHoldCount());
+
         lock.unlock();
         System.out.println(lock.getHoldCount());
         lock.unlock();
