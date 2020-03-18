@@ -63,3 +63,10 @@ https://naotu.baidu.com/file/89fb28b05e3395800f9dc2d332d2b198?token=9b45e08e5528
 4.6、把普通变量升级为原子类，用AtomicIntegerFieldUpdater升级原有变量
 4.7、Adder累加器
 4.8、Accumulator累加器
+
+5、CAS原理
+5.1、什么是CAS
+5.2、案例演示
+5.3、应用场景
+5.4、以AtomicInteger为例，分析在Java中是如何利用CAS实现原子操作的？
+5.5、缺点
