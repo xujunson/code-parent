@@ -25,11 +25,25 @@ AtomicIntegerDemo1.java
 如果说在做账务系统或者财务管理的时候，经常会有并发的修改，这种修改需要保证原子性，可以利用AtomicIntegerArray来保障线程安全。
 
 4.3.2 AtomicLong：原子类
-
 4.3.3 AtomicBoolean：布尔型原子类
 
 4.4、Atomic*Array数组类型原子类
+AtomicArrayDemo.java
+
 4.5、Atomic*Reference引用类型原子类
+4.5.1、AtomicReference：AtomicReference类的作用，课AtomicInteger并没有本质区别。AtomicInteger可以让一个整数保证原子性，而AtomicReference可以让一个对象保证原子性，
+当然，AtomicReference的功能明显比AtomicInteger强，因为一个对象里可以包含很多属性。用法和AtomicInteger类似。
+SpinLock.java
+
 4.6、把普通变量升级为原子类，用AtomicIntegerFieldUpdater升级原有变量
+4.6.1、AtomicIntegerFieldUpdater对普通变量进行升级
+适用场景：
+1)、如果一个类不是我们编写的，我们没有权利去修改它，此时可以使用AtomicIntegerFieldUpdater;
+2)、偶尔需要一个原子get-set操作；
+
+4.6.2、AtomicIntegerFieldUpdater注意点
+1)、所能修改的是具有一个可见范围的；
+2)、不支持被static修饰的变量
+
 4.7、Adder累加器
 4.8、Accumulator累加器
