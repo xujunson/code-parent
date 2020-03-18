@@ -53,3 +53,13 @@ https://naotu.baidu.com/file/89fb28b05e3395800f9dc2d332d2b198?token=9b45e08e5528
 3.7、自旋锁和阻塞锁
 3.8、可中断锁：顾名思义就是可以响应中断的锁
 3.9、锁优化
+
+4、atomic包【一刻也不能分割】
+4.1、什么是原子类，有什么作用？
+4.2、6类原子类纵览
+4.3、Atomic*基本类型原子类，以AtomicInteger为例
+4.4、Atomic*Array数组类型原子类
+4.5、Atomic*Reference引用类型原子类
+4.6、把普通变量升级为原子类，用AtomicIntegerFieldUpdater升级原有变量
+4.7、Adder累加器
+4.8、Accumulator累加器
