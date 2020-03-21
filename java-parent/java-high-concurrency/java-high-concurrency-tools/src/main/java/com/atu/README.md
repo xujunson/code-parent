@@ -79,3 +79,11 @@ https://naotu.baidu.com/file/89fb28b05e3395800f9dc2d332d2b198?token=9b45e08e5528
 6.5 不变性和final的关系
 
 栈封闭
+
+7、并发容器精讲————面试杀手锏
+7.1、并发容器概览
+7.2、趣说集合类的历史————古老和过时的同步容器
+7.3、ConcurrentHashMap(*)
+7.4、CopyOnWriteArrayList
+7.5、并发队列Queue(阻塞队列、非阻塞队列)
+7.6、各并发容器总结
