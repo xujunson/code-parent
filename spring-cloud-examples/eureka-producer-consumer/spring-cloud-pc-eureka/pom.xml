@@ -4,9 +4,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.atu</groupId>
-    <artifactId>spring-cloud-eureka</artifactId>
+    <artifactId>spring-cloud-pc-eureka</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>spring-cloud-eureka</name>
+    <name>spring-cloud-pc-eureka</name>
     <description>Demo project for Spring Boot</description>
 
     <parent>
