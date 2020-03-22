@@ -10,7 +10,18 @@
 7.2、趣说集合类的历史————古老和过时的同步容器
 1)、Vector和HashTable——JDK早期的，目标是提供线程安全的集合类，随着JDK的发展，已经不能满足当今的需求了；
 比如说性能不够好、对复合操作支持的不够好、有其他线程并发修改容器里面的内容时，可能会抛出异常；
-7.3、ConcurrentHashMap(*)
+
+2)、HashMap和ArrayList——线程不安全
+虽然这两个类是线程不安全的，但是可以用Collections.synchronizedList(new ArrayList<E>())和
+Collections.synchronizedMap(new HashMap<K,V>())使之变成线程安全的；
+————虽然可以保证线程安全但是性能并未提高
+
+比较不错的实现————ConcurrentHashMap和CopyOnWriteArrayList，取代同步的HashMap和同步的ArrayList(时代巨轮滚滚向前);
+在绝大多数并发情况下，ConcurrentHashMap和CopyOnWriteArrayList的性能都更好；
+
+7.3、ConcurrentHashMap
+
+
 7.4、CopyOnWriteArrayList
 7.5、并发队列Queue(阻塞队列、非阻塞队列)
 7.6、各并发容器总结
