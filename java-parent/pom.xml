@@ -13,6 +13,7 @@
         <module>java-high-concurrency/java-high-concurrency-synchronized</module>
         <module>java-high-concurrency/java-high-concurrency-core</module>
         <module>java-high-concurrency/java-high-concurrency-tools</module>
+        <module>java-high-concurrency/hashmapendlessloop</module>
     </modules>
     <packaging>pom</packaging>
 

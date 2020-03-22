@@ -19,8 +19,61 @@ Collections.synchronizedMap(new HashMap<K,V>())使之变成线程安全的；
 比较不错的实现————ConcurrentHashMap和CopyOnWriteArrayList，取代同步的HashMap和同步的ArrayList(时代巨轮滚滚向前);
 在绝大多数并发情况下，ConcurrentHashMap和CopyOnWriteArrayList的性能都更好；
 
-7.3、ConcurrentHashMap
+7.3、ConcurrentHashMap(*)
+7.3.1、磨刀不误砍柴工：Map简介
+1)、HashMap——可以满足大多数的使用场景，所以它的使用频率是最高的
+![binaryTree](../img/Map.png "binaryTree")
+HashMap会根据键的hashcode存储，由于可以直接计算出hashcode的值，所以可以直接定位到这个键所在的位置；
+所以它的访问速度是非常快的；HashMap允许键(key)为null去写入的，但是对于值是null，这个是不做限制的，
+我们可以设置很多key不为null的数据并且设置它们的值为null；并且它是一个线程非安全的实现，所以如果有多个线程同时对它操作，
+可能会导致数据不一致；
 
+2)、Hashtable
+历史遗留类，很多功能和HashMap是一致的，但是它是线程安全的；任何一个时刻只能有一个线程对它进行操作；
+所以它的并发性远不如ConcurrentHashMap，所以不建议使用Hashtable；
+
+3)、LinkedHashMap
+HashMap的子类，保存了记录的插入顺序，并且在遍历的时候就有用了；
+
+4)、TreeMap
+由于实现了SortedMap接口，所以可以根据键去排序，默认是升序，也可以定义排序的具体实现；
+
+MapDemo.java
+
+总结：以上的四种实现都要求key是不可变对象，不可变对象指的是对象在创建后它的hash值不会改变；
+
+7.3.2、为什么需要ConcurrentHashMap？
+1)、为什么不用Collections.synchronizedMap()?
+它是通过一个锁来保证不同线程之间的并发访问，但是由于synchronized对于并发量高的时候，它的性能并不理想；
+所以不采用这种方法。
+2)、为什么HashMap是线程不安全的？
+ a)、同时put碰撞导致数据丢失
+  多个线程同时put，计算出来的hash值有可能是一样的，这两个key会放到同一个位置；但是两个线程都放到同一个位置，
+  那就会有一个人最终是丢失的；
+ b)、同时put扩容导致数据丢失
+  多个线程同时put，并且同时发现需要扩容，那么扩容之后的数组也只有一个会被保留下来，所以也会造成某些数据的丢失；
+ c)、死循环造成的CPU 100% (*)——JDK1.7中
+ java.lang.OutOfMemoryError: Java heap space
+ HashMapEndlessLoop.java
+ 原因：多个线程，在同时扩容的时候，会造成链表的死循环(你指向我，我指向你)，这样一来就没有尽头了
+  
+7.3.3、九层之台，起于累土，罗马不是一天建成的：HashMap的分析
+HashMap关于并发的特点
+1)、非线程安全
+2)、迭代是不允许修改内容
+3)、只读的并发是安全的
+4)、如果一定要把HashMap用在并发环境，用Collections.synchronizedMap(new HashMap())
+
+
+7.3.4、JDK1.7的ConcurrentHashMap实现和分析
+
+7.3.5、JDK1.8的ConcurrentHashMap实现和分析
+
+7.3.6、对比JDK1.7和1.8的优缺点，为什么要把1.7的结构改成1.8的结构
+
+7.3.7、组合操作：ConcurrentHashMap也不是线程安全的
+
+7.3.8、实际生产案例分享
 
 7.4、CopyOnWriteArrayList
 7.5、并发队列Queue(阻塞队列、非阻塞队列)
