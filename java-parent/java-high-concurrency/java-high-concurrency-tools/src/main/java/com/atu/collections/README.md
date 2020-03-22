@@ -64,16 +64,41 @@ HashMap关于并发的特点
 3)、只读的并发是安全的
 4)、如果一定要把HashMap用在并发环境，用Collections.synchronizedMap(new HashMap())
 
-
 7.3.4、JDK1.7的ConcurrentHashMap实现和分析
+![binaryTree](../img/Java7_ConcurrentHashMap.png "binaryTree")
+1)、Java7中的ConcurrentHashMap最外层是多个segment，每个segment的底层数据结构与HashMap类似，仍然是数组和链表组成的拉链法；
+2)、每个segment设置了独立的ReentrantLock锁，每个segment之间互不影响，提高了并发效率；
+3)、ConcurrentHashMap默认有16个Segments，所以最多可以同时支持16个线程并发写(操作分别分布在不同的Segment上)。
+这个默认值可以在初始化的时候设置为其他值，但是一旦初始化以后，是不可以扩容的。
 
 7.3.5、JDK1.8的ConcurrentHashMap实现和分析
+![binaryTree](../img/Java8_ConcurrentHashMap.png "binaryTree")
+简介：和HashMap的结构非常相似，采用的是一个个的Node(节点),当链表值大于某个阈值的时候(8)，并且总容量大于某个阈值是时；
+它会把链表转为红黑树，避免的一个个的找把复杂度从O(n)降到了O(logn);
+![binaryTree](../img/ConcurrentHashMap_putVal流程.png "binaryTree")
+![binaryTree](../img/ConcurrentHashMap_get流程.png "binaryTree")
 
 7.3.6、对比JDK1.7和1.8的优缺点，为什么要把1.7的结构改成1.8的结构
+1)、数据结构上1.8提高了并发度
+2)、Hash碰撞：1.7使用拉链法，1.8会先使用拉链法如果达到它的条件就转为红黑树以便做进一步的平衡提高效率；
+3)、保证并发安全：1.7使用分段锁，采用segment保证并发安全，而segment继承自ReentrantLock；1.8是通过CAS+synchronized，
+所以在这一点有很大不同；
+4)、查询复杂度：1.7遍历链表复杂度O(n);1.8遍历红黑树复杂度就是O(logn)，所以也提高了查询效率；
+
+为什么在超过8的时候转为红黑树？、
+首先在数据量并不多的时候，即便用链表也无所谓；
+红黑树的节点所占用的空间是链表的两倍，在空间上的损耗比链表要大，所以在开始默认用链表的形式；
+正常情况下链表不会转为红黑树，在8的时候有千万分之一的概率会转为；那如果真的发生这种情况，我们转为红黑树，可以确保在这种极端情况下，
+我们的查询依然能够保证一定的效率。
 
 7.3.7、组合操作：ConcurrentHashMap也不是线程安全的
+OptionsNotSafe.java
+
+1)、replace用法
+2)、putIfAbsent
 
 7.3.8、实际生产案例分享
+多线程务必使用ConcurrentHashMap。
 
 7.4、CopyOnWriteArrayList
 7.5、并发队列Queue(阻塞队列、非阻塞队列)

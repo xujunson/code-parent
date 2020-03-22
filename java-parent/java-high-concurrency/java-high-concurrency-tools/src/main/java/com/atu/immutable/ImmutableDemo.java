@@ -6,7 +6,7 @@ import java.util.Set;
 /**
  * @author: Tom
  * @date: 2020-03-18 17:21
- * @description: 一个属性是对象，但是整体不可变，其他类无法修改set里面恶毒数据
+ * @description: 一个属性是对象，但是整体不可变，其他类无法修改set里面的数据
  */
 public class ImmutableDemo {
     //不可变指的是 内容不可变
