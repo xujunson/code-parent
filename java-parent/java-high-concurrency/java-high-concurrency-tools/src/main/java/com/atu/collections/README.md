@@ -147,4 +147,90 @@ CopyOnWriteArrayListDemo2.java
 数据结构
 
 7.5、并发队列Queue(阻塞队列、非阻塞队列)
+7.5.1、为什么要用队列
+1)、用队列可以在线程间传递数据：生产者消费者模式、银行转账
+2)、考虑锁等线程安全问题的重任从"你" 转移到了"队列"上
+
+7.5.2、并发队列简介
+1)、Queue：Java5，用来保存一组等待处理的数据，有很多的实现
+2)、BlockingQueue：增加了可阻塞的插入和获取操作，如果队列为空，取得这个操作就会一直阻塞；
+如果队列满了，插入就插不进去，也会一直阻塞；直到队列有一个被拿走，有个空间空出来——生产者消费者模式；
+
+7.5.3、各并发队列关系图
+![binaryTree](../img/各并发队列关系图.png "binaryTree")
+
+7.5.4、阻塞队列(BlockingQueue)(*)
+1)、什么是阻塞队列
+![binaryTree](../img/什么是阻塞队列.png "binaryTree")
+ a)、简介、地位
+   (1)、阻塞队列是具有阻塞功能的队列，所以它首先是一个队列，其次是具有阻塞功能；
+   (2)、通常，阻塞队列的一端是给生产者放数据用，另一端给消费者拿数据用。阻塞队列是线程安全的，
+   所以生产者和消费者都可以是多线程的。
+ 阻塞功能：最有特色的两个带有阻塞功能的方法是
+ b)、take()方法：获取并移除队列的头结点，一旦执行take的时候，队列里无数据，则阻塞，直到队列里有数据；
+ c)、put()方法：插入元素。但是如果队列已满，那么就无法继续插入，则阻塞，直到队列里有了空闲空间；
+ d)、是否有界(容量有多大)：这是一个非常重要的属性，无界队列意味着里面可以容纳非常多(Integer.MAX_VALUE,约为2的31次，是非常大的一个数，
+ 可以近似认为是无限容量)
+ e)、阻塞队列和线程池的关系：阻塞队列是线程池的重要组成部分；
+
+2)、主要方法介绍
+a)、put、take(*)
+特点会阻塞住；
+
+b)、add、remove、element
+add：添加，和put很像，但是区别就在于，如果满了放不进去，add会抛出异常；
+remove：发现队列空了，还想删除也会抛出异常；
+element：返回队列头元素，如果是空也会抛出异常；
+
+c)、offer、poll、peek
+offer：添加一个元素，如果满了会返回一个boolean值——false;
+poll：试图取一个元素，如果为空则会返回一个null
+peek：poll在取元素的同时会删除，peek不删除只取出，共同点就是如果为空则会返回一个null；
+
+3)、ArrayBlockingQueue
+ a、有界
+ b、指定容量
+ c、公平：还可以指定是否需要保证公平，如果想保证公平的话，那么等待了最长时间的线程会被优先处理，
+不过这会同时带来一定的性能损耗
+
+ArrayBlockingQueueDemo.java
+
+4)、LinkedBlockingQueue
+ a、无界
+ b、容量Integer.MAX_VALUE
+ c、内部结构：Node、两把锁。分析put方法
+5)、PriorityBlockingQueue
+ a、支持优先级
+ b、自然顺序(不是先进先出)
+ c、无界队列：容量不够可以扩容
+ d、PriorityQueue的先出安全版本
+ 
+6)、SynchronousBlockingQueue
+ a、容量为0
+ b、需要注意的是，SynchronousQueue的容量不是1而是0，因为SynchronousQueue不需要去持有元素，它所做的就是直接传递(direct handoff)
+ c、效率很高
+![binaryTree](../img/SynchronousQueue.png "binaryTree")
+
+ e、注意点：
+  (1) SynchronousQueue没有peek等函数，因为peek的含义是取出头结点，但是SynchronousQueue的容量是0，所以连头结点都没有，
+  也就没有peek方法。同理，没有iterate相关方法。
+  (2) 是一个极好的用来直接传递的并发数据结构
+  (3) SynchronousQueue是线程池Executors.newCachedThreadPool()使用的阻塞队列
+
+7)、DelayQueue
+ a、延迟队列，根据延迟时间排序
+ b、元素需要实现Delayed接口，规定排序规则
+
+7.5.5、非阻塞队列
+并发包中的非阻塞队列只有ConcurrentLinkedQueue这一种，顾名思义ConcurrentLinkedQueue是使用链表作为其数据结构的，
+使用CAS非阻塞算法来实现线程安全(不具备阻塞功能)，适合用在对性能要求较高的并发场景。用的相对比较少一些。
+
+7.5.6、如何选择适合自己的队列(*)
+1)、边界
+2)、空间
+3)、吞吐量
+
 7.6、各并发容器总结
+1)、java.util.concurrent包提供的容器分为3类：Concurrent*、CopyOnWrite*、Blocking*;
+2)、Concurrent*的特点是大部分通过CAS实现并发，而CopyOnWrite*则是通过赋值一份原数据来实现的，
+Blocking通过AQS实现的；
