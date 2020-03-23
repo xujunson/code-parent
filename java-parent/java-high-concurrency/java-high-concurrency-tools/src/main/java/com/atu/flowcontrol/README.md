@@ -82,4 +82,44 @@ SemaphoreDemo.java
 那么就线程1 acquire()，而线程2完成任务后release()，这样的话，相当用户是轻量级的CountDownLatch。
 
 8.4、Condition接口(又称条件对象)
+8.4.1 作用
+1)、假设线程1需要等待某一个条件的时候，它就去执行condition.await()方法，一旦执行了await()方法，线程就会进入阻塞状态；
+2)、然后通常会有另外一个线程，假设是线程2，去执行对应的条件，直到这个条件达成的时候，线程2就会去执行condition.signal()方法，
+这是JVM就会从被阻塞的线程里找到那些等待该condition的线程，当线程1就会收到可执行信号的时候，
+它的线程状态就会变成Runnable可执行状态。
+
+8.4.2 signalAll()和signal()区别
+1)、signalAll()会唤起所有的正在等待的线程
+2)、但signal()是公平的，只会唤起那个等待时间最长的线程
+
+8.4.2 代码演示(*)
+1)、普通示例：ConditionDemo1.java
+
+2)、用Condition实现生产者消费者模式
+ConditionDemo2.java
+
+8.4.3 注意点
+1)、实际上，如果说Lock用来代替synchronized，那么Condition就是用来代替相对应的Object.wait/notify的，
+所以在用法和性质上，几乎都一样；
+
+2)、synchronized中调用wait()方法，就会释放Monitor锁，在这里调用await方法会自动释放持有的Lock锁，和Object.wait一样，
+不需要自己手动释放锁；
+
+3)、调用await的时候，必须持有锁，否则会抛出异常，和Object.wait一样；
+
 8.5、CyclicBarrier循环栅栏
+8.5.1 作用
+1)、CyclicBarrier循环栅栏和CountDownLatch很类似，都能阻塞一组线程；
+2)、当有大量线程相互配合，分别计算不同任务，并且需要最后统一汇总的时候，我们可以使用CyclicBarrier。
+CyclicBarrier可以构造一个集结点，当某一个线程执行完毕，它就会到集结点等待，直到所有线程都到了集结点，那么该栅栏就被撤销，
+所有线程再统一出发，继续执行剩下的任务。
+
+3)、可重用
+CyclicBarrierDemo.java
+
+8.5.2 CyclicBarrier和CountDownLatch的区别
+1)、CyclicBarrier要等固定数量的线程都到了栅栏位置才能继续执行，而CountDownLatch只需等待数字到0，
+也就是说，CountDownLatch用于事件，但是CyclicBarrier是用于线程的；
+
+2)、可重用性不同：CountDownLatch在倒数到0并触发门闩打开后，就不能再次使用了，
+除非新建新的实例，而CyclicBarrier可以重复使用。
