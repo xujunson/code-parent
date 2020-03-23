@@ -24,19 +24,19 @@ BothRunnableThread.java
 还有其他的实现线程的方法，例如线程池等，它们也能新建线程，但是细看源码，从没有逃出过本质，也就是实现Runnable接口和继承Thread类。
 
 1.3 典型错误观点分析
-a、"线程池创建线程也算是一种新建线程的方式"
+1)、"线程池创建线程也算是一种新建线程的方式"
 ThreadPool5.java 是通过new Thread();实现的
 
-b、"通过Callable和FutureTask创建线程，也算是一种新建线程的方法"
+2)、"通过Callable和FutureTask创建线程，也算是一种新建线程的方法"
 实现了Runnable接口，本质离不开Runnable
 
-c、"无返回值的是实现runnable接口，有返回值是实现callable接口，所以callable是新的实现线程的方式"
+3)、"无返回值的是实现runnable接口，有返回值是实现callable接口，所以callable是新的实现线程的方式"
 本质没有创新，离不开Runnable接口
-d、定时器
+4)、定时器
 DemoTimmerTask.java 表面现象，也是离不开那两种方法
-e、匿名内部类
+5)、匿名内部类
 AnonymousInnerClassDemo.java
-f、Lambda表达式
+6)、Lambda表达式
 Lambda.java
 
 总结：多线程的实现方式，在代码中写法千变万化，但其本质万变不离其宗。
@@ -64,20 +64,20 @@ public void run () {
 2、怎样才是正确的线程启动方式？
 2.1 start()和run()的比较
 2.1.1 start()方法含义：
-a、启动新线程————主线程会请求jvm运行线程，线程何时能运行由线程调度器决定。
+1)、启动新线程————主线程会请求jvm运行线程，线程何时能运行由线程调度器决定。
 start方法会让两个线程同时运行，第一个就是主线程，第二个才是刚刚创建的子线程；
 
-b、准备工作————调用start()方法只是告诉jvm在合适的时候来启动；
+2)、准备工作————调用start()方法只是告诉jvm在合适的时候来启动；
 第二个就是新线程需要准备工作才能运行，首先它会让自己处于就绪状态，
 就绪状态指的是我已经获取到除CPU以外的其他资源，比如说我已经设置了上下文、栈、线程状态以及PC(寄存器，PC指向了程序运行的位置)；
 
-c、不能重复调用start():
+3)、不能重复调用start():
 CantStartTwice.java————报错
 
-d、start方法的执行流程是什么？ 
-1)、检查线程状态，只有NEW状态下的线程才能继续，否则会抛出IllegalThreadStateException（在运行中或者已结束的线程，都不能再次启动，详见CantStartTwice类）
-2)、被加入线程组 
-3)、调用start0()方法启动线程 
+4)、start方法的执行流程是什么？ 
+a、检查线程状态，只有NEW状态下的线程才能继续，否则会抛出IllegalThreadStateException（在运行中或者已结束的线程，都不能再次启动，详见CantStartTwice类）
+b)、被加入线程组 
+c)、调用start0()方法启动线程 
 注意点： start方法是被synchronized修饰的方法，可以保证线程安全；
 由JVM创建的main方法线程和system组线程，并不会通过start来启动。
 
@@ -89,6 +89,7 @@ start()方法开始的时候就会对当前线程的状态进行一个检查，�
 线程的状态：new状态 -> runnable -> 结束。
 
 (*)面试问题：既然start()方法会调用run()方法，为什么我们选择调用start()方法，而不是直接调用run()方法呢？
+StartAndRunMethod.java
 因为调用start()方法才是真正意义上启动一个线程，它会去经历线程的各个生命周期；
 而如果直接调用run()方法，它就是一个普通的方法而已，不会通过子线程去调用。
 
