@@ -96,10 +96,18 @@ https://naotu.baidu.com/file/89fb28b05e3395800f9dc2d332d2b198?token=9b45e08e5528
 8.5、CyclicBarrier循环栅栏
 
 9、AQS【进阶必备，并发灵魂人物】
-9.1 学习AQS的思路
-9.2 为什么需要AQS
-9.3 AQS的作用
-9.4 AQS的重要性，地位
-9.5 AQS内部原理解析
-9.6 应用实例、源码解析
-9.7 利用AQS实现一个自己的Latch门闩
+9.1、 学习AQS的思路
+9.2、 为什么需要AQS
+9.3、 AQS的作用
+9.4、 AQS的重要性，地位
+9.5、 AQS内部原理解析
+9.6、 应用实例、源码解析
+9.7、 利用AQS实现一个自己的Latch门闩
+
+10、 获取子线程的执行结果【来而不往非礼也】Future和Callable——治理线程的第二大法宝(*)
+10.1、Runnable的缺陷
+10.2、Callable接口
+10.3、Future类
+10.4、用法1：线程池的submit方法返回Future对象，6个代码演示
+10.5、用法2：用FutureTask来创建Future
+10.6、Future的注意点
