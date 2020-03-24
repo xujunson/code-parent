@@ -50,6 +50,16 @@ b、用get(long timeout, TimeUnit unit)方法是，如果call()在规定时间�
 c、超时不获取，任务需取消
 
 3)、cancel方法：取消任务的执行
+ a、如果这个任务还没有开始执行，那么这种情况最简单，任务会被正常的取消，未来也不会被执行，方法返回true。
+ b、如果任务已完成，或者已取消：那么cancel()方法会执行失败，方法返回false；
+ c、如果这个任务已经开始执行了，那么这个取消方法将不会直接取消该任务，而是会根据我们填的参数mayInterruptIfRunning做判断：
+  true——发送中断信号;false——不发送，程序继续执行。
+  
+ Future.cancel(true)适用于：我们知道中断的任务有能力正确处理中断的时候；
+ Future.cancel(false)仅用于避免启动尚未启动的任务，适用于：
+  (1) 未能处理interrupt的任务
+  (2) 不清楚任务是否支持取消
+  (3) 需要等待已经开始的任务执行完成
 4)、isDone()方法：判断线程是否执行完毕
 5)、isCancelled()方法：判断是否被取消
 
@@ -57,7 +67,22 @@ c、超时不获取，任务需取消
 1)、首先，我们要给线程池提交我们的任务，提交时线程池会立刻返回给我们一个空的Future容器。当线程的任务一旦执行完毕，也就是当我们可以获取结果的时候，
 线程池便会把该结果填入到之前给我们的那个Future中去(而不是创建一个新的Future)，
 我们此时便可以从该Future中获取任务执行的结果。
-
+a、get的基本用法——OneFuture.java
+b、Callable的Lambda表达式形式——OneFutureLambda.java
+c、多个任务，用Future数组来获取结果
+d、任务执行过程中抛出Exception和isDone展示：GetException.java
+e、获取任务超时：Timeout.java
 
 10.5、用法2：用FutureTask来创建Future
+1)、用FutureTask来获取Future和任务的结果
+2)、FutureTask是一种包装器，可以把Callable转化成Future和Runnable，它同时实现二者的接口；
+![binaryTree](../img/用FutureTask来创建Future.png "binaryTree")
+3)、把Callable实例作为参数，生成FutureTask的对象，然后把这个对象当做一个Runnable对象，用线程池或另起线程去执行这个Runnable对象，
+最后通过FutureTask获取刚才执行的结果；
+FutureTaskDemo.java
+
 10.6、Future的注意点
+1)、当for循环批量获取future的结果时，容易发生一部分线程很慢的情况，get方法调用时应使用timeout限制。
+2)、Future的生命周期不能后退
+ 生命周期只能前进，不能后退。就和线程池的生命周期一样，一旦完全完成了任务，它就永久停在了"已完成"的状态，不能重头再来。
+ 
