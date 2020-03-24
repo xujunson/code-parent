@@ -111,3 +111,76 @@ https://naotu.baidu.com/file/89fb28b05e3395800f9dc2d332d2b198?token=9b45e08e5528
 10.4、用法1：线程池的submit方法返回Future对象，6个代码演示
 10.5、用法2：用FutureTask来创建Future
 10.6、Future的注意点
+
+11、从0到1打造高性能缓存【学以致用，直击痛点】
+11.1、从最简单版缓存入手——HashMap
+ImoocCache1.java
+给HashMap加final关键字
+属性被声明为final后，该变量则只能被赋值一次。且一旦被赋值，final的变量就不能再被改变。
+所以我们把它加上final关键字，增强安全性。
+
+并发安全要保证——用synchronized实现：
+问题：1、性能差；2、代码复用能力差；
+
+11.2、代码有重构空间——用装饰者模式
+我们假设ExpensiveFunction类是耗时计算的实现类，实现了Computable接口，但是其本身不具备缓存功能，
+也不需要考虑缓存的事情。
+ImoocCache2.java
+
+问题：1、性能差；
+
+11.3、性能待优化——引出锁性能优化经验：缩小锁的粒度
+ImoocCache3.java ——> ImoocCache4.java
+
+1)、虽然提高了并发效率，但是并不意味着就是线程安全的，还需要考虑到同时读写等情况；
+2)、但是其实没必要自己实现线程安全的HashMap，也不应该加synchronized，因为我们自己实现的性能远不如现有的并发集合；
+3)、使用ConcurrentHashMap优化缓存
+
+11.4、用并发集合——ConcurrentHashMap
+ImoocCache5.java
+
+问题：在计算完成前，另一个要求计算相同值的请求到来，会导致计算两边，这和缓存想避免多次就散的初衷恰恰相反，是不可接受的。
+![binaryTree](../atu/img/重复计算问题.png "binaryTree")
+
+ImoocCache6.java
+
+11.5、避免重复计算——Future和Callable的妙用
+动机：现在不同的线程进来以后，确实可以同时计算，但是如果两个线程前后脚，也就是相差无几的进来请求同一个数据，
+那么我们来看看会出现什么问题：重复计算；
+如果线程巨大那么会造成巨大的浪费。
+
+改进放向：前人种树，后人乘凉
+避免重复计算——ImoocCache7.java
+
+11.6、 依然存在重复的可能——用原子操作putIfAbsent
+如果有两个同时计算666的线程，同时调用cache.get()方法，
+那么返回的结果都为null，后面还是会创建两个任务去计算相同的值。
+
+ImoocCache8.java
+
+11.7、 计算中抛出异常——ExecutionException
+计算过程并不是一帆风顺的，假设有一个计算类，它有一定概率计算失败，应该如何处理？
+![binaryTree](../atu/img/计算中抛出异常的处理.png "binaryTree")
+ImoocCache9.java
+
+11.8、 缓存污染——计算失败则移除Future，增加健壮性
+ImoocCache9.java
+
+11.9、缓存过期功能
+为每个结果指定过期时间，并定期扫描过期的元素。
+ImoocCache10.java
+
+11.10、高并发访问时
+如果同时过期，那么同时都拿不到缓存，导致打爆cpu和MySql，造成缓存雪崩、缓存击穿等高并发下的缓存问题。
+
+解决：
+缓存过期时间设置为随机。
+ImoocCache10.java
+
+11.11、测试并发性能，所有线程同时访问缓存
+
+ImoocCache11.java -> ImoocCache12.java
+前一个类存在一个问题，就是大量的请求实际上不是同时到达的，而是分先后，但是这样就没办法给缓存造成压力，
+我们需要真正的同一时刻大量请求到达，此时可以用CountDownLatch来实现。
+
+每个线程都有存储独立信息的需求：ThreadLocal
