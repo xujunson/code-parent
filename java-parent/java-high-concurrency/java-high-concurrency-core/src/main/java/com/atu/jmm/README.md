@@ -125,7 +125,8 @@ b看到了真实的值是3，但是a还没完全同步过来，只能找原始�
 ![binaryTree](../img/主内存和本地内存.png "binaryTree")
 ![binaryTree](../img/主内存和本地内存2.png "binaryTree")
 
-(1) Java 作为高级语言，屏蔽了CPU多层缓存这些底层细节，用 JMM 定义了一套读写内存数据的规范，虽然我们不再需要关心一级缓存和二级缓存的问题，但是，JMM 抽象了主内存和本地内存的概念。 
+(1) Java 作为高级语言，屏蔽了CPU多层缓存这些底层细节，用 JMM 定义了一套读写内存数据的规范，虽然我们不再需要关心一级缓存和二级缓存的问题，
+但是，JMM 抽象了主内存和本地内存的概念。 
 (2) 这里说的本地内存并不是真的是一块给每个线程分配的内存，而是 JMM 的一个抽象，是对于寄存器、一级缓存、二级缓存等的抽象。
 
 5.3.2 主内存和本地内存的关系
@@ -193,7 +194,7 @@ OutOfOrderExecution.java
 
 5.6 能保证可见性的措施
 除了volatile可以让变量保证可见性外，synchronized、Lock、并发集合、Thread.join()和Thread.start()等都可以保证可见性。
-具体看happens-before原则的规定
+具体看happens-before原则的规定。
 
 5.7 升华：对synchronized可见性的正确理解
 1)、synchronized不仅保证了原子性，还保证了可见性；
