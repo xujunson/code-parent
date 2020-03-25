@@ -27,8 +27,8 @@ SimulatedCAS.java
 1)、AtomicInteger加载Unsafe工具，用来直接操作内存数据；
 2)、用Unsafe来实现底层操作；
 3)、用volatile修饰value字段，保证可见性；
-4)、Unsafe类 Unsafe是CAS的核心类。Java无法直接访问底层操作系统，而是通过本地（native）方法来访问。不过尽管如此，JVM还是开了一个后门，JDK中有一个类Unsafe，它提供了硬件级别的原子操作。  
-
+4)、Unsafe类 Unsafe是CAS的核心类。Java无法直接访问底层操作系统，而是通过本地（native）方法来访问。不过尽管如此，JVM还是开了一个后门，
+JDK中有一个类Unsafe，它提供了硬件级别的原子操作。  
 
 5.4、以AtomicInteger为例，分析在Java中是如何利用CAS实现原子操作的？
 源码分析过程 让我们来看看AtomicInteger是如何通过CAS实现并发下的累加操作的，以AtomicInteger的getAndAdd方法为突破口。  
