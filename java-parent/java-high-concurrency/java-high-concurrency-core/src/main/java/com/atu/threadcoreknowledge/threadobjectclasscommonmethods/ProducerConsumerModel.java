@@ -57,17 +57,18 @@ class EventStorage {
         this.storage = new LinkedList<>();
     }
 
+    //保证线程安全
     public synchronized void put() {
         while (storage.size() == 10) {
             try {
-                wait();
+                wait();//满了之后需要等待
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
         storage.add(new Date());
         System.out.println("仓库里有了" + storage.size() + " 个产品。");
-        notify();
+        notify(); //唤醒消费者可以进行消费
     }
 
     public synchronized void take() {

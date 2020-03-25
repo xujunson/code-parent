@@ -19,7 +19,7 @@ public class WaitNotifyReleaseOwnMonitor {
                         System.out.println("ThreadA got resourceB lock.");
                         try {
                             System.out.println("ThreadA releases resourceA lock.");
-                            resourceA.wait();
+                            resourceB.wait();
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
@@ -39,9 +39,9 @@ public class WaitNotifyReleaseOwnMonitor {
 
                 synchronized (resourceA) {
                     System.out.println("ThreadB got resourceA lock.");
-                    System.out.println("ThreadB tries to resourceA lock.");
+                    System.out.println("ThreadB tries to resourceB lock.");
 
-                    synchronized (resourceB) {
+                    synchronized (resourceA) {
                         System.out.println("ThreadB got resourceB lock.");
                     }
                 }
