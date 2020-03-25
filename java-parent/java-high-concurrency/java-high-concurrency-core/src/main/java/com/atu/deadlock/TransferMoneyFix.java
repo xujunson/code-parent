@@ -3,8 +3,7 @@ package com.atu.deadlock;
 /**
  * @author: Tom
  * @date: 2020-03-13 15:11
- * @description: 转账时遇到死锁
- * 一旦打开注释 便会发生死锁
+ * @description: 转账时遇到死锁——解决 hasp排序
  */
 public class TransferMoneyFix implements Runnable {
     int flag = 1;
