@@ -69,7 +69,7 @@ c、超时不获取，任务需取消
 我们此时便可以从该Future中获取任务执行的结果。
 a、get的基本用法——OneFuture.java
 b、Callable的Lambda表达式形式——OneFutureLambda.java
-c、多个任务，用Future数组来获取结果
+c、多个任务，用Future数组来获取结果——MultiFutures.java
 d、任务执行过程中抛出Exception和isDone展示：GetException.java
 e、获取任务超时：Timeout.java
 
