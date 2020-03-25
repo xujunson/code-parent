@@ -12,10 +12,10 @@ import java.util.concurrent.CopyOnWriteArrayList;
  */
 public class CopyOnWriteArrayListDemo1 {
     public static void main(String[] args) {
-        ArrayList<String> list = new ArrayList<>();
+        //ArrayList<String> list = new ArrayList<>();
 
         //允许在迭代过程中修改，但是迭代的数据还是原来的
-        //CopyOnWriteArrayList<String> list = new CopyOnWriteArrayList<String>();
+        CopyOnWriteArrayList<String> list = new CopyOnWriteArrayList<String>();
         list.add("1");
         list.add("2");
         list.add("3");

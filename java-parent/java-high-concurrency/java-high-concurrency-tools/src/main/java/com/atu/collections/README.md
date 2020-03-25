@@ -60,7 +60,7 @@ MapDemo.java
 7.3.3、九层之台，起于累土，罗马不是一天建成的：HashMap的分析
 HashMap关于并发的特点
 1)、非线程安全
-2)、迭代是不允许修改内容
+2)、迭代时不允许修改内容
 3)、只读的并发是安全的
 4)、如果一定要把HashMap用在并发环境，用Collections.synchronizedMap(new HashMap())
 
@@ -74,7 +74,7 @@ HashMap关于并发的特点
 7.3.5、JDK1.8的ConcurrentHashMap实现和分析
 ![binaryTree](../img/Java8_ConcurrentHashMap.png "binaryTree")
 简介：和HashMap的结构非常相似，采用的是一个个的Node(节点),当链表值大于某个阈值的时候(8)，并且总容量大于某个阈值是时；
-它会把链表转为红黑树，避免的一个个的找把复杂度从O(n)降到了O(logn);
+它会把链表转为红黑树，避免的一个个的找，把复杂度从O(n)降到了O(logn);
 ![binaryTree](../img/ConcurrentHashMap_putVal流程.png "binaryTree")
 ![binaryTree](../img/ConcurrentHashMap_get流程.png "binaryTree")
 
@@ -129,7 +129,7 @@ CopyOnWriteArrayListDemo1.java
 
 3)、"不可变"原理
 CopyOnWriteArrayList在每一次修改过程中都是新建一个完全新的容器，所以对于旧的容器来说就不可变了；
-所以旧的容器没有人操作它，它是不会变得，既然不会变那完全就是线程安全的，完全可以并发读；
+所以旧的容器没有人操作它，它是不会变的，既然不会变那完全就是线程安全的，完全可以并发读；
 
 4)、迭代的时候
 在迭代的时候如果数组原内容已经被修改过了，但是迭代器是不知道的，迭代器使用的是旧数组而且也不会报错；
@@ -203,7 +203,7 @@ ArrayBlockingQueueDemo.java
  a、支持优先级
  b、自然顺序(不是先进先出)
  c、无界队列：容量不够可以扩容
- d、PriorityQueue的先出安全版本
+ d、PriorityQueue的线程安全版本
  
 6)、SynchronousBlockingQueue
  a、容量为0
@@ -232,5 +232,5 @@ ArrayBlockingQueueDemo.java
 
 7.6、各并发容器总结
 1)、java.util.concurrent包提供的容器分为3类：Concurrent*、CopyOnWrite*、Blocking*;
-2)、Concurrent*的特点是大部分通过CAS实现并发，而CopyOnWrite*则是通过赋值一份原数据来实现的，
+2)、Concurrent*的特点是大部分通过CAS实现并发，而CopyOnWrite*则是通过复制一份原数据来实现的，
 Blocking通过AQS实现的；
