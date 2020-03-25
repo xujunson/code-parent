@@ -13,7 +13,7 @@ https://naotu.baidu.com/file/89fb28b05e3395800f9dc2d332d2b198?token=9b45e08e5528
 所以总体来讲，线程池有两个好处：1、复用线程；2、可以控制资源总量。
 
 如果不使用线程池，每一个任务都要新开一个线程处理：
-1)、一个线程：EveryTaskOneThread；b、for循环创建线程：ForLoop
+1)、一个线程：EveryTaskOneThread.java；b、for循环创建线程：ForLoop.java
 当任务数量上升到1000。。。
 这样开销太大（尤其是内存），我们希望有固定数量的线程，来执行这1000个线程，这样就避免了反复创建并销毁线程所带来的的开销问题。
 
@@ -39,7 +39,7 @@ b)、让这部分线程都保持工作，且可以反复执行任务————
 2)、maxPoolSize：线程池有可能会在核心线程数的基础上，增加额外一些线程，但是这些新增加的线程数有一个上限，这就是最大量maxPoolSize；
 3)、keepAliveTime：如果说线程池当前的线程数多于corePoolSize，那么如果多余的线程空闲时间超过keepAliveTime，它们就会被终止————相当于回收；
 默认情况下回收的是多于corePoolSize的数量会被回收，除非修改allowCoreThreadTimeOut为true，这样会把核心的数量也回收，但是通常不采用。
-4)、ThreadFactory：新线程都是有ThreadFactory创建的，默认使用Executors.defaultThreadFactory()，创建出来的线程都在同一个线程组，拥有同样的NORM_PRIORITY优先级并且都不是守护线程。
+4)、ThreadFactory：新线程都是由ThreadFactory创建的，默认使用Executors.defaultThreadFactory()，创建出来的线程都在同一个线程组，拥有同样的NORM_PRIORITY优先级并且都不是守护线程。
 如果自己指定ThreadFactory，那么就可以改变线程名，线程组，优先级，是否是守护线程等。
 5)、workQueue：工作队列，有3种最常见的队列类型：
  a、直接交换——SynchronousQueue：如果说任务不会特别多，我们只是把任务通过这个队列做一下简单的中转，交给线程去处理的话，那么就可以使用这个队列，队列内部的容量是0；
@@ -91,7 +91,7 @@ c、newCachedThreadPool：可缓存线程池 CachedThreadPool.java
 1)、FixedThreadPool：固定数量的线程池，设定多少就是多少，不会超出这个值；
 2)、CachedThreadPool：可缓存线程池，具有自动回收多余线程的功能；
 3)、ScheduledThreadPool：支持定时及周期性任务执行的线程池；
-4)、SingleThreadExecutor：单线程的线程池：它只会用唯一我的工作线程来执行任务；它的原理和FixedThreadPool是一样的，但是此时的线程数量被设置为了1；
+4)、SingleThreadExecutor：单线程的线程池：它只会用唯一的工作线程来执行任务；它的原理和FixedThreadPool是一样的，但是此时的线程数量被设置为了1；
 ![binaryTree](../img/线程池的构造函数的参数.png "binaryTree")
 
 1.2.5 阻塞队列分析
