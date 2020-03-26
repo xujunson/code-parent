@@ -87,3 +87,44 @@ Zuul的大部分功能都是通过过滤器实现的，过滤器的类型会对�
 
 3、微服务通用模块开发【企业级开发常见抽象】
 https://coding.imooc.com/lesson/310.html#mid=21837
+
+4、广告投放系统的开发【打好基础，才能迎接将来的挑战】
+4.1、Spring IOC和MVC基础知识
+Spring是一个开源的应用程序框架，提供了一个简易的开发方式，通过这种开发方式它将避免那些可能致使代码变得繁杂混乱的大量业务工具组合在一起；
+包括它的创建与销毁等等，它会去帮我们管理，在被管理对象与业务逻辑之间 Spring会通过控制反转(IOC)来架起使用的桥梁。
+IOC也可以看做是Spring最核心最重要的思想。Spring在启动的时候会读取应用程序提供的bean配置信息，
+并在Spring容器中，生成一份相应的bean配置注册表，然后根据这个注册表实例化各个bean，装配好bean之间的依赖关系，为上层应用提供准备就绪的应用环境。
+
+![binaryTree](/img/Spring IOC原理拆解.png "binaryTree")
+
+1)、读取Bean的配置信息
+2)、根据bean注册表实例化bean
+3)、将bean实例放到Spring容器中：
+启动容器、读取配置文件、初始化各个bean，并完成bean之间的依赖注入；
+4)、应用程序使用
+
+4.2、Spring MVC
+Spring MVC是Spring的一部分，主要用来开发web应用和网络接口；是Spring的一个模块；
+通过一些预定义的组件，让web应用的开发变得更加的容易。
+
+![binaryTree](/img/Spring MVC模块解析.png "binaryTree")
+
+Spring MVC的运行原理：
+1)、Http请求：首先客户端发起Http请求，请求最先到达DispatchServlet；
+DispatchServlet是Spring提供的前端控制器，所有的请求都由它统一分发，我们可以认为它就是一个网关一样；
+2)、寻找处理器：DispatchServlet将请求分发给Controller之前，需要借助于Spring提供的HandlerMapping去定位到具体的Controller；
+HandlerMapping可以拆解开，第一步是handler，第二步是mapping；
+handler就是需要找寻具体的处理方法，mapping就是找到对应的处理方法；
+3)、调用处理器：将请求提交Controller，Controller需要处理用户的请求，需要保证是线程安全，并且是可重用的；
+4)、调用业务处理服务：Controller调用业务处理逻辑Service;
+5)、得到处理结果：Service返回ModelAndView给到前端控制器；ModelAndView包含两个东西，一个是model一个是view；
+model是应用程序所需要的数据，view就是视图信息；
+6)、处理视图映射：DispatchServlet得到处理结果之后，会去查询一个或者多个处理视图的映射 ViewResolver(视图解析器)；
+7)、模型数据传递到view层：找到ModelAndView指定的视图，然后对Model数据进行渲染，得到view；
+8)、Http响应：最后返回给客户端。
+
+总结:DispatchServlet是整个Spring MVC的核心，它负责http请求，然后组织协调MVC的各个组件和各个组成部分；
+它的主要功能有以下三项：
+a、捕获符合特定格式的URL请求
+b、初始化DispatchServlet上下文，然后执行各个逻辑
+c、初始化Spring MVC的各个组成部件，装配到DispatchServlet中，以便完成操作。
