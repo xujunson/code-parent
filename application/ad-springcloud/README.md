@@ -84,3 +84,6 @@ Zuul的大部分功能都是通过过滤器实现的，过滤器的类型会对�
 3)、Post filters：路由到微服务以后去执行，这种过滤器可以用来为响应添加标准的http header头、收集统计信息和指标、将响应从微服务发送个客户端等等；
 4)、Error filters：当请求发生了错误去执行的过滤器
 5)、Custom filters：可以创建自定义的过滤器类型
+
+3、微服务通用模块开发【企业级开发常见抽象】
+https://coding.imooc.com/lesson/310.html#mid=21837
