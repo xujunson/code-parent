@@ -13,6 +13,7 @@
         <module>ad-eureka</module>
         <module>ad-gateway</module>
         <module>ad-service</module>
+        <module>springboot-study</module>
     </modules>
 
     <name>ad-springcloud</name>

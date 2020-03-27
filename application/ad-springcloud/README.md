@@ -128,3 +128,14 @@ model是应用程序所需要的数据，view就是视图信息；
 a、捕获符合特定格式的URL请求
 b、初始化DispatchServlet上下文，然后执行各个逻辑
 c、初始化Spring MVC的各个组成部件，装配到DispatchServlet中，以便完成操作。
+
+4.3、SpringBoot分析——常用功能特性介绍——springboot-study
+4.3.1 SpringBoot应用启动入口
+
+4.3.2 容器启动之后执行的操作
+
+4.3.3 Profile环境配置
+
+4.3.4 配置信息封装成实体类
+
+4.3.5 定时任务
