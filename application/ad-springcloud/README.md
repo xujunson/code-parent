@@ -147,3 +147,8 @@ https://coding.imooc.com/lesson/310.html#mid=21839
 
 4.7、MySQL事务隔离级别
 https://coding.imooc.com/lesson/310.html#mid=21841
+
+4.8、SpringCloud服务调用
+![binaryTree](/img/SpringCloud服务调用.png "binaryTree")
+Ribbon：基于Http和TCP的客户端的负载均衡器，它可以通过在客户端中配置Ribbon Server List 来设置服务端列表去轮询访问，
+达到负载均衡作用，Ribbon的主要功能就是去Eureka Server上面拿取Eureka Client的配置信息，去轮询访问实现远程调用。
