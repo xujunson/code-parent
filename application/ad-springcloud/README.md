@@ -149,6 +149,11 @@ https://coding.imooc.com/lesson/310.html#mid=21839
 https://coding.imooc.com/lesson/310.html#mid=21841
 
 4.8、SpringCloud服务调用
+https://coding.imooc.com/lesson/310.html#mid=21842
 ![binaryTree](/img/SpringCloud服务调用.png "binaryTree")
 Ribbon：基于Http和TCP的客户端的负载均衡器，它可以通过在客户端中配置Ribbon Server List 来设置服务端列表去轮询访问，
 达到负载均衡作用，Ribbon的主要功能就是去Eureka Server上面拿取Eureka Client的配置信息，去轮询访问实现远程调用。
+
+Feign：是一个声明式的WebService客户端，它使得编写WebService客户端更加简单，我们只需要Feign来创建一个接口，应用注解来配置它就可以完成；
+具备可插拔的注解支持，包括Feign注解，以及lis注解；Feign也支持可插拔的编码和解码；Spring Cloud为Feign增加了对SpringMVC注解的支持，
+还整合了Ribbon和Eureka来提供负载均衡的http客户端的实现，也就是说Feign是基于Ribbon实现的。实际工作中基本使用Feign实现微服务之间的调用而不是使用Ribbon。
