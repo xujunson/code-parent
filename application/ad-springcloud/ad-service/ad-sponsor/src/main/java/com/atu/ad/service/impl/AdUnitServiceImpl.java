@@ -132,6 +132,12 @@ public class AdUnitServiceImpl implements IAdUnitService {
         return new AdUnitDistrictResponse(ids);
     }
 
+    /**
+     * 保存创意推广单元
+     * @param request
+     * @return
+     * @throws AdException
+     */
     @Override
     public CreativeUnitResponse createCreativeUnit(CreativeUnitRequest request) throws AdException {
 
