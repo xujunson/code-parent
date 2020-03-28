@@ -138,3 +138,12 @@ c、初始化Spring MVC的各个组成部件，装配到DispatchServlet中，以
 
 4.4、广告投放系统介绍
 https://coding.imooc.com/lesson/310.html#mid=21838
+
+4.5、MySQL慢查询
+https://coding.imooc.com/lesson/310.html#mid=21839
+
+4.6、MySQL索引
+https://coding.imooc.com/lesson/310.html#mid=21839
+
+4.7、MySQL事务隔离级别
+https://coding.imooc.com/lesson/310.html#mid=21841
