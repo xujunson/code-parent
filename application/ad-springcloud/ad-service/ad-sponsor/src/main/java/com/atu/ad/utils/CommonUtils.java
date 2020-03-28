@@ -17,6 +17,13 @@ public class CommonUtils {
         return DigestUtils.md5Hex(value).toUpperCase();
     }
 
+    /**
+     * 将String 转为Date
+     *
+     * @param dateString
+     * @return
+     * @throws AdException
+     */
     public static Date parseStringDate(String dateString)
             throws AdException {
 
