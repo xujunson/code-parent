@@ -28,11 +28,11 @@ import java.util.Optional;
 @Service
 public class AdPlanServiceImpl implements IAdPlanService {
 
-    @Autowired
-    private AdUserRepository userRepository;
-    @Autowired
-    private AdPlanRepository planRepository;
 
+    private AdUserRepository userRepository;
+
+    private AdPlanRepository planRepository;
+    @Autowired
     public AdPlanServiceImpl(AdUserRepository userRepository, AdPlanRepository planRepository) {
         this.userRepository = userRepository;
         this.planRepository = planRepository;
