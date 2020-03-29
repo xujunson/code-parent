@@ -1,10 +1,7 @@
 package com.atu.handler;
 
 import com.alibaba.fastjson.JSON;
-import com.atu.ad.dump.table.AdCreativeTable;
-import com.atu.ad.dump.table.AdCreativeUnitTable;
-import com.atu.ad.dump.table.AdPlanTable;
-import com.atu.ad.dump.table.AdUnitTable;
+import com.atu.ad.dump.table.*;
 import com.atu.index.DataTable;
 import com.atu.index.IndexAware;
 import com.atu.index.adplan.AdPlanIndex;
@@ -15,9 +12,16 @@ import com.atu.index.creative.CreativeIndex;
 import com.atu.index.creative.CreativeObject;
 import com.atu.index.creativeunit.CreativeUnitIndex;
 import com.atu.index.creativeunit.CreativeUnitObject;
+import com.atu.index.district.UnitDistrictIndex;
+import com.atu.index.interest.UnitItIndex;
+import com.atu.index.keyword.UnitKeywordIndex;
 import com.atu.mysql.constant.OpType;
 import com.atu.utils.CommonUtils;
 import lombok.extern.slf4j.Slf4j;
+
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author: Tom
@@ -126,6 +130,98 @@ public class AdLevelDataHandler {
         handleBinlogEvent(DataTable.of(CreativeUnitIndex.class), CommonUtils.stringConcat(creativeUnitObject.getAdId().toString(),
                 creativeUnitObject.getUnitId().toString()), creativeUnitObject,
                 type);
+    }
+
+    /**
+     * 第四层级 关键词维度、兴趣维度、地域维度与推广单元有依赖关系
+     * 第四层级——与第三层级有依赖关系
+     * 地域维度
+     */
+    public static void handleLevel4(AdUnitDistrictTable unitDistrictTable, OpType type) {
+        if (type == OpType.UPDATE) {
+            log.error("district index can not support update");
+            return;
+        }
+        AdUnitObject unitObject = DataTable.of(
+                AdUnitIndex.class
+        ).get(unitDistrictTable.getUnitId());
+        if (null == unitObject) {
+            log.error("AdUnitDistrictTable index error: {}",
+                    unitDistrictTable.getUnitId());
+            return;
+        }
+        String key = CommonUtils.stringConcat(
+                unitDistrictTable.getProvince(),
+                unitDistrictTable.getCity()
+        );
+
+        //将unitId转为Set
+        Set<Long> value = new HashSet<>(
+                Collections.singleton(unitDistrictTable.getUnitId())
+        );
+        handleBinlogEvent(DataTable.of(UnitDistrictIndex.class),
+                key, value, type);
+    }
+
+    /**
+     * 兴趣维度
+     *
+     * @param unitItTable
+     * @param type
+     */
+    public static void handleLevel4(AdUnitItTable unitItTable, OpType type) {
+
+        if (type == OpType.UPDATE) {
+            log.error("it index can not support update");
+            return;
+        }
+
+        AdUnitObject unitObject = DataTable.of(
+                AdUnitIndex.class
+        ).get(unitItTable.getUnitId());
+        if (unitObject == null) {
+            log.error("AdUnitItTable index error: {}",
+                    unitItTable.getUnitId());
+            return;
+        }
+
+        Set<Long> value = new HashSet<>(
+                Collections.singleton(unitItTable.getUnitId())
+        );
+        handleBinlogEvent(
+                DataTable.of(UnitItIndex.class),
+                unitItTable.getItTag(),
+                value,
+                type
+        );
+    }
+
+    public static void handleLevel4(AdUnitKeywordTable keywordTable,
+                                    OpType type) {
+
+        if (type == OpType.UPDATE) {
+            log.error("keyword index can not support update");
+            return;
+        }
+
+        AdUnitObject unitObject = DataTable.of(
+                AdUnitIndex.class
+        ).get(keywordTable.getUnitId());
+        if (unitObject == null) {
+            log.error("AdUnitKeywordTable index error: {}",
+                    keywordTable.getUnitId());
+            return;
+        }
+
+        Set<Long> value = new HashSet<>(
+                Collections.singleton(keywordTable.getUnitId())
+        );
+        handleBinlogEvent(
+                DataTable.of(UnitKeywordIndex.class),
+                keywordTable.getKeyword(),
+                value,
+                type
+        );
     }
 
     /**
