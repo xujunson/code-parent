@@ -17,13 +17,15 @@ import java.util.concurrent.ConcurrentSkipListSet;
 /**
  * @author: Tom
  * @date: 2020-03-29 10:44
- * @description:
+ * @description: 对于推广单元的限制维度我们使用倒排索引
  */
 @Slf4j
 @Component
 public class UnitKeywordIndex implements IndexAware<String, Set<Long>> {
 
+    //以关键词形式寻找推广单元id，一个关键词可以对应多个推广单元
     private static Map<String, Set<Long>> keywordUnitMap;
+    //正向索引——推广单元id到关键词映射
     private static Map<Long, Set<String>> unitKeywordMap;
 
     static {

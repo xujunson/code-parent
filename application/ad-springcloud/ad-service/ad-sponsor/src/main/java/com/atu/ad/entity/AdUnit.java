@@ -11,7 +11,7 @@ import java.util.Date;
 /**
  * @author: Tom
  * @date: 2020-03-27 15:52
- * @description: 推广单元
+ * @description: 推广单元与维度限制
  */
 @Data
 @NoArgsConstructor

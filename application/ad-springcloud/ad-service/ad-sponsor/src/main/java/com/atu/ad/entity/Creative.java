@@ -10,7 +10,7 @@ import java.util.Date;
 /**
  * @author: Tom
  * @date: 2020-03-27 16:17
- * @description: 创意
+ * @description: 创意与推广单元关联关系表
  */
 @Data
 @NoArgsConstructor
