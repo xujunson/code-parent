@@ -173,3 +173,7 @@ Feign：是一个声明式的WebService客户端，它使得编写WebService客�
 
 总结：
 https://coding.imooc.com/lesson/310.html#mid=21843
+
+7、广告检索系统 – 加载全量索引【对业务的理解要透彻，才能一气呵成】
+总结：
+https://coding.imooc.com/lesson/310.html#mid=21863
