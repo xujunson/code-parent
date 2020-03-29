@@ -148,7 +148,7 @@ https://coding.imooc.com/lesson/310.html#mid=21839
 4.7、MySQL事务隔离级别
 https://coding.imooc.com/lesson/310.html#mid=21841
 
-4.8、SpringCloud服务调用
+5、SpringCloud服务调用
 https://coding.imooc.com/lesson/310.html#mid=21842
 ![binaryTree](/img/SpringCloud服务调用.png "binaryTree")
 Ribbon：基于Http和TCP的客户端的负载均衡器，它可以通过在客户端中配置Ribbon Server List 来设置服务端列表去轮询访问，
@@ -157,3 +157,16 @@ Ribbon：基于Http和TCP的客户端的负载均衡器，它可以通过在客�
 Feign：是一个声明式的WebService客户端，它使得编写WebService客户端更加简单，我们只需要Feign来创建一个接口，应用注解来配置它就可以完成；
 具备可插拔的注解支持，包括Feign注解，以及lis注解；Feign也支持可插拔的编码和解码；Spring Cloud为Feign增加了对SpringMVC注解的支持，
 还整合了Ribbon和Eureka来提供负载均衡的http客户端的实现，也就是说Feign是基于Ribbon实现的。实际工作中基本使用Feign实现微服务之间的调用而不是使用Ribbon。
+
+6、广告检索系统——广告数据索引的设计与实现
+6.1、正向索引
+通过唯一键/主键生成与对象的映射关系。
+在本系统应用在推广计划、推广单元、创意等实体类。
+
+6.2、倒排索引
+也被成作是反向索引，是一种索引方法，它的设计是为了存储在全文搜素下某个单词在一个文档或一组文档中存储位置的映射。是在文档检索系统中最常用的数据结构。
+![binaryTree](/img/倒排索引.png "binaryTree")
+
+6.3 全量索引+增量索引
+全量索引：检索系统在启动时一次性读取当前数据库中(注意，不能直接从数据库中读取?)的所有数据，建立索引。
+增量索引：系统运行过程中，监控数据库变化，即增量，实施加载更新，构建索引。
