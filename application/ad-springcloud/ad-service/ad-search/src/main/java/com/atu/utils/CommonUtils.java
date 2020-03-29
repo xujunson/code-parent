@@ -30,6 +30,12 @@ public class CommonUtils {
         return map.computeIfAbsent(key, k -> factory.get());
     }
 
+    /**
+     * 字符串拼接
+     *
+     * @param args
+     * @return
+     */
     public static String stringConcat(String... args) {
 
         StringBuilder result = new StringBuilder();
