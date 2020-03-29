@@ -1,0 +1,37 @@
+server:
+  port: 7000
+  servlet:
+    #controller根路径，前缀
+    context-path: /ad-sponsor
+
+spring:
+  application:
+    name: eureka-client-ad-sponsor
+  #jpa用于orm对数据库进行增删改查
+  jpa:
+    #执行orm过程的时候是否需要打印sql语句
+    show-sql: true
+    hibernate:
+      #create：每一次加载hibernate时，去重新创建数据表结构
+      #create-drop：加载hibernate时创建，退出时删除表结构
+      #none：无操作
+      #update：加载hibernate时，自动更新数据库结构
+      #validate：加载hibernate时，验证数据表的结构是否正确
+      ddl-auto: none
+    properties:
+      #是否对sql语句格式化
+      hibernate.format_sql: true
+    open-in-view: false
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/ad_data?autoReconnect=true
+    username: root
+    password: 111111
+    tomcat:
+      max-active: 4
+      min-idle: 2
+      initial-size: 2
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://server1:8000/eureka/
