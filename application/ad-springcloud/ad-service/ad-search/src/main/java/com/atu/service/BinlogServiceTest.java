@@ -46,6 +46,7 @@ public class BinlogServiceTest {
 
         //client.setBinlogFilename();
         //client.getBinlogPosition();
+        //注册事件监听器
         client.registerEventListener(event -> {
             EventData data = event.getData();
             if (data instanceof UpdateRowsEventData) {
