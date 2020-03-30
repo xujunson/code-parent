@@ -224,3 +224,6 @@ https://coding.imooc.com/lesson/310.html#mid=22015
 8.8、总结
 [关于监听 Binlog 构造增量数据的介绍及作业](https://coding.imooc.com/lesson/310.html#mid=22017)
 
+9、广告检索系统 – Binlog 增量数据的投递【企业级开发必备技能】
+[https://coding.imooc.com/lesson/310.html#mid=22018](https://coding.imooc.com/lesson/310.html#mid=22018)
+
