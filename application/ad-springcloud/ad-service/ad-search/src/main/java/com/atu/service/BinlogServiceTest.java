@@ -31,12 +31,12 @@ public class BinlogServiceTest {
 //]}
 
 
-//    Write---------------
-//    WriteRowsEventData{tableId=70, includedColumns={0, 1, 2, 3, 4, 5, 6, 7}, rows=[
-//    [12, 10, plan, 1, Tue Jan 01 08:00:00 CST 2019, Tue Jan 01 08:00:00 CST 2019, Tue Jan 01 08:00:00 CST 2019, Tue Jan 01 08:00:00 CST 2019]
+//    WriteRowsEventData{tableId=109, includedColumns={0, 1, 2, 3, 4, 5, 6, 7}, rows=[
+//    [10, 15, 推广计划名称, 1, Wed Nov 28 08:00:00 CST 2018, Wed Nov 20 08:00:00 CST 2019, Tue Nov 20 04:42:27 CST 2018, Tue Nov 20 04:57:12 CST 2018]
 //]}
 
-    // Tue Jan 01 08:00:00 CST 2019
+
+    // Wed Nov 28 08:00:00 CST 2018
 
     public static void main(String[] args) throws IOException {
         BinaryLogClient client = new BinaryLogClient("127.0.0.1",

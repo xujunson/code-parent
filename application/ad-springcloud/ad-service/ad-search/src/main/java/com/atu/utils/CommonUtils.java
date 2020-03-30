@@ -47,7 +47,7 @@ public class CommonUtils {
         return result.toString();
     }
 
-    // Tue Jan 01 08:00:00 CST 2019
+    // Wed Nov 28 08:00:00 CST 2018
     public static Date parseStringDate(String dateString) {
 
         try {
