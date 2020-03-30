@@ -220,3 +220,7 @@ show binlog events
 https://coding.imooc.com/lesson/310.html#mid=22015
 
 [Java8 Map computeIfAbsent方法说明](https://blog.csdn.net/weixin_38229356/article/details/81129320)
+
+8.8、总结
+[关于监听 Binlog 构造增量数据的介绍及作业](https://coding.imooc.com/lesson/310.html#mid=22017)
+
