@@ -177,3 +177,44 @@ https://coding.imooc.com/lesson/310.html#mid=21843
 7、广告检索系统 – 加载全量索引【对业务的理解要透彻，才能一气呵成】
 总结：
 https://coding.imooc.com/lesson/310.html#mid=21863
+
+8、广告检索系统 – 监听 Binlog 构造增量数据【技能提升：难度指数5颗星】
+Mysql有很多日志：错误日志、更新日志、二进制日志(Binlog)、查询日志、慢查询日志；更新日志是老版本的Mysql才有的，
+目前的已经被二进制日志替代，在默认情况下呢，系统仅仅打开错误日志，关闭的其他日志，以达到尽可能减少IO损耗，
+提高系统性能的目的。
+8.1、什么是Binlog?
+二进制日志，记录对数据发生或潜在发生更改的SQL语句，并以二进制的形式保存在磁盘中。
+
+一般稍微重要一点的实际应用场景中，都需要打开Binlog开关，这是MySQL许多存储引擎进行增量备份的基础，
+是MySQL实现复制的基本条件。
+比如两个集群，主集群对我们的应用程序提供服务，它需要把写入数据不断同步到从集群，也就是master 到 slave的同步过程。
+
+8.2、Binlog的作用是什么？
+复制、恢复和审计。
+
+8.3、Binlog相关变量
+log_bin、binlog_format。
+![binaryTree](/img/binlog相关变量.png "binaryTree")
+
+8.4、Binlog日志的三种格式
+ROW：记录每一行数据被修改的形式，然后再slave端对相同数据进行修改；ROW模式可以不记录执行的SQL语句是什么，
+只需要记录哪条数据被修改成什么样子了，它不会因为某些语法复制出现问题，比如函数、触发器等等。
+它的缺点是每行数据的修改都会记录下来，最明显的就是update语句，会导致更新多少条语句就会产生多少事件。
+使Binlog文件变得很大，而复制数据需要通过网络传输，也就会影响性能。
+
+STATEMENT：每一条修改数据的sql都会记录在Binlog中，slave端再根据sql语句去重现，它解决了ROW模式的缺点：
+它不会产生大量的Binlog数据。它的缺点是为了让sql能够在slave端去正确的重现，需要记录sql执行的上下文信息。
+另外一个问题就是在复制某些特殊的函数或者功能时会出现问题，比如：slip函数。
+
+MIXED：是以上两种的结合，根据不同情况使用ROW模式或者是STATEMENT，保证Binlog记录能够正确表达。
+![binaryTree](/img/Binlog日志的三种格式.png "binaryTree")
+
+8.5、管理Binlog相关的SQL语句
+![binaryTree](/img/管理Binlog相关的SQL语句.png "binaryTree")
+
+8.6、Binlog中的Event_type
+show binlog events
+![binaryTree](/img/Binlog中的Event_type.png "binaryTree")
+
+8.7、总结
+https://coding.imooc.com/lesson/310.html#mid=22015
