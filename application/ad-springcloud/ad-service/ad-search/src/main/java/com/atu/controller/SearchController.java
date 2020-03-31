@@ -6,6 +6,9 @@ import com.atu.ad.vo.CommonResponse;
 import com.atu.client.SponsorClient;
 import com.atu.client.vo.AdPlan;
 import com.atu.client.vo.AdPlanGetRequest;
+import com.atu.search.ISearch;
+import com.atu.search.vo.SearchRequest;
+import com.atu.search.vo.SearchResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,11 +26,27 @@ import java.util.List;
 @Slf4j
 @RestController
 public class SearchController {
+
+    @Autowired
+    private ISearch search;
     @Autowired
     private RestTemplate restTemplate;
 
     @Autowired
     private SponsorClient sponsorClient;
+
+    /**
+     * 实现广告检索
+     *
+     * @param request
+     * @return
+     */
+    @PostMapping("/fetchAds")
+    public SearchResponse fetchAds(@RequestBody SearchRequest request) {
+        log.info("ad-search: fetchAds -> {}",
+                JSON.toJSONString(request));
+        return search.fetchAds(request);
+    }
 
     /**
      * 通过Feign方式调用微服务
