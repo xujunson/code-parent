@@ -1,6 +1,7 @@
 package com.atu.index.district;
 
 import com.atu.index.IndexAware;
+import com.atu.search.vo.feature.DistrictFeature;
 import com.atu.utils.CommonUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
@@ -22,8 +23,9 @@ import java.util.stream.Collectors;
 @Component
 public class UnitDistrictIndex implements IndexAware<String, Set<Long>> {
 
-    private static Map<String,Set<Long>> districtUnitMap;
-    private static Map<Long,Set<String>> unitDistrictMap;
+    private static Map<String, Set<Long>> districtUnitMap;
+    private static Map<Long, Set<String>> unitDistrictMap;
+
     static {
         districtUnitMap = new ConcurrentHashMap<>();
         unitDistrictMap = new ConcurrentHashMap<>();
@@ -31,6 +33,7 @@ public class UnitDistrictIndex implements IndexAware<String, Set<Long>> {
 
     /**
      * key——province+city连接
+     *
      * @param key
      * @return
      */
@@ -90,24 +93,30 @@ public class UnitDistrictIndex implements IndexAware<String, Set<Long>> {
         log.info("UnitDistrictIndex, after delete: {}", unitDistrictMap);
     }
 
-    /*public boolean match(Long adUnitId,
+    /**
+     * @param adUnitId
+     * @param districts
+     * @return
+     */
+    public boolean match(Long adUnitId,
                          List<DistrictFeature.ProvinceAndCity> districts) {
+
 
         if (unitDistrictMap.containsKey(adUnitId) &&
                 CollectionUtils.isNotEmpty(unitDistrictMap.get(adUnitId))) {
 
+            //获取province+city组合索引
             Set<String> unitDistricts = unitDistrictMap.get(adUnitId);
 
             List<String> targetDistricts = districts.stream()
-                    .map(
-                            d -> CommonUtils.stringConcat(
-                                    d.getProvince(), d.getCity()
-                            )
+                    .map(d -> CommonUtils.stringConcat(
+                            d.getProvince(), d.getCity())
                     ).collect(Collectors.toList());
 
+            //判断targetDistricts是否是 unitDistricts的子集
             return CollectionUtils.isSubCollection(targetDistricts, unitDistricts);
         }
 
         return false;
-    }*/
+    }
 }

@@ -3,8 +3,9 @@ package com.atu.index.adunit;
 import com.atu.index.IndexAware;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -20,6 +21,36 @@ public class AdUnitIndex implements IndexAware<Long, AdUnitObject> {
 
     static {
         objectMap = new ConcurrentHashMap<>();
+    }
+
+    //对所有的索引进行匹配
+    public Set<Long> match(Integer positionType) {
+        Set<Long> adUnitIds = new HashSet<>();
+        //对当前的索引对象进行遍历，看是否有满足条件的推广单元
+        objectMap.forEach((k, v) -> {
+            if (AdUnitObject.isAdSlotTypeOk(positionType, v.getPositionType())) {
+                adUnitIds.add(k);
+            }
+        });
+        return adUnitIds;
+    }
+
+    //根据推广单元的ids获取到对应的索引对象
+    public List<AdUnitObject> fetch(Collection<Long> adUnitIds) {
+        if (CollectionUtils.isEmpty(adUnitIds)) {
+            return Collections.emptyList();
+        }
+
+        List<AdUnitObject> result = new ArrayList<>();
+        adUnitIds.forEach(u -> {
+            AdUnitObject object = get(u);
+            if (object == null) {
+                log.error("AdUnitObject not found: {}", u);
+                return;
+            }
+            result.add(object);
+        });
+        return result;
     }
 
     @Override

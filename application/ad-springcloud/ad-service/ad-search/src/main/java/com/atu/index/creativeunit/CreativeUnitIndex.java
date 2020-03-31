@@ -1,12 +1,12 @@
 package com.atu.index.creativeunit;
 
 import com.atu.index.IndexAware;
+import com.atu.index.adunit.AdUnitObject;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Component;
 
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListSet;
 
@@ -79,5 +79,31 @@ public class CreativeUnitIndex implements IndexAware<String, CreativeUnitObject>
             creativeSet.remove(value.getAdId());
         }
         log.info("after delete: {}", objectMap);
+    }
+
+    /**
+     * 获取推广单元关联的创意id
+     *
+     * @param unitObjects
+     * @return
+     */
+    public List<Long> selectAds(List<AdUnitObject> unitObjects) {
+
+        //判空
+        if (CollectionUtils.isEmpty(unitObjects)) {
+            return Collections.emptyList();
+        }
+
+        List<Long> result = new ArrayList<>();
+
+        for (AdUnitObject unitObject : unitObjects) {
+
+            Set<Long> adIds = unitCreativeMap.get(unitObject.getUnitId());
+            if (CollectionUtils.isNotEmpty(adIds)) {
+                result.addAll(adIds);
+            }
+        }
+
+        return result;
     }
 }

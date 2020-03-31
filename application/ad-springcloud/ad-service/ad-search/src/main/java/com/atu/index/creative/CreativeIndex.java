@@ -3,8 +3,9 @@ package com.atu.index.creative;
 import com.atu.index.IndexAware;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -20,6 +21,33 @@ public class CreativeIndex implements IndexAware<Long, CreativeObject> {
 
     static {
         objectMap = new ConcurrentHashMap<>();
+    }
+
+    /**
+     * 根据id获取对象
+     *
+     * @param adIds
+     * @return
+     */
+    public List<CreativeObject> fetch(Collection<Long> adIds) {
+
+        if (CollectionUtils.isEmpty(adIds)) {
+            return Collections.emptyList();
+        }
+
+        List<CreativeObject> result = new ArrayList<>();
+
+        adIds.forEach(u -> {
+            CreativeObject object = get(u);
+            if (null == object) {
+                log.error("CreativeObject not found: {}", u);
+                return;
+            }
+
+            result.add(object);
+        });
+
+        return result;
     }
 
     @Override
