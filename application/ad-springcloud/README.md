@@ -274,4 +274,20 @@ g、consumer：消费者去消费生产者生产的数据，消费者可以从br
 3)、Kafka的安装和使用
 
 4)、Kafka发送消息与消费消息
+三种发送方式
+a、只发送，不管返回值
+b、同步发送代码
+c、异步发送 等待回调
 
+5)、Kafka Producer消息分区
+key可空。
+![binaryTree](/img/Kafka Producer消息分区.png "binaryTree")
+
+6)、消费者与消费者组
+Kafka消费者是消费者组的一部分，当多个消费者形成一个消费者组来消费topic时，每个消费者会收到不同分区的消息。
+![binaryTree](/img/消费者组.png "binaryTree")
+![binaryTree](/img/消费者组2.png "binaryTree")
+![binaryTree](/img/消费者组3.png "binaryTree")
+consumer的数量不应该比分区数多，kafka的特性就是只需要写入一次消息可以支持任意多个应用读取这个消息。
+换句话说每个应用都能读到全量消息。
+总结：如果应用需要读取全量消息，那么就应该为应用设置消费者组。如果应用的消费能力不足，可以给消费者组里面增加其他的消费者。

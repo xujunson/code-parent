@@ -27,7 +27,7 @@ public class MyProducer {
         properties.put("value.serializer",
                 "org.apache.kafka.common.serialization.StringSerializer");
 
-        //properties.put("partitioner.class", "com.atu.CustomPartitioner");
+        properties.put("partitioner.class", "com.atu.CustomPartitioner");
 
         producer = new KafkaProducer<>(properties);
     }
@@ -87,11 +87,26 @@ public class MyProducer {
      */
     private static void sendMessageCallback() {
         ProducerRecord<String, String> record = new ProducerRecord<String, String>(
-                "atu-kafka-study", "name", "callback"
+                "atu-kafka-study-x", "name", "callback"
         );
-
         //回调类——MyProducerCallback
         producer.send(record, new MyProducerCallback());
+
+        record = new ProducerRecord<String, String>(
+                "atu-kafka-study-x", "name-x", "callback"
+        );
+        producer.send(record, new MyProducerCallback());
+
+        record = new ProducerRecord<String, String>(
+                "atu-kafka-study-x", "name-y", "callback"
+        );
+        producer.send(record, new MyProducerCallback());
+
+        record = new ProducerRecord<String, String>(
+                "atu-kafka-study-x", "name-z", "callback"
+        );
+        producer.send(record, new MyProducerCallback());
+
         producer.close();
     }
 
