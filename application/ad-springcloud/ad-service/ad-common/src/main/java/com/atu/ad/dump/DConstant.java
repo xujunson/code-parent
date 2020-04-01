@@ -7,7 +7,7 @@ package com.atu.ad.dump;
  */
 public class DConstant {
     //数据文件存储目录
-    public static final String DATA_ROOT_DIR = "E:\\info";
+    public static final String DATA_ROOT_DIR = "E:\\info\\";
 
     //各个表数据的存储文件名
     public static final String AD_PLAN = "ad_plan.data";
