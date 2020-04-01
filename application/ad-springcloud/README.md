@@ -300,3 +300,12 @@ c、手动异步提交当前位移
 d、手动异步提交当前位移带回调
 e、混合同步与异步提交位移
 [kafka介绍](https://coding.imooc.com/lesson/310.html#mid=22095)
+
+12、熔断监控Hystrix Dashboard【添加监控，完善系统】
+12.1、Hystrix断路器
+可以实现服务降级功能，也就是说我们定义的服务如果发生了错误就可以使用Hystrix定义错误之后的回退。
+通常在Spring Cloud工程中去使用Hystrix组件是通过HystrixCommand注解。
+
+12.2、总结
+[Hystrix Dashboard 的介绍](https://coding.imooc.com/lesson/310.html#mid=22184)
+

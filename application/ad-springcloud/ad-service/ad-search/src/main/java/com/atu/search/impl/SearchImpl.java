@@ -19,6 +19,7 @@ import com.atu.search.vo.feature.FeatureRelation;
 import com.atu.search.vo.feature.ItFeature;
 import com.atu.search.vo.feature.KeywordFeature;
 import com.atu.search.vo.media.AdSlot;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Service;
@@ -33,7 +34,16 @@ import java.util.*;
 @Slf4j
 @Service
 public class SearchImpl implements ISearch {
+    //异常回退方法
+    //通过 EnableCircuitBreaker注解实现
+    //这个注解会通过AOP拦截所有的HystrixCommand注解的方法，是的HystrixCommand能够集成到springboot里面
+    //并且将注解的方法(fetchAds)扔到Hystrix的线程池中。发生失败的时候，通过反射去调用回退方法(fallback)，然后实现断路。
+    public SearchResponse fallback(SearchRequest request, Throwable e) {
+        return null;
+    }
+
     @Override
+    @HystrixCommand(fallbackMethod = "fallback")
     public SearchResponse fetchAds(SearchRequest request) {
         //1、取出请求的广告位信息
         List<AdSlot> adSlots = request.getRequestInfo().getAdSlots();
