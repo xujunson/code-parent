@@ -3,7 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-    <!-- 指定父pom, 注意它是 imooc-ad-service 的子模块 -->
+    <!-- 指定父pom, 注意它是 ad-service 的子模块 -->
     <parent>
         <artifactId>ad-service</artifactId>
         <groupId>com.atu</groupId>

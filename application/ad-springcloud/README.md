@@ -309,3 +309,9 @@ e、混合同步与异步提交位移
 12.2、总结
 [Hystrix Dashboard 的介绍](https://coding.imooc.com/lesson/310.html#mid=22184)
 
+13、广告系统的可用性测试【开发完功能，验证下是否好用】
+13.1 关于广告系统可用性测试的介绍及说明
+[关于广告系统可用性测试的介绍及说明](https://coding.imooc.com/lesson/310.html#mid=22186)
+
+
+

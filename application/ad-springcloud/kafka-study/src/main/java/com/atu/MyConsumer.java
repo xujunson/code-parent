@@ -154,7 +154,7 @@ public class MyConsumer {
 
         properties.put("auto.commit.offset", false);
         consumer = new KafkaConsumer<>(properties);
-        consumer.subscribe(Collections.singletonList("imooc-kafka-study-x"));
+        consumer.subscribe(Collections.singletonList("atu-kafka-study-x"));
 
         while (true) {
             boolean flag = true;
@@ -206,7 +206,7 @@ public class MyConsumer {
     private static void mixSyncAndAsyncCommit() {
         properties.put("auto.commit.offset", false);
         consumer = new KafkaConsumer<>(properties);
-        consumer.subscribe(Collections.singletonList("imooc-kafka-study-x"));
+        consumer.subscribe(Collections.singletonList("atu-kafka-study-x"));
 
         try {
             while (true) {
