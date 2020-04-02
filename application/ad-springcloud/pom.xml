@@ -15,6 +15,7 @@
         <module>ad-service</module>
         <module>springboot-study</module>
         <module>kafka-study</module>
+        <module>extra-spring</module>
     </modules>
 
     <name>ad-springcloud</name>
