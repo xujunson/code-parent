@@ -1,7 +1,7 @@
 package com.atu.extra.exception;
 
 /**
- * <h1>CustomException</h1>
+ * 自定义异常——Checked异常，不会回滚
  */
 public class CustomException extends Exception {
 

@@ -36,7 +36,7 @@ public class TransactionTest {
     }
 
     @Test
-    public void testRuntimeExceptionCanRollback() {
+    public void testRuntimeExceptionCanRollback()  {
 
         springTransaction.RuntimeExceptionCanRollback();
     }
@@ -48,7 +48,7 @@ public class TransactionTest {
     }
 
     @Test
-    public void testRollbackOnlyCanRollback() throws Exception {
+    public void testRollbackOnlyCanRollback() throws CustomException {
 
         springTransaction.RollbackOnlyCanRollback();
     }

@@ -388,4 +388,12 @@ b、在默认配置中, Spring事务处理框架只会将Runtime Unchecked异常
 也就是说，当事务中抛出的异常类是Runtime异常或者其子类这样的事务才会回滚。在默认情况下，
 所有的Checked异常都不会引起事务的回滚。
 
+[@Transactional注解解析](https://coding.imooc.com/lesson/310.html#mid=22706)
+[Spring 事务管理接口](https://coding.imooc.com/lesson/310.html#mid=22711)
+[Spring 阶段练习](https://coding.imooc.com/lesson/310.html#mid=22771)
+
+[Spring 中 @Transactional 注解的限制](https://coding.imooc.com/lesson/310.html#mid=23215)
+
+
+
 

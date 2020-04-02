@@ -31,7 +31,7 @@ public interface ISpringTransaction {
     /**
      * <h2>Rollback Only, 事务可以回滚</h2>
      * */
-    void RollbackOnlyCanRollback() throws Exception;
+    void RollbackOnlyCanRollback() throws CustomException;
 
     /**
      * <h2>同一个类中, 一个不标注事务的方法去调用 transactional 的方法, 事务会失效</h2>

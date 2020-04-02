@@ -8,6 +8,8 @@ import javax.persistence.*;
 
 /**
  * <h1>额外表实体类定义</h1>
+ *
+ * @Entity 标注为一个实体类
  */
 @Data
 @NoArgsConstructor
@@ -17,6 +19,7 @@ import javax.persistence.*;
 public class ExtraAd {
 
     @Id
+    //数据库默认主键自增策略
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
