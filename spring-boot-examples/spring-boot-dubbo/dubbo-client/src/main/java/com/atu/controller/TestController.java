@@ -14,6 +14,7 @@ public class TestController {
     @Reference
     private ITestService testService;
 
+    //127.0.0.1:8001/orderToMember
     @GetMapping("/orderToMember")
     public String orderToMember() {
 

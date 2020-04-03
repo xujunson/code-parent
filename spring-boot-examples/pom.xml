@@ -28,5 +28,8 @@
         <module>spring-boot-dubbo/dubbo-client</module>
         <module>spring-boot-dubbo/dubbo-interface</module>
         <module>spring-boot-dubbo/dubbo-service</module>
+        <module>spring-boot-dubbo2/dubbo-demo2-interface</module>
+        <module>spring-boot-dubbo2/dubbo-demo2-service</module>
+        <module>spring-boot-dubbo2/dubbo-demo2-client</module>
     </modules>
 </project>
