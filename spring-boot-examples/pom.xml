@@ -6,7 +6,7 @@
     <groupId>com.atu</groupId>
     <artifactId>spring-boot-examples</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>pom</packaging>
     <name>spring-boot-examples</name>
     <description>spring-boot-examples parent!</description>
     <modules>
@@ -25,5 +25,6 @@
         <module>spring-boot-web</module>
         <module>sprint-boot-jpa-thymeleaf-crud</module>
         <module>sprint-boot-ws</module>
+        <module>spring-boot-login-demo</module>
     </modules>
 </project>
