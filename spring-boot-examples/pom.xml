@@ -25,6 +25,8 @@
         <module>spring-boot-web</module>
         <module>sprint-boot-jpa-thymeleaf-crud</module>
         <module>sprint-boot-ws</module>
-        <module>spring-boot-login-demo</module>
+        <module>spring-boot-dubbo/dubbo-client</module>
+        <module>spring-boot-dubbo/dubbo-interface</module>
+        <module>spring-boot-dubbo/dubbo-service</module>
     </modules>
 </project>

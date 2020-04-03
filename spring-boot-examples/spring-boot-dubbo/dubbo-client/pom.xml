@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.0.1.RELEASE</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>dubbo-client</artifactId>
+    <!-- 编写统一的版本控制 -->
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <java-version>1.8</java-version>
+        <curator-framework>4.0.1</curator-framework>
+        <zookeeper.version>3.4.13</zookeeper.version>
+        <dubbo.starter.version>0.2.0</dubbo.starter.version>
+    </properties>
+    <dependencies>
+
+        <!-- SpringBoot 整合 Web组件 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba.boot</groupId>
+            <artifactId>dubbo-spring-boot-starter</artifactId>
+            <version>${dubbo.starter.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.atu</groupId>
+            <artifactId>dubbo-interface</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <!--<dependency>
+          <groupId>org.apache.curator</groupId>
+          <artifactId>curator-framework</artifactId>
+          <version>${curator-framework}</version>
+        </dependency>
+
+        <dependency>
+          <groupId>org.apache.zookeeper</groupId>
+          <artifactId>zookeeper</artifactId>
+          <version>${zookeeper.version}</version>
+        </dependency>-->
+
+    </dependencies>
+
+</project>
