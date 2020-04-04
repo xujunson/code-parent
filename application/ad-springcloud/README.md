@@ -394,6 +394,35 @@ b、在默认配置中, Spring事务处理框架只会将Runtime Unchecked异常
 
 [Spring 中 @Transactional 注解的限制](https://coding.imooc.com/lesson/310.html#mid=23215)
 
+15、（彩蛋番外篇二）重构检索系统微服务【架构重新设计，优化系统性能】
+15.1、再谈MySQL的Master/Slave协议
+MySQL的主从复制，是一个异步的复制过程。数据库数据从一个MySQL数据库——Master复制到另一个MySQL数据库——Slave。
+在Master与Slave之间，实现整个主从复制的过程是由三个线程去参与完成的。其中有两个线程在Slave端。
+图中右边的部分，是MySQL的Slave。它参与MySQL主从复制有两个线程，一个是IO线程，另一个是SQL线程。
+增删改对于MySQL的Master来说它会记录到数据文件里，同时由于我们更改了数据记录，Master会把它写入Binlog里面。
+然后Slave和Master之间同步数据，利用这三个线程和Binlog完成同步。
 
+主从复制过程：Master/Slave协议的工作过程
+a、首先Slave服务器上去执行 "start Slave" 命令，去开启主从复制的开关；此时Slave服务器上的IO线程呢会通过Master服务器上授权的
+有复制权限的用户去请求连接Master服务器，并请求从指定的Binlog日志文件的指定位置之后，发送Binlog的日志内容。
+需要注意，日志的文件名和位置就是在配置主从复制的任务的时候，去执行 master命令的时候指定。
+Slave想要从Master获取复制数据，由Slave告诉Master，需要哪个Binlog文件以及Binlog的位置等等，由Slave的IO线程去发起。
 
+b、Master服务器接受到来自Slave服务器的IO线程的请求之后，Master服务器的IO线程会根据Slave服务器的IO线程的请求信息，
+去读取指定的Binlog日志文件指定的位置之后的Binlog日志信息然后返回给Slave端的IO线程。返回的信息中除了Binlog的日志内容之外，
+还有本次返回日志内容后在Master服务器端的新的Binlog文件的名字，以及在Binlog中的下一个指定的更新位置。
+
+c、当Slave服务器的IO线程获取了来自Master服务器上的IO线程发送的Binlog的日志内容及日志文件的位置之后，
+它会将Binlog的日志内容写入到Slave自己的 relay-log中，写入到这个文件的最末端。并将新的Binlog文件的名字和位置记录到Master info这个文件里面，
+以便下一次去读取Master端新的Binlog日志时能告诉Master服务器，需要从新的Binlog的哪个文件的哪个位置，开始去请求新的Binlog日志内容。
+核心解释就是说，Master发送一些信息之后，Slave需要对它的一些信息进行保存。那新的Binlog的文件以及位置由Slave通过IO线程保存到master-info文件里。
+Master Binlog日志会由IO线程保存到relay-log里面。
+
+d、Slave服务器端的SQL线程会实时检测本地的relay-log中新增加的日志内容，然后及时把relay-log文件中的内容，
+解析成在Master端曾经执行的SQL语句的内容，并在自身Slave服务器上按语句的顺序执行，去应用这些SQL语句。
+应用完毕之后会清理应用过的日志。
+
+![binaryTree](/img/MySQL的Master&Slave协议.png "binaryTree")
+
+[微服务包的设计思想](https://coding.imooc.com/lesson/310.html#mid=24888)
 
