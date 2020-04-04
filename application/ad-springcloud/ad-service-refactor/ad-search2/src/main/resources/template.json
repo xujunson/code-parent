@@ -1,5 +1,5 @@
 {
-  "database": "imooc_ad_data",
+  "database": "ad_data",
   "tableList": [
     {
       "tableName": "ad_plan",

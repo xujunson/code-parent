@@ -21,7 +21,7 @@
         </encoder>
     </appender>
 
-    <logger name="com.imooc.ad" level="info" additivity="false">
+    <logger name="com.atu" level="info" additivity="false">
         <appender-ref ref="stdout"/>
         <appender-ref ref="system"/>
     </logger>
