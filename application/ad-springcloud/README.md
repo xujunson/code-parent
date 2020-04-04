@@ -484,3 +484,27 @@ ES中的两个概念：Pipeline，Processors
 
 [日志收集系统的说明](https://coding.imooc.com/lesson/310.html#mid=25881)
 [SpringBoot 项目的日志配置](https://coding.imooc.com/lesson/310.html#mid=25882)
+
+17、（彩蛋番外篇四）常见问题解答【第一季】
+17.1、SpringCloud相关问题
+1)、SpringCloud和Dubbo的选择问题，Zuul和GateWay的选择问题？
+技术选型的选择问题。
+SpringCloud和Dubbo从原理和思想上来说，几乎是一样的，都是常用的微服务框架。
+
+a、不纠结技术选型和技术实现，注重业务思想；
+b、不需要特别子阿姨框架或者工具的版本问题；
+只要能够解决目前的问题，不必要去纠结这写，除非新版本提供的功能能够大大简化实现。
+
+2)、Eureka单节点没有问题，但是多节点的Eureka出现问题？
+单节点的三步骤：创建工程、配置好Maven依赖；编写启动程序；启动类添加注解
+多节点的Eureka：情况就变得复杂很多，搭建多节点的Eureka是因为在实际的企业级开发中，不允许存在单节点服务的；
+单点故障是不允许的；
+多节点的三步骤：修改host；配置工程的配置文件；编译打包、执行命令
+
+3)、Eureka Server中维护了Client的哪些信息？
+![binaryTree](/img/DiscoveryClient_java.png "binaryTree")
+![binaryTree](/img/DiscoveryClient_java2.png "binaryTree")
+
+4)、Eureka Server又是怎样存储这些信息的？
+![binaryTree](/img/ApplicationResource.png "binaryTree")
+![binaryTree](/img/PeerAwareInstanceRegistry.png "binaryTree")
