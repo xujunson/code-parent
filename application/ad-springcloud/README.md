@@ -425,4 +425,9 @@ d、Slave服务器端的SQL线程会实时检测本地的relay-log中新增加�
 ![binaryTree](/img/MySQL的Master&Slave协议.png "binaryTree")
 
 [微服务包的设计思想](https://coding.imooc.com/lesson/310.html#mid=24888)
+15.2、广告检索微服务架构设计优化
+
+![binaryTree](/img/当前的检索服务实现.png "binaryTree")
+![binaryTree](/img/优化后实现.png "binaryTree")
+
 

@@ -16,6 +16,12 @@
         <module>springboot-study</module>
         <module>kafka-study</module>
         <module>extra-spring</module>
+        <module>ad-service-refactor/ad-binlog-common</module>
+        <module>ad-service-refactor/ad-binlog-kafka</module>
+        <module>ad-service-refactor/ad-search2</module>
+        <module>ad-service-refactor/ad-common2</module>
+        <module>ad-service-refactor/ad-dashboard2</module>
+        <module>ad-service-refactor/ad-sponsor2</module>
     </modules>
 
     <name>ad-springcloud</name>
