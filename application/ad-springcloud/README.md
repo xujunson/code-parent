@@ -481,3 +481,6 @@ node.ingest:true，默认情况下ES集群中所有的节点都具有预处理�
 在ES没有提供Ingest Node功能时，我们想对存储在ES里的数据在存储之前进行一个加工处理的话，我们只能依赖Logstash。或者自定义插件来完成这个功能。
 但是实现成本非常高。
 ES中的两个概念：Pipeline，Processors
+
+[日志收集系统的说明](https://coding.imooc.com/lesson/310.html#mid=25881)
+[SpringBoot 项目的日志配置](https://coding.imooc.com/lesson/310.html#mid=25882)
