@@ -453,6 +453,7 @@ L(Logstash)：开源工具，它可以对日志进行收集、过滤、并将其
 Logstash的核心用途就是接受我们服务的日志，并把它发送给ES。
 K(Kibana)：开源工具，Kibana可以为Logstash和ES提供日志分析友好的一个web界面。可以帮助我们去汇总、分析和搜索重要的数据日志。
 它还可以自定义各种图表等等。Kibana的主要功能就是对日志数据的展示，以及对数据的搜素功能。
+[ELK 的下载、安装和配置](https://coding.imooc.com/lesson/310.html#mid=26063)
 
 3)、将Logstash替换为Filebeat
 Logstash的优点：Logstash的最重要的功能是对日志的收集，最大的优点是能够对日志进行一个预处理。这里的预处理指的是，我们通过将本地日志接收到Logstash里面，
