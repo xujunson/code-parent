@@ -13,6 +13,7 @@ import org.apache.dubbo.config.annotation.Service;
 public class TestService2Impl implements TestService2 {
     @Override
     public String showName() {
+        System.out.println("TestService2 -------------------");
         return "HELLO   TestService2";
     }
 }
