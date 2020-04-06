@@ -21,7 +21,7 @@ import java.io.OutputStream;
 /**
  * @author: Tom
  * @date: 2020-03-04 10:41
- * @description: 拦截器
+ * @description: 定义拦截器，实现自定义注解——AccessLimit
  */
 @Service
 public class AccessInterceptor extends HandlerInterceptorAdapter {
@@ -30,6 +30,15 @@ public class AccessInterceptor extends HandlerInterceptorAdapter {
     @Autowired
     RedisService redisService;
 
+    /**
+     * 方法执行前做拦截
+     *
+     * @param request
+     * @param response
+     * @param handler
+     * @return
+     * @throws Exception
+     */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {

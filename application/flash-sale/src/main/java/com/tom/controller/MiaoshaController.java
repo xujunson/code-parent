@@ -214,6 +214,14 @@ public class MiaoshaController implements InitializingBean {
         return Result.success(0); //0-排队中
     }
 
+    /**
+     * 自定义注解 AccessLimit ：5s内最多访问5次，同时需要用户登录
+     * @param request
+     * @param user
+     * @param goodsId
+     * @param verifyCode
+     * @return
+     */
     @AccessLimit(seconds=5, maxCount=5, needLogin=true)
     @RequestMapping(value = "/path", method = RequestMethod.GET)
     @ResponseBody
