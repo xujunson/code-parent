@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class TestDubboController {
-    @Reference(version = "1.0.0")
+    @Reference(group = "g2",version = "1.0.0")
     TestService2 service2;
-    @Reference(version = "1.0.0")
+    @Reference(group = "g1",version = "1.0.0")
     TestService service;
 
     //http://127.0.0.1:7000/test1

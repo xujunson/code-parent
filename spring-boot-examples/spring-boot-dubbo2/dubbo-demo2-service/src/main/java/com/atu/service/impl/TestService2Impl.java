@@ -9,7 +9,7 @@ import org.apache.dubbo.config.annotation.Service;
  * @description:
  */
 
-@Service(version = "1.0.0")
+@Service(group = "g2", version = "1.0.0")
 public class TestService2Impl implements TestService2 {
     @Override
     public String showName() {
