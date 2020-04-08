@@ -315,7 +315,7 @@ e、混合同步与异步提交位移
 [关于广告系统可用性测试的介绍及说明](https://coding.imooc.com/lesson/310.html#mid=22186)
 
 14、（彩蛋番外篇一）Spring事务处理机制【工作与面试，你都会遇到】
-14.1、异常和事务基础
+14.1、异常和事务基础 SpringTransactionImpl.java
 ![binaryTree](/img/异常的继承结构.png "binaryTree")
 Throwable：Java中所有异常和错误的超类。
 
