@@ -618,3 +618,5 @@ ProducerConsumerModel.java
 
 思维导图：
 https://naotu.baidu.com/file/07f437ff6bc3fa7939e171b00f133e17?token=6744a1c6ca6860a0
+
+[多线程是Java最基本的一种并发模型，本章我们将详细介绍Java多线程编程——廖雪峰](https://www.liaoxuefeng.com/wiki/1252599548343744/1255943750561472)
