@@ -32,5 +32,6 @@
         <module>spring-boot-dubbo2/dubbo-demo2-service</module>
         <module>spring-boot-dubbo2/dubbo-demo2-client</module>
         <module>spring-boot-jpa-demo</module>
+        <module>spring-boot-rocketmq</module>
     </modules>
 </project>
