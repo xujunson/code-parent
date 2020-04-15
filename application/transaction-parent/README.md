@@ -31,6 +31,7 @@
 [Spring 事务机制详解](https://juejin.im/post/5a3b1dc4f265da43333e9049)
 [Java中的事务——JDBC事务和JTA事务](http://www.hollischuang.com/archives/1658)
 [MySQL 笔记 - 事务&锁](https://juejin.im/post/5b76938de51d45664715fba8)
+
 2、Docker
 2.1、Docker介绍
   Docker是一种轻量级的容器。它是使用操作系统级别的虚拟化技术对进程、软件系统和网络之类的资源，进行封装和隔离。
@@ -57,3 +58,43 @@ c、假设我的java应用要使用mysql或者其他的数据库，我现在在�
 那我就可以在docker-compose里面定义两个服务，其中一个是mysql，我可以设置mysql的镜像，另一个是java应用的docker，
 两个docker容器就可以共享一个网络，相互之间有一个统一的关系等等，可以统一管理；
 d、集群：假设我这个java应用可以进行分布式部署，可以部署在多台机器上就可以配置一个集群。
+
+3、Spring事务机制
+3.1、Spring事务机制：事务抽象、事务传播、事务隔离
+3.1.1、Spring事务管理
+a、提供统一的API接口支持不同的资源
+b、提供声明式事务管理
+c、方便的与Spring框架集成
+d、多个资源的事务管理、同步
+
+3.1.2、Spring事务抽象
+a、 ：
+提供事务管理器的接口，不管使用的是什么样的事务管理器的实现，但是我们都可以用这个接口来进行事务的管理。
+包括：事务的开启、提交、回滚等操作。
+![binaryTree](img/事务管理器.png "binaryTree")
+
+b、TransactionDefinition
+事务的定义。我们可以创建一个TransactionDefinition，然后给它设置一些事务的属性，
+包括：传播属性、隔离属性等等。在通过这个定义创建一个具体的实例。
+![binaryTree](img/事务定义.png "binaryTree")
+![binaryTree](img/事务隔离机制.png "binaryTree")
+![binaryTree](img/事务传播机制.png "binaryTree")
+
+c、TransactionStatus
+事务的运行状态，或者是运行的有状态的事务。
+![binaryTree](img/TransactionStatus.png "binaryTree")
+
+3.2、代码方式与标签方式的事务实现
+![binaryTree](img/Transactional代码方式实现.png "binaryTree")
+CustomerServiceTxInAnnotation.java
+
+![binaryTree](img/Transactional标签方式实现.png "binaryTree")
+CustomerServiceTxInCode.java
+
+![binaryTree](img/PlatformTransactionManager的常见实现.png "binaryTree")
+
+3.3、JPA、JMS事务实例
+3.3.1、Spring事务实例
+1)、代码方式、标签方式实现事务
+2)、JPA事务管理
+3)、使用H2数据库(支持事务)
