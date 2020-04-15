@@ -28,6 +28,32 @@
   d、SERIALIZABLE——线性读：所有的事务操作必须是线性执行，想当于排队执行，隔离级别最高。
  
  设置脏读：SET SESSION TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
+[Spring 事务机制详解](https://juejin.im/post/5a3b1dc4f265da43333e9049)
+[Java中的事务——JDBC事务和JTA事务](http://www.hollischuang.com/archives/1658)
+[MySQL 笔记 - 事务&锁](https://juejin.im/post/5b76938de51d45664715fba8)
+2、Docker
+2.1、Docker介绍
+  Docker是一种轻量级的容器。它是使用操作系统级别的虚拟化技术对进程、软件系统和网络之类的资源，进行封装和隔离。
+  看起来就好像一个独立的系统，所以它也叫做容器。
+2.2、与传统的虚拟机异同
+  比如VM，它其实是在宿主机器上，去虚拟出一套硬件。然后在这套硬件上面去安装一套操作系统。在这套操作系统上再去安装我们要使用的软件。
+  而Docker是直接在操作系统上面把一部分的进程、软件系统、网络等隔离出来。让你觉得好像它是一个独立的操作系统。
+  但是实际上它只是隔离了一个容器而已。它是运行在docker的引擎上面的，它不需要虚拟硬件，也不需要安装额外的操作系统。
+  所以它非常的轻量，然后使用起来非常方便。
+2.3、几个概念
+ 1)、Docker镜像-docker资源库
+   它是保存在docker资源库里面的
+ 2)、Docker容器——Dockerfile
+   定义使用的镜像，设置环境变量等
+ 3)、Docker服务——docker-compose
+   把多个docker容器定义在一个文件
+ 4)、Docker集群-swam、Kubernetes
  
- 
- 
+a、假设我需要部署一个Java应用，首先我需要一个Java的运行环境，所以说我在docker资源库里面找一个jdk的运行环境；
+b、然后我想自动去设置java的编译、运行等等。那我就写一个Dockerfile文件，然后用Dockerfile文件定义出一个容器来，
+在这个容器里面去运行java应用；
+在Dockerfile文件里面需要指定要用的jdk镜像、设置源文件在本地的地址和需要映射到容器的地址、在镜像中安装Maven、映射网络端口，访问服务。
+c、假设我的java应用要使用mysql或者其他的数据库，我现在在本地想把这些都设置到同一个docker服务的docker-compose里面，
+那我就可以在docker-compose里面定义两个服务，其中一个是mysql，我可以设置mysql的镜像，另一个是java应用的docker，
+两个docker容器就可以共享一个网络，相互之间有一个统一的关系等等，可以统一管理；
+d、集群：假设我这个java应用可以进行分布式部署，可以部署在多台机器上就可以配置一个集群。
