@@ -40,6 +40,15 @@ public class CustomerResource {
         customerService.handle(msg);
     }
 
+    @PostMapping("/message2/listen")
+    public void createMsg2WithListener(@RequestParam String msg) {
+        jmsTemplate.convertAndSend("customer:msg2:new", msg);
+    }
+    @PostMapping("/message2/direct")
+    public void createMsg2Direct(@RequestParam String msg) {
+        customerService.handleInCode(msg);
+    }
+
     /**
      * 读取消息
      *
