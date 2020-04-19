@@ -12,6 +12,7 @@
         <module>c1-local-tran-jdbc</module>
         <module>c2-spring-boot-db</module>
         <module>c3-1-spring-trans-jpa</module>
+        <module>c3-2-spring-trans-jms</module>
     </modules>
 
 

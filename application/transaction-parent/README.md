@@ -95,6 +95,45 @@ CustomerServiceTxInCode.java
 
 3.3、JPA、JMS事务实例
 3.3.1、Spring事务实例
+c3-1-spring-trans-jpa
 1)、代码方式、标签方式实现事务
 2)、JPA事务管理
 3)、使用H2数据库(支持事务)
+
+3.3.2、Spring JMS事务实例
+3.3.2.1、Spring JMS Session
+1)、通过Session进行事务管理
+是Spring来访问MQ服务器的时候，用的session的对象。数据库读、写、提交、失误都是通过Session来进行操作的。
+所以说JMS内部是支持事务的，有一个session级别的事务管理。每次读消息的时候，读完消息，它都会有所谓的一个提交，
+确保这个消息已经读完。如果失败了，它会重新触发读。
+2)、Session是thread-bound
+由于Session可能是共用的，在应用里面它不会每次都重新建一个session或者说重新建一个连接。
+每次在我新接收请求的时候，对于一个新的线程，它可能会共用以前的session或者说新建一个session来用。
+每一个session在每一个线程里面它会有自己的一个事务，这个事务的生命周期就是session在thread里面的生命周期。
+也就是说当我在我的应用里面读一个消息，然后处理，处理完往另外一个队列里面写消息的时候，
+这个线程的操作就是 先读；然后处理；然后在写消息。这个session在这个过程中使用的是同一个session。
+在进行事务管理的时候，读和写两个操作是在一个事务当中。只有所有这些操作都完成没有错误的情况下，然后它最后才会做一个commit操作，
+把这个最后提交上去。
+3)、事务上下文：在一个线程中的一个Session
+
+3.3.2.2、Spring JMS事务类型
+1)、Session管理的事务——原生事务
+![binaryTree](img/session原生事务.png "binaryTree")
+ 
+2)、Jms-session实例——c3-2-spring-trans-jms
+对于session管理的jms事务而言，它的事务是作用在线程内 的生命周期上的。
+对于listener触发的方法，listener用session去读了消息以后，触发了handle方法。
+在handle里面触发了convertAndSend()。直到方法结束后这个listener才会去调用session的commit()去提交session管理的事务。
+但是此时因为有一个异常，所以做了回滚操作。
+   
+如果直接调用handle方法的话，不通过listener，这个session事务的生命周期就只在convertAndSend()方法内部起作用，而不是整个handle方法起作用
+所以就直接提交上去没有回滚。
+
+3.3.2.3、外部管理的事务：JmsTransactionManager、JTA
+![binaryTree](img/JmsTransactionManager事务.png "binaryTree")
+
+
+1)、Spring Boot中使用JMS
+2)、Spring Boot ActiveMQ Starter
+3)、内置的可运行的ActiveMQ服务器
+4)、实现读写ActiveMQ的事务
