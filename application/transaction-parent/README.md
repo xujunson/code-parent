@@ -128,12 +128,67 @@ c3-1-spring-trans-jpa
    
 如果直接调用handle方法的话，不通过listener，这个session事务的生命周期就只在convertAndSend()方法内部起作用，而不是整个handle方法起作用
 所以就直接提交上去没有回滚。
+a)、Spring Boot中使用JMS
+b)、Spring Boot ActiveMQ Starter
+c)、内置的可运行的ActiveMQ服务器
+d)、实现读写ActiveMQ的事务
 
 3.3.2.3、外部管理的事务：JmsTransactionManager、JTA
 ![binaryTree](img/JmsTransactionManager事务.png "binaryTree")
 
+3.3.4、Spring外部事务与JTA
+3.3.4.1、Spring内部事务与外部事务
+1)、本地事务
+ a、Spring容器管理事务的生命周期
+ b、通过Spring事务接口调用
+ c、业务代码与具体事务的实现无关
+ d、![binaryTree](img/本地事务.png "binaryTree")
+2)、外部(全局)事务
+ a、外部事务管理器提供事务管理
+ b、通过Spring事务接口，调用外部管理器
+ c、使用JNDI等方式获取外部事务管理器的实例
+ d、外部事务管理器一般由应用服务器提供，如Jboss等
+ e、外部事务管理器提供JTA事务管理
+ f、JTA事务管理器可以管理多个数据资源
+ g、通过"两阶段提交"实现多数据源的事务
+ 
+ 两阶段提交:当我在一个JTA的事务里面，使用两个数据库的时候，我进行两阶段提交，也就是第一阶段先做一个第一阶段的提交；
+  等所有的数据库都提交返回，没有问题的时候，然后在进行第二阶段的提交。
+  第二阶段提交完成了以后数据才真正写进去相当于持久化。事务才算完成。
+  如果在第一阶段提交完以后，某一些数据库返回了错误或者说没有及时返回，那么第二阶段没有及时提交而是直接rollback。
+ ![binaryTree](img/外部(全局)事务.png "binaryTree")
+ ![binaryTree](img/外部(全局)事务-不使用应用服务器.png "binaryTree")
+ 
+3.3.4.2、JTA与Spring JTA实现
+1)、JTA事务管理的用途
+解决一个java服务访问多个数据源的时候，怎么样能够保证，满足他的事务性。 
 
-1)、Spring Boot中使用JMS
-2)、Spring Boot ActiveMQ Starter
-3)、内置的可运行的ActiveMQ服务器
-4)、实现读写ActiveMQ的事务
+3.3.4.3、JTA与XA
+1)、XA
+XA：是由X/Open提出的分布式事务的规范，这个规范定义了一个全局的事务管理器的接口-Transaction Manager
+XA Resource
+两阶段提交
+
+2)、JTA
+JTA实际上是XA规范在Java中的实现，JTA(Java Transaction API)。
+ a、TransactionManager
+ b、XAResource
+ c、XID
+
+3)、JTA事务管理的弊端
+ a、两阶段提交
+ b、事务时间太长、锁数据的时间太长
+ c、低性能、低吞吐量
+
+4)、不使用JTA实现多数据源的事务管理-Spring事务同步
+ a、Spring事务同步机制
+ b、多个数据源上实现近似事务一致性
+ c、高性能、高吞吐量
+
+下一节 4-8
+
+3.3.4.4、JTA分布式事务实例
+
+
+
+
