@@ -13,6 +13,7 @@
         <module>c2-spring-boot-db</module>
         <module>c3-1-spring-trans-jpa</module>
         <module>c3-2-spring-trans-jms</module>
+        <module>c3-3-spring-trans-jta</module>
     </modules>
 
 
