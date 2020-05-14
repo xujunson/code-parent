@@ -101,6 +101,8 @@ c3-1-spring-trans-jpa
 3)、使用H2数据库(支持事务)
 
 3.3.2、Spring JMS事务实例
+[Spring整合JMS(消息中间件)](https://blog.csdn.net/suifeng3051/article/details/51718675)
+[Spring整合JMS(消息中间件)实例](https://blog.csdn.net/suifeng3051/article/details/51721141)
 3.3.2.1、Spring JMS Session
 1)、通过Session进行事务管理
 是Spring来访问MQ服务器的时候，用的session的对象。数据库读、写、提交、失误都是通过Session来进行操作的。
@@ -185,9 +187,9 @@ JTA实际上是XA规范在Java中的实现，JTA(Java Transaction API)。
  b、多个数据源上实现近似事务一致性
  c、高性能、高吞吐量
 
-下一节 4-8
-
 3.3.4.4、JTA分布式事务实例
+[JTA分布式事务处理](https://www.jianshu.com/p/029f28c060f6)
+
 
 
 
