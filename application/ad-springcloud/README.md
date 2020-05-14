@@ -232,6 +232,7 @@ https://coding.imooc.com/lesson/310.html#mid=22015
 [广告检索服务的介绍](https://coding.imooc.com/lesson/310.html#mid=22094)
 
 11、Kafka 的安装与使用【不仅能应用在工作与面试中，还会用于架构优化】
+[kafka中文教程](https://www.orchome.com/kafka/index)
 11.1、Kafka基础知识的介绍
 1)、消息系统
 一个消息系统负责将数据从一个应用传递给另一个应用。应用只需要关注于数据，无需关注数据在两个应用间是如何传递的。
