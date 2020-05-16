@@ -1,0 +1,10 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: user
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://atu:123456@localhost:8761/eureka/

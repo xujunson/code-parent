@@ -8,3 +8,10 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://atu:123456@127.0.0.1:8761/eureka/
+#修改路由规则
+zuul:
+    routes:
+        userApi:
+            path: /home/**
+            serviceId: user
+            stripPrefix: false
