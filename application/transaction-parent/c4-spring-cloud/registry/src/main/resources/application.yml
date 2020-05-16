@@ -1,0 +1,23 @@
+#一般情况下对于springboot的应用, 我们不需要配置它的端口, 它会有一个默认的端口;
+#但是对于服务注册中心, 它会有一个默认的端口8761, web的spring boot端口是8080
+#所以我们需要设置成一个统一的
+server:
+  port: 8761
+
+spring:
+  application:
+    name: registry
+eureka:
+  client:
+    register-with-eureka: false #启动时不会去查找现有的注册中心
+    fetch-registry: false #不会去查找现有的注册中心
+    serviceUrl:
+      defaultZone: http://127.0.0.1:${server.port}/eureka/
+
+#禁止注册非法服务
+security:
+  basic:
+    enable: true
+  user:
+    name: atu
+    password: 123456
