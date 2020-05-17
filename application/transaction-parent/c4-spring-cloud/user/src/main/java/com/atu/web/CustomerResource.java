@@ -31,6 +31,11 @@ public class CustomerResource {
         return customerRepository.save(customer);
     }
 
+    /**
+     * 性能监控
+     *
+     * @return
+     */
     @GetMapping("")
     @HystrixCommand
     public List<Customer> getAll() {
