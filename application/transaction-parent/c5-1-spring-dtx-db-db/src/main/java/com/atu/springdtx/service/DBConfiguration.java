@@ -64,4 +64,16 @@ public class DBConfiguration {
     public JdbcTemplate orderJdbcTemplate(@Qualifier("orderDataSource") DataSource orderDataSource) {
         return new JdbcTemplate(orderDataSource);
     }
+
+    /**
+     * 一个服务里面使用两个数据源：实现链式事务管理
+     * @return
+     */
+    @Bean
+    public PlatformTransactionManager transactionManager() {
+        DataSourceTransactionManager userTM = new DataSourceTransactionManager(userDataSource());
+        PlatformTransactionManager orderTM = new DataSourceTransactionManager(orderDataSource());
+        ChainedTransactionManager tm = new ChainedTransactionManager(userTM, orderTM);
+        return tm;
+    }
 }
