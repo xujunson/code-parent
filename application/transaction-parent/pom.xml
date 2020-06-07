@@ -16,6 +16,8 @@
         <module>c3-3-spring-trans-jta</module>
         <module>c3-4-spring-trans-jta-multi</module>
         <module>c5-1-spring-dtx-db-db</module>
+        <module>c5-2-spring-dtx-jpa-db</module>
+        <module>c5-3-spring-dtx-jms-db</module>
     </modules>
 
 
