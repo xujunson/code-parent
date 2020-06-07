@@ -394,7 +394,9 @@ c5-1-spring-dtx-db-db
 测试：如果存在error2时，在执行了customer_order之后，customer表回滚，而customer_order仍保存进数据。
 原因：对 customer_order表的操作不在一个事务中执行的。它是直接提交上去额度过程。
 
-5.2.1、![binaryTree](img/Spring分布式事务实现-实例2.png "binaryTree")
+5.2.2、![binaryTree](img/Spring分布式事务实现-实例2.png "binaryTree")
 c5-2-spring-dtx-jpa-db
 问题：在提交的过程中，如果说第二个事务，在提交的过程中出现了数据库的异常，第二个事务没有提交；
 第一个事务的提交就没有办法回滚，在这种情况下是会出现错误的，但是在其他情况下都可以满足要求。
+
+5.2.3、![binaryTree](img/Spring分布式事务实现-实例3.png "binaryTree")
