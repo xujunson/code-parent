@@ -439,3 +439,25 @@ c5-3-spring-dtx-jms-db
  
 ![binaryTree](img/Service方法实现幂等性.png "binaryTree")
 ![binaryTree](img/SQL实现幂等性.png "binaryTree")
+
+5.4、全局一致性ID和分布式对象
+分布式系统唯一性ID：GUID
+ a、分布式系统的全局唯一标识
+ b、UUID：生成唯一ID的规范
+ c、用于唯一标识、处理重复消息
+
+1)、分布式系统唯一性ID生成方式：
+ a、数据库自增序列
+ b、UUID：唯一ID标准，128位，几种版本
+ c、MongoDB的ObjectID：时间戳+机器ID+进程ID+序号
+ d、Redis的INCR操作、Zookeeper节点的版本号
+
+2)、使用何种方法？
+ a、自增的ID：考虑安全性、部署
+ b、时间有序：便于通过ID判断创建时间
+ c、长度、是否数字类型：是否建索引
+
+3)、分布式系统分布式对象
+ a、Redis：Redisson库：RLock、RMap、RQueue等对象
+ b、Zookeeper：Netflix Curator库：Lock、Queue等对象。
+下一节：第7章 分布式事务实现：消息驱动模式
