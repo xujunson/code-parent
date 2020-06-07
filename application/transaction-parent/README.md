@@ -388,4 +388,8 @@ JTA是在单个服务当中如果有多个数据源的情况下，实现分布�
 5.1.5、总结：
 在Spring下面实现分布式事务主要有两种方式：使用JTA(强一致性)、不使用JTA——通过事务同步机制尽量保证事务一致。
 
-下一节：6-4 实例1-DB-DB
+5.2、分布式事务实现
+5.2.1、![binaryTree](img/Spring分布式事务实现-实例1.png "binaryTree")
+c5-1-spring-dtx-db-db
+测试：如果存在error2时，在执行了customer_order之后，customer表回滚，而customer_order仍保存进数据。
+原因：对 customer_order表的操作不在一个事务中执行的。它是直接提交上去额度过程。
