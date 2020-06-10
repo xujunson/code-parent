@@ -460,4 +460,40 @@ c5-3-spring-dtx-jms-db
 3)、分布式系统分布式对象
  a、Redis：Redisson库：RLock、RMap、RQueue等对象
  b、Zookeeper：Netflix Curator库：Lock、Queue等对象。
-下一节：第7章 分布式事务实现：消息驱动模式
+ 
+第7章 分布式事务实现：消息驱动模式
+
+7.1、分布式事务实现：消息驱动模式
+1)、微服务架构的事务问题：
+ a、服务间调用操作的回滚
+ b、服务间调用失败的重试问题
+2)、微服务架构的事务问题解决：
+ a、方法1：减少服务间调用
+ b、方法2：没有服务间调用，通过消息驱动调用服务
+3)、注意的问题:
+ a、消息中间件需要支持事务
+ b、如何处理重试的消息：通过uuid、幂等性的实现来处理
+ c、发生业务异常时回滚操作
+4)、系统错误额度处理
+ a、方法1：将出错未处理的消息写到失败队列，进行相应回滚操作
+ b、方法2：通过定时任务检查超时订单，对未完成的订单做自动回滚
+ c、方法3：保存出错消息，人工处理
+
+7.2、消息驱动的分布式事务实现
+实例：
+ a、Order服务、User服务、Ticket服务
+ b、ActiveMQ作为消息中间件
+ c、错误处理：定时任务检查超时并回滚
+ d、幂等性：实现方法的幂等性
+![binaryTree](img/购票业务流程.png "binaryTree")
+![binaryTree](img/消息流程.png "binaryTree")
+![binaryTree](img/消息流程-锁票失败.png "binaryTree")
+![binaryTree](img/购票业务流程-并发请求购买同一张票.png "binaryTree")
+![binaryTree](img/消息流程-扣费失败.png "binaryTree")
+
+实现锁票的安全性：
+ a、利用@JmsListener设置一个消费者，不适用于多实例
+ b、使用事务和数据库锁的特性
+ c、分布式锁：需要进行严格测试，数据库二级缓存等等
+ 
+下一节：7-3 消息驱动模式实例：创建ticket服务
