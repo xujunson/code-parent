@@ -33,6 +33,7 @@ public class TicketService {
         LOG.info("Get new order for ticket lock:{}", msg);
         int lockCount = ticketRepository.lockTicket(msg.getCustomerId(), msg.getTicketNum());
         if (lockCount == 0) {
+            //锁票失败
             msg.setStatus("TICKET_LOCK_FAIL");
             jmsTemplate.convertAndSend("order:fail", msg);
         } else {
@@ -63,6 +64,31 @@ public class TicketService {
         jmsTemplate.convertAndSend("order:finish", msg);
     }
 
+    /**
+     * 触发 error_ticket 的情况：
+     * 1. 扣费失败，需要解锁票
+     * 2. 订单超时，如果存在锁票就解锁，如果已经交票就撤回
+     * 这时候，都已经在OrderDTO里设置了失败的原因，所以这里就不再设置原因。
+     *
+     * @param msg
+     */
+    @Transactional
+    @JmsListener(destination = "order:ticket_error", containerFactory = "msgFactory")
+    public void handleError(OrderDTO msg) {
+        LOG.info("Get order error for ticket unlock:{}", msg);
+        //撤回
+        int count = ticketRepository.unMoveTicket(msg.getCustomerId(), msg.getTicketNum()); // 撤销票的转移
+        if (count == 0) {
+            LOG.info("Ticket already unmoved, or not moved:", msg);
+        }
+
+        //解锁
+        count = ticketRepository.unLockTicket(msg.getCustomerId(), msg.getTicketNum()); // 撤销锁票
+        if (count == 0) {
+            LOG.info("Ticket already unlocked:", msg);
+        }
+        jmsTemplate.convertAndSend("order:fail", msg);
+    }
 
     /**
      * 锁票方式1：获取对象修改保存
@@ -111,6 +137,12 @@ public class TicketService {
         return updateCount;
     }
 
+    /**
+     * 解锁
+     *
+     * @param orderDTO
+     * @return
+     */
     @Transactional
     public int unLockTicket(OrderDTO orderDTO) {
         int updateCount = ticketRepository.unLockTicket(orderDTO.getCustomerId(), orderDTO.getTicketNum());
