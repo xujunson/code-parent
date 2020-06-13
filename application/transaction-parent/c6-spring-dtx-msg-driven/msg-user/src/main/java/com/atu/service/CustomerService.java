@@ -25,6 +25,11 @@ public class CustomerService {
     @Autowired
     private PayInfoRepository payInfoRepository;
 
+    /**
+     * 监听代缴费队列
+     *
+     * @param msg
+     */
     @Transactional
     @JmsListener(destination = "order:pay", containerFactory = "msgFactory")
     public void handle(OrderDTO msg) {
@@ -36,24 +41,33 @@ public class CustomerService {
             return;
         }
 
+        //检查余额
         Customer customer = customerRepository.findOne(msg.getCustomerId());
         if (customer.getDeposit() < msg.getAmount()) {
             LOG.info("No enough deposit, need amount:{}", msg.getAmount());
             msg.setStatus("NOT_ENOUGH_DEPOSIT");
+            //余额不足
             jmsTemplate.convertAndSend("order:ticket_error", msg);
             return;
         }
 
+        //扣费
         pay = new PayInfo();
         pay.setOrderId(msg.getId());
         pay.setAmount(msg.getAmount());
         pay.setStatus("PAID");
         payInfoRepository.save(pay);
-//        customer.setDeposit(customer.getDeposit() - msg.getAmount());
-//        customerRepository.save(customer); // 如果用户下了2个订单，这个handle方法不是单线程处理，或者有多个实例，又刚好这2个请求被同时处理，
+
+        // 如果用户下了2个订单，这个handle方法不是单线程处理，或者有多个实例，又刚好这2个请求被同时处理
+        // 只会减一次余额
+        /*customer.setDeposit(customer.getDeposit() - msg.getAmount());
+        customerRepository.save(customer);*/
+
         customerRepository.charge(msg.getCustomerId(), msg.getAmount());
 
         msg.setStatus("PAID");
+
+        //发送交票队列
         jmsTemplate.convertAndSend("order:ticket_move", msg);
     }
 }
