@@ -62,7 +62,6 @@ public class CustomerService {
         // 只会减一次余额
         /*customer.setDeposit(customer.getDeposit() - msg.getAmount());
         customerRepository.save(customer);*/
-
         customerRepository.charge(msg.getCustomerId(), msg.getAmount());
 
         msg.setStatus("PAID");

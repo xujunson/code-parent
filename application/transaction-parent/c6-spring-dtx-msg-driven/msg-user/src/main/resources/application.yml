@@ -4,9 +4,9 @@ spring:
   application:
     name: user
   datasource:
-    url: jdbc:mysql://localhost:3306/imooc_user
+    url: jdbc:mysql://39.97.114.213:3306/tom_user
     username: root
-    password: 123456
+    password: Atu-1995
     driver-class-name: com.mysql.jdbc.Driver
   jpa:
     hibernate:

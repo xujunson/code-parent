@@ -6,7 +6,7 @@
 <!-- The FILE and ASYNC appenders are here as examples for a production configuration -->
 
 
-    <logger name="com.imooc" level="DEBUG"/>
+    <logger name="com.atu" level="DEBUG"/>
     <property name="DEBUG_LEVEL" value="INFO" />
 
     <logger name="org.springframework.transaction" level="${DEBUG_LEVEL}"/>

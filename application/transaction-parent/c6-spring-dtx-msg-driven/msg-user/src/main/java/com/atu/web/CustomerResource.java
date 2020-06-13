@@ -25,7 +25,7 @@ public class CustomerResource {
             return;
         }
         Customer customer = new Customer();
-        customer.setUsername("imooc");
+        customer.setUsername("atu");
         customer.setPassword("111111");
         customer.setRole("User");
         customer.setDeposit(1000);
@@ -53,7 +53,7 @@ public class CustomerResource {
     @GetMapping("/my")
     @HystrixCommand
     public Map getMyInfo() {
-        Customer customer = customerRepository.findOneByUsername("imooc");
+        Customer customer = customerRepository.findOneByUsername("atu");
         List<OrderDTO> orders = orderClient.getMyOrder(customer.getId());
         List<TicketDTO> tickets = ticketClient.getMyTickets(customer.getId());
         Map result = new HashMap();
