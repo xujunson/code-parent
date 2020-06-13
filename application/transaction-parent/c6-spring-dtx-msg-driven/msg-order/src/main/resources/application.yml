@@ -1,0 +1,18 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: order
+  datasource:
+    url: jdbc:mysql://39.97.114.213:3306/tom_order
+    username: root
+    password: Atu-1995
+    driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://atu:111111@localhost:8761/eureka/

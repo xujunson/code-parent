@@ -18,6 +18,13 @@
         <module>c5-1-spring-dtx-db-db</module>
         <module>c5-2-spring-dtx-jpa-db</module>
         <module>c5-3-spring-dtx-jms-db</module>
+        <module>c6-spring-dtx-msg-driven</module>
+        <module>c6-spring-dtx-msg-driven/msg-order</module>
+        <module>c6-spring-dtx-msg-driven/msg-proxy</module>
+        <module>c6-spring-dtx-msg-driven/msg-registry</module>
+        <module>c6-spring-dtx-msg-driven/msg-service</module>
+        <module>c6-spring-dtx-msg-driven/msg-user</module>
+        <module>c6-spring-dtx-msg-driven/msg-ticket</module>
     </modules>
 
 
