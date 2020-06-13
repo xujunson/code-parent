@@ -4,7 +4,7 @@ spring:
   application:
     name: ticket
   datasource:
-    url: jdbc:mysql://39.97.114.213:3306/tom_ticket
+    url: jdbc:mysql://127.0.0.1:3306/tom_ticket
     username: root
     password: Atu-1995
     driver-class-name: com.mysql.jdbc.Driver
