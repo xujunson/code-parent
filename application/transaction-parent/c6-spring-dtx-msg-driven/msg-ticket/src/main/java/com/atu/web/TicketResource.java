@@ -27,7 +27,7 @@ public class TicketResource implements TicketCompositeService {
         }
         Ticket ticket = new Ticket();
         ticket.setName("No.1");
-        ticket.setTicketNum(110L);
+        ticket.setTicketNum(100L);
         ticketRepository.save(ticket);
     }
 
@@ -55,11 +55,23 @@ public class TicketResource implements TicketCompositeService {
         }).collect(Collectors.toList());
     }
 
+    /**
+     * 锁票
+     * 方式1
+     * @param dto
+     * @return
+     */
     @PostMapping("/lock")
     public Ticket lock(@RequestBody OrderDTO dto) {
         return ticketService.lockTicket(dto);
     }
 
+    /**
+     * 锁票
+     * 方式2
+     * @param dto
+     * @return
+     */
     @PostMapping("/lock2")
     public int lock2(@RequestBody OrderDTO dto) {
         return ticketService.lockTicket2(dto);
