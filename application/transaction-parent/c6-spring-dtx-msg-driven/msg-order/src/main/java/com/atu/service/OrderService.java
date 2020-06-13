@@ -25,10 +25,16 @@ public class OrderService {
     @Autowired
     private OrderRepository orderRepository;
 
+    /**
+     * 创建订单
+     *
+     * @param msg
+     */
     @Transactional
     @JmsListener(destination = "order:locked", containerFactory = "msgFactory")
     public void handle(OrderDTO msg) {
         LOG.info("Get new order to create:{}", msg);
+        //判断是否重复处理
         if (orderRepository.findOneByUuid(msg.getUuid()) != null) { // 通过保存到数据库，来使用uuid处理重复消息
             LOG.info("Msg already processed:{}", msg);
         } else {
@@ -37,6 +43,7 @@ public class OrderService {
             msg.setId(order.getId());
         }
         msg.setStatus("NEW");
+        //发送到代缴费队列
         jmsTemplate.convertAndSend("order:pay", msg);
     }
 

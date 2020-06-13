@@ -28,7 +28,9 @@ public class OrderResource implements OrderCompositeService {
     @Transactional
     @PostMapping("")
     public void create(@RequestBody OrderDTO dto) {
+        //设置uuid
         dto.setUuid(uuidGenerator.generate().toString());
+        //发送order信息到 order:new队列中
         jmsTemplate.convertAndSend("order:new", dto);
     }
 

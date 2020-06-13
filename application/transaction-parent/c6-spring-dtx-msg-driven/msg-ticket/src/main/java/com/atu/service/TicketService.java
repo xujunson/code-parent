@@ -22,6 +22,7 @@ public class TicketService {
     private TicketRepository ticketRepository;
 
     /**
+     * 锁票
      * JmsListener 监听 destination
      *
      * @param msg
@@ -35,7 +36,12 @@ public class TicketService {
             msg.setStatus("TICKET_LOCK_FAIL");
             jmsTemplate.convertAndSend("order:fail", msg);
         } else {
+            //锁票成功
+
+            //设置状态
             msg.setStatus("TICKET_LOCKED");
+
+            //创建订单
             jmsTemplate.convertAndSend("order:locked", msg);
         }
     }
