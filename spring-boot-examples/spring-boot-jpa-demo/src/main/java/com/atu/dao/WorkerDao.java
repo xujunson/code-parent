@@ -139,4 +139,67 @@ public interface WorkerDao extends JpaRepository<Worker, Long> {
             Long salary, Sort sort
     );
 
+
+    /**
+     * 连表分页多条件动态查询
+     */
+    /*@Query(value = "   select l.appno,l.loan_code loanCode, l.start_date loanDate,l.ent_id entId, l.lnci_amt lnciAmt, " +
+            "  l.end_date endDate, w.warning_type warningType, w.warning_date warningDate " +
+            " from prod_scf_loan_inf l LEFT JOIN prod_scf_warning_inf w on l.loan_code = w.loan_code where 1 = 1 " +
+            "and IF (?1 != '', l.loan_code = ?1, 1=1) " +
+            "and IF (?2 != '', w.warning_type = ?2, 1=1) " +
+            "and IF (?3 != '', l.start_date > ?3, 1=1) " +
+            "and IF (?4 != '', l.start_date  < ?4, 1=1) " +
+            "and IF (?5 != '', l.lnci_amt > ?5, 1=1) " +
+            "and IF (?6 != '', l.lnci_amt < ?6, 1=1) " +
+            "and IF (?7 != '', w.warning_date > ?7, 1=1) " +
+            "and IF (?8 != '', w.warning_date < ?8, 1=1) " +
+            "and IF (?9 != '', l.ent_id = ?9, 1=1) ",
+
+            countQuery = "SELECT count(*) FROM prod_scf_loan_inf where 1 = 1 "+
+                    "and IF (?1 != '', l.loan_code = ?1, 1=1) " +
+                    "and IF (?2 != '', w.warning_type = ?2, 1=1) " +
+                    "and IF (?3 != '', l.start_date > ?3, 1=1) " +
+                    "and IF (?4 != '', l.start_date  < ?4, 1=1) " +
+                    "and IF (?5 != '', l.lnci_amt > ?5, 1=1) " +
+                    "and IF (?6 != '', l.lnci_amt < ?6, 1=1) " +
+                    "and IF (?7 != '', w.warning_date > ?7, 1=1) " +
+                    "and IF (?8 != '', w.warning_date < ?8, 1=1) " +
+                    "and IF (?9 != '', l.ent_id = ?9, 1=1) ",
+            nativeQuery = true)
+    Page<Map<String, Object>> findWarnInfo(String loanCode,
+                                           String warningType,
+                                           Date loanDateSt,
+                                           Date loanDateEd,
+                                           BigDecimal lnciAmtSt,
+                                           BigDecimal lnciAmtEd,
+                                           Date warningDateSt,
+                                           Date warningDateEd,
+                                           String entId,
+                                           Pageable pageable);*/
+
+    /**
+     * 动态汇总查询
+     */
+    /*
+     CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+     CriteriaQuery criteriaQuery = criteriaBuilder.createQuery();
+     Root<Object> root = criteriaQuery.from(Object.class);
+     criteriaQuery.multiselect(criteriaBuilder.sum(root.get("lnciAmt")), criteriaBuilder.sum(root.get("receivableAccuredInt")));
+
+
+     List<Predicate> predicates = Lists.newArrayList();
+     if (!StringUtils.isEmpty(request.getAppno())) {
+     predicates.add(criteriaBuilder.equal(root.get("appno"), request.getAppno()));
+
+     }
+     if (!StringUtils.isEmpty(request.getEntId())) {
+     predicates.add(criteriaBuilder.equal(root.get("entId"), request.getEntId()));
+
+     }
+
+     criteriaQuery.where(predicates.toArray(new Predicate[predicates.size()]));
+     Object object = entityManager.createQuery(criteriaQuery).getSingleResult();
+     List<BigDecimal> list = JSONObject.parseObject(JSONObject.toJSONString(object), ArrayList.class);
+     */
 }
