@@ -499,3 +499,59 @@ c5-3-spring-dtx-jms-db
 消息驱动方式：c6-spring-dtx-msg-driven
 锁票时，在高并发情况下同时锁票不会出现问题，因为数据库的事务和锁的机制保证了只有一个用户可以锁成功。
 也保证了方法的幂等性等等操作。
+
+7、 分布式事务实现：事件溯源
+7.1、事件溯源模式介绍
+1)、消息驱动(msg-driven or event-driven)
+ a、事件不要求持久化保存
+ b、消息只是为了更新业务数据的状态，数据库才是一等数据
+ c、不要求所有的数据操作都通过消息驱动
+
+2)、事件溯源(event-sourcing)
+ a、事件作为一等数据保存
+ b、统一的时间管理器和接口，数据更新都由事件产生
+ c、数据库中数据的当前状态根据事件的聚合产生
+ d、聚合数据可以保存在数据库中、可以根据事件重新生成
+
+3)、事件溯源的优点：
+ a、历史重现：从时间中重新生成试图数据库
+ b、方便的数据流处理与报告生成
+ c、性能
+ d、服务的松耦合
+ 
+4)、事件溯源的缺点：
+ a、只能保证事务的最终一致性
+ b、设计和开发思维的转变、学习成本
+ c、事件结构的改变
+ d、扩展性：Event Store的分布式实现、事件的分布式处理
+ 
+5)、消息驱动 VS 事件溯源：
+ a、一等数据：事件 vs u、业务数据
+ b、事件永久保存、历史重现
+ c、所有数据更新都必须通过事件来产生
+ d、Event Store服务承担更多的功能
+
+6)、事件溯源的数据一致性：
+ a、一个事件只处理一个服务的数据
+ b、保证事件的至少一次处理、幂等性
+ c、业务请求的错误处理：多次重试失败、网络异常、服务不可用
+
+7)、事件溯源和CQRS（命令查询责任隔离）：
+ a、CQRS：命令查询职责分离，系统实践的模式——把数据的操作和查询隔离开
+ b、C端执行命令，Q端执行查询
+
+7.2、事件溯源模式与Axon框架
+1)、Axon框架介绍
+![binaryTree](img/Axon框架介绍.png "binaryTree")
+![binaryTree](img/Axon框架的构成.png "binaryTree")
+![binaryTree](img/Axon框架的构成-可扩展性.png "binaryTree")
+![binaryTree](img/Axon框架：聚合.png "binaryTree")
+![binaryTree](img/事件溯源与Axon框架.png "binaryTree")
+![binaryTree](img/Axon Command处理.png "binaryTree")
+![binaryTree](img/Axon处理Command过程.png "binaryTree")
+![binaryTree](img/Axon Event处理.png "binaryTree")
+![binaryTree](img/Axon处理Event过程.png "binaryTree")
+![binaryTree](img/Axon Command和Event的区别.png "binaryTree")
+2)、Axon框架设计开发的步骤
+3)、用Axon框架实现Event Sourcing的微服务实例
+4)、Axon框架的分布式实现分析
