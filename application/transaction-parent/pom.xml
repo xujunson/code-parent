@@ -25,6 +25,7 @@
         <module>c6-spring-dtx-msg-driven/msg-service</module>
         <module>c6-spring-dtx-msg-driven/msg-user</module>
         <module>c6-spring-dtx-msg-driven/msg-ticket</module>
+        <module>c7-1-spring-axon-example/spring-axon</module>
     </modules>
 
 

@@ -555,3 +555,18 @@ c5-3-spring-dtx-jms-db
 2)、Axon框架设计开发的步骤
 3)、用Axon框架实现Event Sourcing的微服务实例
 4)、Axon框架的分布式实现分析
+
+7.3)、使用Axon框架的设计过程介绍
+1)、账户管理：账户创建、查看、转账
+2)、使用Axon框架的设计过程：
+ a、领域模型设计
+ b、业务-Command-Command处理
+ c、数据-Event-Event处理
+ d、将数据保存到数据库：聚合数据-映射到-视图数据
+ e、查询-Query
+3)、实例
+ a、领域模型：账户Account
+ b、业务Command：创建账户、存款、取款
+ c、事件Event：账户创建、存款、取款
+ d、将账户信息保存到数据库中，方便查询
+ e、查询Command：查询账户
