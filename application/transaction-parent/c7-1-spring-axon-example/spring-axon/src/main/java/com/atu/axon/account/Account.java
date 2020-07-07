@@ -2,8 +2,10 @@ package com.atu.axon.account;
 
 import com.atu.axon.account.command.AccountCreateCommand;
 import com.atu.axon.account.command.AccountDepositCommand;
+import com.atu.axon.account.command.AccountWithdrawCommand;
 import com.atu.axon.account.event.AccountCreatedEvent;
 import com.atu.axon.account.event.AccountMoneyDepositedEvent;
+import com.atu.axon.account.event.AccountMoneyWithdrawEvent;
 import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.commandhandling.model.AggregateIdentifier;
 import org.axonframework.eventsourcing.EventSourcingHandler;
@@ -33,10 +35,21 @@ public class Account {
     public void handle(AccountDepositCommand command) {
         apply(new AccountMoneyDepositedEvent(command.getAccountId(), command.getAmount()));
     }
+
+    @CommandHandler
+    public void handle(AccountWithdrawCommand command) {
+        if (this.deposit >= command.getAmount()) {
+            apply(new AccountWithdrawCommand(command.getAccountId(), command.getAmount()));
+        } else {
+            throw new IllegalArgumentException("余额不足");
+        }
+    }
+
     @CommandHandler
     public Account(AccountCreateCommand command) {
         apply(new AccountCreatedEvent(command.getAccountId(), command.getName()));
     }
+
     @EventSourcingHandler
     public void on(AccountCreatedEvent event) {
         this.accountId = event.getAccountId();
@@ -45,8 +58,13 @@ public class Account {
 
     @EventSourcingHandler
     public void on(AccountMoneyDepositedEvent event) {
-        this.accountId = event.getAccountId();
-        this.deposit = event.getAmount();
+        this.deposit += event.getAmount();
+    }
+
+    //取款
+    @EventSourcingHandler
+    public void on(AccountMoneyWithdrawEvent event) {
+        this.deposit -= event.getAmount();
     }
 
     public String getAccountId() {

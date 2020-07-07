@@ -1,8 +1,7 @@
 package com.atu.axon.account.query;
 
-import org.springframework.data.annotation.Id;
-
 import javax.persistence.Entity;
+import javax.persistence.Id;
 
 /**
  * @author: Tom
