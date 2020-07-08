@@ -31,6 +31,14 @@ public class Account {
      */
     private Double deposit;
 
+    public Account() {
+    }
+
+    @CommandHandler
+    public Account(AccountCreateCommand command) {
+        apply(new AccountCreatedEvent(command.getAccountId(), command.getName()));
+    }
+
     @CommandHandler
     public void handle(AccountDepositCommand command) {
         apply(new AccountMoneyDepositedEvent(command.getAccountId(), command.getAmount()));
@@ -43,11 +51,6 @@ public class Account {
         } else {
             throw new IllegalArgumentException("余额不足");
         }
-    }
-
-    @CommandHandler
-    public Account(AccountCreateCommand command) {
-        apply(new AccountCreatedEvent(command.getAccountId(), command.getName()));
     }
 
     @EventSourcingHandler

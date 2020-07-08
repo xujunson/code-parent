@@ -10,9 +10,9 @@ public class AccountMoneyWithdrawEvent {
 
     private Double amount;
 
-
-    public AccountMoneyWithdrawEvent(String accountId) {
+    public AccountMoneyWithdrawEvent(String accountId, Double amount) {
         this.accountId = accountId;
+        this.amount = amount;
     }
 
     public String getAccountId() {
