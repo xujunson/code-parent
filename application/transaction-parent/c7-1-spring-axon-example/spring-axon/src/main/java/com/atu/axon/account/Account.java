@@ -10,6 +10,8 @@ import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.commandhandling.model.AggregateIdentifier;
 import org.axonframework.eventsourcing.EventSourcingHandler;
 import org.axonframework.spring.stereotype.Aggregate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static org.axonframework.commandhandling.model.AggregateLifecycle.apply;
 
@@ -20,6 +22,7 @@ import static org.axonframework.commandhandling.model.AggregateLifecycle.apply;
  */
 @Aggregate
 public class Account {
+    private static final Logger log = LoggerFactory.getLogger(Account.class);
     /**
      * 主键
      */
@@ -46,8 +49,9 @@ public class Account {
 
     @CommandHandler
     public void handle(AccountWithdrawCommand command) {
-        if (this.deposit >= command.getAmount()) {
-            apply(new AccountWithdrawCommand(command.getAccountId(), command.getAmount()));
+        log.info("-------------------当前余额[{}]元--------------------",deposit);
+        if (deposit >= command.getAmount()) {
+            apply(new AccountMoneyWithdrawEvent(command.getAccountId(), command.getAmount()));
         } else {
             throw new IllegalArgumentException("余额不足");
         }

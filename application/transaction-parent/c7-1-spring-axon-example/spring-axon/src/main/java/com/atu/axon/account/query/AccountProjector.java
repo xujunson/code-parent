@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 /**
  * @author: Tom
  * @date: 2020-07-07 14:08
- * @description:
+ * @description: 投影-把聚合对象投影到物化视图上
  */
 @Service
 public class AccountProjector {
@@ -18,6 +18,11 @@ public class AccountProjector {
     @Autowired
     private AccountEntityRepository accountEntityRepository;
 
+    /**
+     * 更新聚合对象
+     *
+     * @param event
+     */
     @EventHandler
     public void on(AccountCreatedEvent event) {
         AccountEntity account = new AccountEntity(event.getAccountId(), event.getName());
