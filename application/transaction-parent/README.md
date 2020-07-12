@@ -575,6 +575,7 @@ c5-3-spring-dtx-jms-db
  c7-1-spring-axon-example/spring-axon
  
 7.4、Axon框架-实例二
+ c7-1-spring-axon-example/spring-axon-saga
  1)、购票系统
   功能：创建用户、创建票、实现用户购票流程
   单系统服务
@@ -588,3 +589,16 @@ c5-3-spring-dtx-jms-db
   ![binaryTree](img/下单(Axon Saga).png "binaryTree")
   ![binaryTree](img/下单(Axon Saga)-扣费失败.png "binaryTree")
   ![binaryTree](img/下单(Axon).png "binaryTree")
+
+7.5、Axon框架-实例三
+c7-2-spring-cloud-axon-example
+ 基于Axon的spring cloud购票系统
+ 功能：创建用户、创建票、实现用户购票流程
+ 微服务系统：
+  user服务、ticket服务
+  order-command服务、order-query服务
+  Saga流程管理
+ ![binaryTree](img/基于Axon的分布式Event Sourcing-Command.png "binaryTree")
+ ![binaryTree](img/Axon分布式Command分发.png "binaryTree")
+ ![binaryTree](img/基于Axon的分布式Event Sourcing-Event.png "binaryTree")
+ ![binaryTree](img/基于Axon的分布式Event处理(AMQP).png "binaryTree")
