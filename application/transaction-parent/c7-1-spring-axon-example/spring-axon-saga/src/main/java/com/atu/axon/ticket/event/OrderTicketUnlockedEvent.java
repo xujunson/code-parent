@@ -4,6 +4,9 @@ public class OrderTicketUnlockedEvent {
 
     private String ticketId;
 
+    public OrderTicketUnlockedEvent() {
+    }
+
     public OrderTicketUnlockedEvent(String ticketId) {
         this.ticketId = ticketId;
     }
