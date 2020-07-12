@@ -53,7 +53,7 @@ public class Customer {
     @CommandHandler
     public void handle(OrderPayCommand command) {
         if (command.getAmount() == 0) {
-            // do nothing, test the Scheduled Event.
+            // do nothing, test the Scheduled Event。
         } else if (this.deposit < command.getAmount()) {
             LOG.error("Not enough deposit");
             apply(new OrderPayFailedEvent(command.getOrderId()));

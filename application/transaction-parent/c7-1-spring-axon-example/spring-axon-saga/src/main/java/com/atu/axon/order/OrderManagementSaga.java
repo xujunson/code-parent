@@ -19,10 +19,14 @@ import org.axonframework.commandhandling.callbacks.LoggingCallback;
 import org.axonframework.eventhandling.saga.EndSaga;
 import org.axonframework.eventhandling.saga.SagaEventHandler;
 import org.axonframework.eventhandling.saga.StartSaga;
+import org.axonframework.eventhandling.scheduling.EventScheduler;
+import org.axonframework.eventhandling.scheduling.ScheduleToken;
 import org.axonframework.spring.stereotype.Saga;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.time.Instant;
 
 import static org.axonframework.commandhandling.GenericCommandMessage.asCommandMessage;
 
@@ -43,6 +47,10 @@ public class OrderManagementSaga {
     @Autowired
     private transient CommandBus commandBus;
 
+    @Autowired
+    private transient EventScheduler eventScheduler;
+    private ScheduleToken timeoutToken;
+
     /**
      * 起始步骤
      */
@@ -53,6 +61,10 @@ public class OrderManagementSaga {
         this.customerId = event.getCustomerId();
         this.ticketId = event.getTicketId();
         this.amount = event.getAmount();
+
+        //30s之后处理fail
+        timeoutToken = eventScheduler.schedule(Instant.now().plusSeconds(30), new OrderFailedEvent(orderId, "Timeout"));
+
         OrderTicketPreserveCommand command = new OrderTicketPreserveCommand(orderId, ticketId, customerId);
         commandBus.dispatch(asCommandMessage(command), LoggingCallback.INSTANCE);
     }
@@ -119,12 +131,18 @@ public class OrderManagementSaga {
     @SagaEventHandler(associationProperty = "orderId")
     public void on(OrderFailedEvent event) {
         LOG.info("Order:{} failed.", event.getOrderId());
+        if (this.timeoutToken != null) {
+            eventScheduler.cancelSchedule(this.timeoutToken);
+        }
     }
 
     @EndSaga
     @SagaEventHandler(associationProperty = "orderId")
     public void on(OrderFinishedEvent event) {
         LOG.info("Order:{} finished.", event.getOrderId());
+        if (this.timeoutToken != null) {
+            eventScheduler.cancelSchedule(this.timeoutToken);
+        }
     }
 
     public String getOrderId() {
