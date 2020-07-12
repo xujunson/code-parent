@@ -608,4 +608,6 @@ c7-2-spring-cloud-axon-example
   a、基于Axon分布式Event设计
   ![binaryTree](img/基于Axon分布式Event设计.png "binaryTree")
   ![binaryTree](img/基于Axon分布式Event设计-Saga.png "binaryTree")
+  b、服务-队列-事件的关系
+   ![binaryTree](img/服务-队列-事件的关系.png "binaryTree")
  
