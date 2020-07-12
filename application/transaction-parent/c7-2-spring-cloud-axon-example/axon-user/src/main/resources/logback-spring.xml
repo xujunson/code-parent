@@ -16,12 +16,8 @@
     <logger name="javax.transaction" level="${DEBUG_LEVEL}"/>
     <logger name="javax.jms" level="${DEBUG_LEVEL}"/>
     <logger name="org.hibernate.jpa" level="${DEBUG_LEVEL}"/>
-    <logger name="org.hibernate.SQL" level="${DEBUG_LEVEL}"/>
-    <logger name="org.apache.activemq" level="${DEBUG_LEVEL}"/>
-
-    <logger name="org.axonframework.messaging.unitofwork.MessageProcessingContext" level="INFO"/>
+    <logger name="org.hibernate.SQL" level="$${DEBUG_LEVEL}"/>
     <logger name="org.axonframework" level="${DEBUG_LEVEL}"/>
-
 
     <root level="INFO">
         <appender-ref ref="CONSOLE"/>

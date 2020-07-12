@@ -1,0 +1,17 @@
+server:
+  port: 8761
+spring:
+  application:
+    name: registry
+security:
+  basic:
+    enabled: true
+  user:
+    name: atu
+    password: 123456
+eureka:
+  client:
+    register-with-eureka: false #启动时不会去查找现有的注册中心
+    fetch-registry: false #不会去查找现有的注册中心
+    serviceUrl:
+      defaultZone: http://127.0.0.1:${server.port}/eureka/

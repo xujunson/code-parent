@@ -26,6 +26,13 @@
         <module>c6-spring-dtx-msg-driven/msg-user</module>
         <module>c6-spring-dtx-msg-driven/msg-ticket</module>
         <module>c7-1-spring-axon-example/spring-axon</module>
+        <module>c7-2-spring-cloud-axon-example/axon-order</module>
+        <module>c7-2-spring-cloud-axon-example/axon-order-query</module>
+        <module>c7-2-spring-cloud-axon-example/axon-proxy</module>
+        <module>c7-2-spring-cloud-axon-example/axon-registry</module>
+        <module>c7-2-spring-cloud-axon-example/axon-service</module>
+        <module>c7-2-spring-cloud-axon-example/axon-ticket</module>
+        <module>c7-2-spring-cloud-axon-example/axon-user</module>
     </modules>
 
 
