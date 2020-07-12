@@ -556,7 +556,7 @@ c5-3-spring-dtx-jms-db
 3)、用Axon框架实现Event Sourcing的微服务实例
 4)、Axon框架的分布式实现分析
 
-7.3)、使用Axon框架的设计过程介绍
+7.3、使用Axon框架的设计过程介绍
 1)、账户管理：账户创建、查看、转账
 2)、使用Axon框架的设计过程：
  a、领域模型设计
@@ -570,3 +570,21 @@ c5-3-spring-dtx-jms-db
  c、事件Event：账户创建、存款、取款
  d、将账户信息保存到数据库中，方便查询
  e、查询Command：查询账户
+ 
+7.4、Axon框架-实例一
+ c7-1-spring-axon-example/spring-axon
+ 
+7.4、Axon框架-实例二
+ 1)、购票系统
+  功能：创建用户、创建票、实现用户购票流程
+  单系统服务
+  使用Axon Saga
+ 2)、Saga模式
+  a、事务驱动的业务流程管理模式
+  b、通过开始事件、结束事件、过程中的事件完成整个业务流程
+  c、保证在多个事件处理方法执行期间实现事务性
+  ![binaryTree](img/Axon Saga实现.png "binaryTree")
+ 3)、实例
+  ![binaryTree](img/下单(Axon Saga).png "binaryTree")
+  ![binaryTree](img/下单(Axon Saga)-扣费失败.png "binaryTree")
+  ![binaryTree](img/下单(Axon).png "binaryTree")
