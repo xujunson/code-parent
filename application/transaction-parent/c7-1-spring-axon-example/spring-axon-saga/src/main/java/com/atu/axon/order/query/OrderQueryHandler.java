@@ -9,11 +9,15 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class OrderQueryHandler {
-
-
     @Autowired
     AxonConfiguration axonConfiguration;
 
+    /**
+     * QueryHandler是一个特殊的Command 在一个Command上不能有两个handler
+     *
+     * @param orderId
+     * @return
+     */
     @QueryHandler
     public Order query(OrderId orderId) {
         // WARN: 强烈不建议使用这种方式将聚合数据暴露给外界，而应该使用物化视图的方式将保存的视图数据显示出来。

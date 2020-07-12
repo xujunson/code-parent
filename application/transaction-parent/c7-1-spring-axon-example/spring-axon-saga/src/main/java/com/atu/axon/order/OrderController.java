@@ -32,6 +32,14 @@ public class OrderController {
         commandGateway.send(command, LoggingCallback.INSTANCE);
     }
 
+    /**
+     * 查询
+     *
+     * @param orderId
+     * @return
+     * @throws ExecutionException
+     * @throws InterruptedException
+     */
     @GetMapping("/query/{orderId}")
     public Order get(@PathVariable String orderId) throws ExecutionException, InterruptedException {
         return queryGateway.query(new OrderId(orderId), Order.class).get();

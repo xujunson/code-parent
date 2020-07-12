@@ -2,6 +2,9 @@ package com.atu.axon.order.query;
 
 import org.axonframework.common.Assert;
 
+/**
+ * OrderId防止属性类型重复
+ */
 public class OrderId {
 
     private final String identifier;

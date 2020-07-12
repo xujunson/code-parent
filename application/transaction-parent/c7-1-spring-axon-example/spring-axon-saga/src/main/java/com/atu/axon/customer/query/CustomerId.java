@@ -32,5 +32,4 @@ public class CustomerId {
     public String toString() {
         return identifier;
     }
-
 }
