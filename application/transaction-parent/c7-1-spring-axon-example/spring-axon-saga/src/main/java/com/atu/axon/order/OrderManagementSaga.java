@@ -62,8 +62,8 @@ public class OrderManagementSaga {
         this.ticketId = event.getTicketId();
         this.amount = event.getAmount();
 
-        //30s之后处理fail
-        timeoutToken = eventScheduler.schedule(Instant.now().plusSeconds(30), new OrderPayFailedEvent(orderId, "Timeout"));
+        //60s之后处理fail
+        timeoutToken = eventScheduler.schedule(Instant.now().plusSeconds(60), new OrderPayFailedEvent(this.orderId));
 
         OrderTicketPreserveCommand command = new OrderTicketPreserveCommand(orderId, ticketId, customerId);
         commandBus.dispatch(asCommandMessage(command), LoggingCallback.INSTANCE);
