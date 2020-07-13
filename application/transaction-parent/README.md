@@ -527,7 +527,7 @@ c5-3-spring-dtx-jms-db
  
 5)、消息驱动 VS 事件溯源：
  a、一等数据：事件 vs u、业务数据
- b、事件永久保存、历史重现
+ b、事件永久保存、历史重现**
  c、所有数据更新都必须通过事件来产生
  d、Event Store服务承担更多的功能
 
@@ -610,4 +610,29 @@ c7-2-spring-cloud-axon-example
   ![binaryTree](img/基于Axon分布式Event设计-Saga.png "binaryTree")
   b、服务-队列-事件的关系
    ![binaryTree](img/服务-队列-事件的关系.png "binaryTree")
+   
+7.6、事件溯源模式与Axon框架总结
+ 1)、Axon分布式事务实现分析
+  a、UnitOfWork同步事务  ![binaryTree](img/UnitOfWork.png "binaryTree")
+  b、聚合对象内处理Command和Event是线性处理
+  c、聚合对象和Entity共用时， 使用for update锁对象保证事务性
+  d、Saga处理Event时使用聚合Id和序号避免并发
+ 
+ 2)、Axon框架事务实现 - Saga
+  a、Saga的每个处理方法在一个事务中执行
+  b、相同的事件始终被同一个saga实例处理
+  c、数据库保存saga实例、每个步骤都会保存到数据库
+  d、Saga处理Event跟Aggregate处理Event在不同的事务中，特别是在使用AMQP时，它肯定是在不同线程去处理的
+ 
+ 3)、总之，Axon框架结合Saga就可以实现在一个分布式系统中，去处理分布式流程，实现事务性。
+ 4)、Axon框架额度优点：
+  a、非常好的实践了Event Sourcing和CQRS架构模式
+  b、没有过多的侵入式代码，大部分通过标签实现，单服务系统开发方便
+  c、即使是对分布式事务，也有默认提供的很好的解决
+  d、对于单服务系统，使用默认配置就能提供很好的性能，还提供了DisruptorCommand分发器，Cache，快照等功能。
+ 
+ 5)、Axon框架的缺点
+  a、分布式系统开发配置相对复杂
+  b、分布式环境下的Event处理和设计过程比较复杂
+  c、分布式环境下的负载均衡、容错性等未被提到
  
