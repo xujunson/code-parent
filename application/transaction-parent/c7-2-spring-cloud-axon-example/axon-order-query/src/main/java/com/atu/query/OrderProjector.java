@@ -1,18 +1,15 @@
 package com.atu.query;
 
 
-import com.imooc.example.order.event.saga.OrderCreatedEvent;
-import com.imooc.example.order.event.OrderFailedEvent;
-import com.imooc.example.order.event.OrderFinishedEvent;
-import com.imooc.example.user.event.saga.OrderPaidEvent;
+import com.atu.order.event.OrderFailedEvent;
+import com.atu.order.event.OrderFinishedEvent;
+import com.atu.order.event.saga.OrderCreatedEvent;
+import com.atu.user.event.saga.OrderPaidEvent;
 import org.axonframework.eventhandling.EventHandler;
 import org.axonframework.eventsourcing.EventSourcingHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-/**
- * Created by mavlarn on 2018/5/22.
- */
 @Service
 public class OrderProjector {
 
