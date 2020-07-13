@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import static org.springframework.cloud.netflix.zuul.filters.support.FilterConstants.ROUTE_TYPE;
 
+/**
+ * 把order服务的get请求转发的order-query上——实现读写分离
+ */
 @Component
 public class HttpMethodZuulFilter extends ZuulFilter {
 
@@ -23,20 +26,36 @@ public class HttpMethodZuulFilter extends ZuulFilter {
         return ROUTE_TYPE;
     }
 
+    /**
+     * 顺讯
+     *
+     * @return
+     */
     @Override
     public int filterOrder() {
         return 0;
     }
 
+    /**
+     * 是否启用过滤器的条件
+     *
+     * @return
+     */
     @Override
     public boolean shouldFilter() {
         RequestContext context = RequestContext.getCurrentContext();
         HttpServletRequest request = context.getRequest();
         String method = request.getMethod();
         String requestURI = request.getRequestURI();
+        //当请求前缀是order、类型是GET的时候，把它转发到order-query上
         return "GET".equals(method.toUpperCase()) && requestURI.startsWith(REQUEST_PATH);
     }
 
+    /**
+     * 转发
+     *
+     * @return
+     */
     @Override
     public Object run() {
         LOG.info("Route GET order requests to order-query service.");
