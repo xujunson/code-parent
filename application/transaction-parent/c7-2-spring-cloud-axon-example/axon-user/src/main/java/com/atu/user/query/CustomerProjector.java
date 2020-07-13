@@ -25,7 +25,7 @@ public class CustomerProjector {
     @EventHandler
     public void on(CustomerDepositedEvent event) {
         String customerId = event.getCustomerId();
-        CustomerEntity accountView = repository.getOne(customerId);
+        CustomerEntity accountView = repository.findOne(customerId);
 
         Double newDeposit = accountView.getDeposit() + event.getAmount();
         accountView.setDeposit(newDeposit);
@@ -35,7 +35,7 @@ public class CustomerProjector {
     @EventHandler
     public void on(CustomerChargedEvent event) {
         String customerId = event.getCustomerId();
-        CustomerEntity customer = repository.getOne(customerId);
+        CustomerEntity customer = repository.findOne(customerId);
 
         Double newDeposit = customer.getDeposit() - event.getAmount();
         customer.setDeposit(newDeposit);
@@ -45,7 +45,7 @@ public class CustomerProjector {
     @EventHandler
     public void on(OrderPaidEvent event) {
         String customerId = event.getCustomerId();
-        CustomerEntity customer = repository.getOne(customerId);
+        CustomerEntity customer = repository.findOne(customerId);
 
         Double newDeposit = customer.getDeposit() - event.getAmount();
         customer.setDeposit(newDeposit);
