@@ -21,6 +21,11 @@ public class AxonConfig {
     @Value("${axon.amqp.exchange}")
     private String exchangeName;
 
+    /**
+     * 监听order队列
+     *
+     * @return
+     */
     @Bean
     public Queue orderQueue() {
         return new Queue("order", true);
@@ -36,6 +41,12 @@ public class AxonConfig {
         return BindingBuilder.bind(orderQueue()).to(exchange()).with("com.atu.order.event.#").noargs();
     }
 
+    /**
+     * 监听消息触发后续步骤
+     *
+     * @param serializer
+     * @return
+     */
     @Bean
     public SpringAMQPMessageSource orderMessageSource(Serializer serializer) {
         return new SpringAMQPMessageSource(serializer) {
@@ -53,5 +64,4 @@ public class AxonConfig {
                           SpringAMQPMessageSource ticketMessageSource, SpringAMQPMessageSource orderMessageSource) {
         ehConfig.registerSubscribingEventProcessor("OrderEventProcessor", c -> orderMessageSource);
     }
-
 }

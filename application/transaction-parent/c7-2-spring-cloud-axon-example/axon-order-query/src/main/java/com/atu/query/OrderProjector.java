@@ -1,16 +1,16 @@
 package com.atu.query;
 
-
-import com.atu.order.event.OrderFailedEvent;
-import com.atu.order.event.OrderFinishedEvent;
+import com.atu.order.event.saga.OrderFailedEvent;
+import com.atu.order.event.saga.OrderFinishedEvent;
 import com.atu.order.event.saga.OrderCreatedEvent;
-import com.atu.user.event.saga.OrderPaidEvent;
+import org.axonframework.config.ProcessingGroup;
 import org.axonframework.eventhandling.EventHandler;
 import org.axonframework.eventsourcing.EventSourcingHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@ProcessingGroup("OrderEventProcessor")
 public class OrderProjector {
 
     @Autowired
@@ -29,12 +29,12 @@ public class OrderProjector {
         repository.save(order);
     }
 
-    @EventSourcingHandler
-    public void onPaid(OrderPaidEvent event) {
-        OrderEntity order = repository.findOne(event.getOrderId());
-        order.setStatus("PAID");
-        repository.save(order);
-    }
+//    @EventSourcingHandler
+//    public void onPaid(OrderPaidEvent event) {
+//        OrderEntity order = repository.findOne(event.getOrderId());
+//        order.setStatus("PAID");
+//        repository.save(order);
+//    }
 
     @EventSourcingHandler
     public void onFinished(OrderFinishedEvent event) {

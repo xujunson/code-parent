@@ -3,8 +3,8 @@ package com.atu.order;
 import com.atu.order.command.OrderCreateCommand;
 import com.atu.order.command.OrderFailCommand;
 import com.atu.order.command.OrderFinishCommand;
-import com.atu.order.event.OrderFailedEvent;
-import com.atu.order.event.OrderFinishedEvent;
+import com.atu.order.event.saga.OrderFailedEvent;
+import com.atu.order.event.saga.OrderFinishedEvent;
 import com.atu.order.event.saga.OrderCreatedEvent;
 import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.commandhandling.model.AggregateIdentifier;
@@ -52,11 +52,19 @@ public class Order {
         apply(new OrderCreatedEvent(command.getOrderId(), command.getCustomerId(), command.getTitle(), command.getTicketId(), command.getAmount(), ZonedDateTime.now()));
     }
 
+    /**
+     * 成功
+     * @param command
+     */
     @CommandHandler
     public void handleFinish(OrderFinishCommand command) {
         apply(new OrderFinishedEvent(command.getOrderId()));
     }
 
+    /**
+     * 失败
+     * @param command
+     */
     @CommandHandler
     public void handleFail(OrderFailCommand command) {
         apply(new OrderFailedEvent(command.getOrderId(), command.getReason()));

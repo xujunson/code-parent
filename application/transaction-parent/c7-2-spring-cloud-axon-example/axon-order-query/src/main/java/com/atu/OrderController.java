@@ -18,6 +18,11 @@ public class OrderController {
     @Autowired
     private OrderEntityRepository orderEntityRepository;
 
+    /**
+     * 查询所有
+     *
+     * @return
+     */
     @GetMapping("")
     public List<OrderEntity> get() {
         return orderEntityRepository.findAll();

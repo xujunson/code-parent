@@ -8,8 +8,8 @@ package com.atu.order;
 
 import com.atu.order.command.OrderFailCommand;
 import com.atu.order.command.OrderFinishCommand;
-import com.atu.order.event.OrderFailedEvent;
-import com.atu.order.event.OrderFinishedEvent;
+import com.atu.order.event.saga.OrderFailedEvent;
+import com.atu.order.event.saga.OrderFinishedEvent;
 import com.atu.order.event.saga.OrderCreatedEvent;
 import com.atu.ticket.command.OrderTicketMoveCommand;
 import com.atu.ticket.command.OrderTicketPreserveCommand;
@@ -46,6 +46,7 @@ public class OrderManagementSaga {
 
     @Autowired
     private transient CommandBus commandBus;
+    //处理超时
     @Autowired
     private transient EventScheduler eventScheduler;
 
@@ -64,7 +65,7 @@ public class OrderManagementSaga {
         this.ticketId = event.getTicketId();
         this.amount = event.getAmount();
 
-        timeoutToken = eventScheduler.schedule(Instant.now().plusSeconds(60), new OrderPayFailedEvent(this.orderId));
+        timeoutToken = eventScheduler.schedule(Instant.now().plusSeconds(30), new OrderPayFailedEvent(this.orderId));
 
         OrderTicketPreserveCommand command = new OrderTicketPreserveCommand(orderId, ticketId, customerId);
         commandBus.dispatch(asCommandMessage(command), LoggingCallback.INSTANCE);

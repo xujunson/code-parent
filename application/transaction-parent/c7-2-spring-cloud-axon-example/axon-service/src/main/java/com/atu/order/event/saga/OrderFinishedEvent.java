@@ -1,4 +1,4 @@
-package com.atu.order.event;
+package com.atu.order.event.saga;
 
 public class OrderFinishedEvent {
 

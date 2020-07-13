@@ -6,8 +6,9 @@ import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.axonframework.queryhandling.QueryGateway;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import java.util.concurrent.ExecutionException;
+
 import java.util.UUID;
+import java.util.concurrent.ExecutionException;
 
 /**
  * @author: Tom
@@ -23,6 +24,11 @@ public class OrderController {
     @Autowired
     private QueryGateway queryGateway;
 
+    /**
+     * 新建订单
+     *
+     * @param order
+     */
     @PostMapping("")
     public void create(@RequestBody Order order) {
         UUID orderId = UUID.randomUUID();
@@ -31,6 +37,14 @@ public class OrderController {
         commandGateway.send(command, LoggingCallback.INSTANCE);
     }
 
+    /**
+     * 查询订单
+     *
+     * @param orderId
+     * @return
+     * @throws ExecutionException
+     * @throws InterruptedException
+     */
     @PostMapping("/{orderId}")
     public Order get(@PathVariable String orderId) throws ExecutionException, InterruptedException {
         return queryGateway.query(orderId, Order.class).get();
