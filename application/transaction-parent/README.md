@@ -635,4 +635,117 @@ c7-2-spring-cloud-axon-example
   a、分布式系统开发配置相对复杂
   b、分布式环境下的Event处理和设计过程比较复杂
   c、分布式环境下的负载均衡、容错性等未被提到
+
+8、TCC模式和微服务架构的设计模式
+8.1、TCC模式介绍
+8.1.1、实现思路
+ 1)、事务管理的过程
+   do -> commit / rollback
+ 2)、JTA事务管理的过程(两阶段提交)
+   do -> prepare / rollback -> commit / rollback
+ 3)、TCC模式的事务管理
+  a、Try：尝试做业务的操作
+  b、Commit(Confirm) / Cancel：借助于事务管理的思路在分布式环境下做事务管理
+ 4)、TCC模式实现思路
+  每个需要实现事务的接口，都需要3个接口，分别是：
+   a、tryXX()：业务检查、预留资源
+   b、confirmXX()：执行业务、使用资源
+   c、cancelXX()：回滚业务、释放资源
+  ![binaryTree](img/充值场景.png "binaryTree")
+  ![binaryTree](img/充值场景-协调器.png "binaryTree")
+
+8.1.2、协调器
+ 1)、TCC模式协调器的功能
+  a、接管事务管理，类似JTA的独立事务管理器(非两阶段提交)
+  b、保存每个资源上的事务记录：跟踪状态、检查超时，调用相应的confirm/cancel方法
+   帮我们去维持数据的一致性
+  c、保证每个资源的事务性
+  d、处理各种错误：超时、重试、网络超时、服务不可用
+
+8.1.3、TCC模式实现分布式事务
+ 1)、借鉴XA的统一资源管理、又不是两阶段提交
+ 2)、不同资源之间没有锁、事务过程数据没有锁、没有隔离
+ 3)、出错时可能多次调用Confirm/Cancel方法、以及顺序无法保证
+ 4)、Confirm/Cancel方法需满足幂等性，即重复调用时结果一致
+
+8.1.4、TCC模式下的业务方法-思路1
+![binaryTree](img/TCC模式下的业务方法-思路1.png "binaryTree")
+![binaryTree](img/TCC模式下的业务方法-思路1-流程图.png "binaryTree")
+ 1)、Try方法返回需要confirm/cancel时的URI
+ 2)、返回：user/charge/{userId}/{orderId}
+ 3)、Confirm：PUT
+ 4)、Cancel：DELETE
+
+8.1.5、TCC模式下的业务方法-思路2
+![binaryTree](img/TCC模式下的业务方法-思路2.png "binaryTree")
+ 1)、将一个业务逻辑封装成TccMethod类来调用
+ 2)、协调器保存TccMethod，TccRequest，TccResponse
+ 3)、服务会有一个专门的接口接收协调器的请求，处理Confirm/Cancel：
+  通过反射/AOP的方式去找到当时调用的TccMethod，
+  然后根据相应的request参数度调用相应的Confirm/Cancel方法
+ 4)、服务不需要开放Confirm/Cancel的接口
+
+8.1.6、TCC模式出错处理
+ 1.order服务创建订单
+ 2.order服务调用user服务tryCharge()
+ 3.order服务调用ticket服务tryTicketMove() 出错
+ 4.协调器调用user服务confirmCharge()
+ 5.协调器调用ticket服务confirmTicketMove() 出错
+ 6.提交事务
  
+ 1)、第一种情况出错是在try阶段，不管是user的try方法还是ticket服务，
+  因为try阶段只是做一个try，如果说出了任何的错误，协调器会调用相应的cancel方法针对
+  try方法做资源的释放，保证事务的一致性
+ 2)、第二种情况出错是在confirm阶段，假如发生在第二个confirm阶段：
+  第一个confirm已经confirm，我们就没有办法回滚，对于第二个confirm出错了这种情况应该怎么办？
+  在TCC模式下，因为try阶段已经完成且没有问题，而且在try阶段所做的操作一般就是业务规则的检查，
+  条件的检查，资源的预留等等操作都已经做完了，那么在正常的情况下，只要我们服务是可用的，
+  按理说confirm操作肯定也不会有问题，但是如果出了问题，那可能就是因为一些网络原因网络不可用，
+  或者说某一个服务整个服务都宕调了，等等原因不可用。
+  这种情况下的confirm最简单的办法就是一直重试，一直到相应的服务恢复，这个操作才可以完成。
+  但是在这种情况下我们又要考虑在某些业务场景下的超时，对于某些个业务场景不可能让用户的请求一直处于
+  等待的状态，对于这种情况下就需要考虑其他的机制做一些处理。
+
+8.1.7、基于TCC模式的开发
+ 1)、没有统一的规范，也没有广泛使用框架
+ 2)、协调器的开发比较复杂：需要保证各种出错情况下的最终一致性
+ 3)、协调器监控事务：事务及其参数、返回值保存在数据库中
+ 4)、TCC模式的服务组件的复用性
+
+8.1.8、基于TCC模式开发的注意事项
+ 1)、合理设计 try/confirm/cancel方法的功能
+ 2)、保证confirm/cancel方法的幂等性
+ 3)、设计合理额度服务间调用：try方法可以调用其他服务
+
+8.1.9、实现TCC模式的框架
+ 实现服务接口规范、协调器
+ https://github.com/liuyangming/ByteTCC
+ https://github.com/QNJR-GROUP/EasyTransaction
+ https://github.com/changmingxie/tcc-transaction
+
+8.2、 微服务架构的设计模式
+8.2.1、微服务系统的分布式事务实现
+ 1)、事务同步
+ 2)、重试和幂等性
+ 3)、Try-Confirm/Cancel
+ 4)、根据微服务系统的架构具体情况具体分析
+
+8.2.2、微服务系统的分布式事务实现
+ 1)、分布式事务的实现没有一个统一规范和框架
+ 2)、分布式事务的实现跟微服务系统的架构设计有关
+ 3)、微服务架构额度设计模式 -> 分布式事务实现方式的总结
+
+8.2.3、设计模式：聚合模式
+![binaryTree](img/聚合模式.png "binaryTree")
+![binaryTree](img/代理模式.png "binaryTree")
+![binaryTree](img/服务链模式.png "binaryTree")
+![binaryTree](img/数据共享模式.png "binaryTree")
+![binaryTree](img/Spring Cloud微服务架构.png "binaryTree")
+![binaryTree](img/消息驱动模式.png "binaryTree")
+![binaryTree](img/事件溯源模式.png "binaryTree")
+
+8.2.4、分布式事务实现
+ 1)、保证高可用：网络、分布式部署
+ 2)、保证事务同步：同步多个数据源的事务
+ 3)、保证幂等性：通过重试解决大部分错误
+ 4)、合理设计流程：条件检查，预留资源，业务操作，完成资源(TCC)
