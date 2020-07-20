@@ -28,8 +28,6 @@
   d、SERIALIZABLE——线性读：所有的事务操作必须是线性执行，想当于排队执行，隔离级别最高。
  
  设置脏读：SET SESSION TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
-
-[Java中的事务——JDBC事务和JTA事务](http://www.hollischuang.com/archives/1658)
 [MySQL 笔记 - 事务&锁](https://juejin.im/post/5b76938de51d45664715fba8)
 
 2、Docker
@@ -124,13 +122,13 @@ c3-1-spring-trans-jpa
 ![binaryTree](img/session原生事务.png "binaryTree")
  
 2)、Jms-session实例——c3-2-spring-trans-jms
-对于session管理的jms事务而言，它的事务是作用在线程内 的生命周期上的。
+对于session管理的jms事务而言，它的事务是作用在线程内的生命周期上的。
 对于listener触发的方法，listener用session去读了消息以后，触发了handle方法。
 在handle里面触发了convertAndSend()。直到方法结束后这个listener才会去调用session的commit()去提交session管理的事务。
 但是此时因为有一个异常，所以做了回滚操作。
    
-如果直接调用handle方法的话，不通过listener，这个session事务的生命周期就只在convertAndSend()方法内部起作用，而不是整个handle方法起作用
-所以就直接提交上去没有回滚。
+如果直接调用handle方法的话，不通过listener，这个session事务的生命周期就只在convertAndSend()方法内部起作用，
+而不是整个handle方法起作用所以就直接提交上去没有回滚。
 a)、Spring Boot中使用JMS
 b)、Spring Boot ActiveMQ Starter
 c)、内置的可运行的ActiveMQ服务器
@@ -140,12 +138,13 @@ d)、实现读写ActiveMQ的事务
 ![binaryTree](img/JmsTransactionManager事务.png "binaryTree")
 
 3.3.4、Spring外部事务与JTA
+[Java中的事务——JDBC事务和JTA事务](http://www.hollischuang.com/archives/1658)
 3.3.4.1、Spring内部事务与外部事务
-1)、本地事务
+1)、本地事务：使用JDBC事务实现
  a、Spring容器管理事务的生命周期
  b、通过Spring事务接口调用
  c、业务代码与具体事务的实现无关
- d、![binaryTree](img/本地事务.png "binaryTree")
+ ![binaryTree](img/本地事务.png "binaryTree")
 2)、外部(全局)事务
  a、外部事务管理器提供事务管理
  b、通过Spring事务接口，调用外部管理器
@@ -164,7 +163,7 @@ d)、实现读写ActiveMQ的事务
  
 3.3.4.2、JTA与Spring JTA实现
 1)、JTA事务管理的用途
-解决一个java服务访问多个数据源的时候，怎么样能够保证，满足他的事务性。 
+解决一个java服务访问多个数据源的时候，怎么样能够保证，满足它的事务性。 
 
 3.3.4.3、JTA与XA
 1)、XA
@@ -187,9 +186,6 @@ JTA实际上是XA规范在Java中的实现，JTA(Java Transaction API)。
  a、Spring事务同步机制
  b、多个数据源上实现近似事务一致性
  c、高性能、高吞吐量
-
-3.3.4.4、JTA分布式事务实例
-[JTA分布式事务处理](https://www.jianshu.com/p/029f28c060f6)
 
 4、分布式系统
 1)、定义与介绍
@@ -248,6 +244,8 @@ P：分区容错性
 通过负载均衡的方式去调用。然后我们可以在Config Server里配置文件，我们所有的服务在启动时会先去联系Config Server下载配置。
 
 4.1 Spring Cloud微服务架构
+[Spring Cloud](https://www.cnblogs.com/Java3y/p/9540386.html)
+
  1)、微服务架构组成
     a、服务
     b、服务注册中心
@@ -295,13 +293,13 @@ P：分区容错性
  d、D 持久性
 4)、分布式事务的原则
  a、强一致性：类似本地事务ACID的完全实现，要求在分布式系统中，多个服务多个数据库之间，实现事务的四大特性；
- 即使是在两个数据库的系统当中，我们实现强一致性可以通过JTA实现，但是对于一个复杂的分布式系统来说实现强一致性非常困难，
- 甚至说在很多情况下甚至是不可能的，而且实现起来对性能影响非常大；
+  即使是在两个数据库的系统当中，我们实现强一致性可以通过JTA实现，但是对于一个复杂的分布式系统来说实现强一致性非常困难，
+  甚至说在很多情况下甚至是不可能的，而且实现起来对性能影响非常大；
  b、弱一致性：在强一致性的基础上放弃原子性和隔离性，对于每一个操作只要求达到数据的一致性；例如，购买商品时要访问多个服务，收费、库存、订单等。
- 我们在这一个业务方法上对多个服务的操作，不要求实现原子性和隔离性，我们只要求最终一致性的要求。在这种情况下实现系统出错时数据回滚可能比较复杂。
+  我们在这一个业务方法上对多个服务的操作，不要求实现原子性和隔离性，我们只要求最终一致性的要求。在这种情况下实现系统出错时数据回滚可能比较复杂。
  c、最终一致性(大部分场景适用)：在弱一致性的基础上,我们允许它出错。但是出错时候我们不要求实现完全的一致性-数据回滚之类的操作，
- 而是通过其他的像重试的方式去尝试着重新执行。或者说有另外的定时方法去检测我们这些出错的业务方法，把它作为其他的数据回滚操作，
- 甚至还有一些人工干预去处理达到最终一致性。
+  而是通过其他的像重试的方式去尝试着重新执行。或者说有另外的定时方法去检测我们这些出错的业务方法，把它作为其他的数据回滚操作，
+  甚至还有一些人工干预去处理达到最终一致性。
  
 5.1、Spring分布式事务实现
 内容:
@@ -318,12 +316,12 @@ P：分区容错性
 2)、JTA是XA规范在Java中的实现，在JTA里定义了一个JTA Transaction Manager，它根据XA规范定义了一个事务管理的接口，
 也就是这个JTA Transaction Manager里面的接口。它可以针对多个 XA Resource进行多个数据库资源的事务管理。
 XA Resource就是针对XA里面的Resource一个实现。
-JTA事务管理器实现资源的管理实际上还是通过具体的数据资源的资源管理器实现。比如,
-mq——ConnectionFactory进行具体的管理，数据库——jdbc connection实现具体管理，来实现事务。
+JTA事务管理器实现资源的管理实际上还是通过具体的数据资源的资源管理器实现。
+比如：mq——ConnectionFactory进行具体的管理，数据库——jdbc connection实现具体管理，来实现事务。
 
 JTA是在单个服务当中如果有多个数据源的情况下，实现分布式事务的方式。
-但是应用到复杂的微服务系统或者说复杂的分布式系统当中，JTA的使用场景——消息中间件
-通过消息中间件把每个服务串起来。
+
+但是应用到复杂的微服务系统或者说复杂的分布式系统当中，JTA的使用场景——消息中间件，通过消息中间件把每个服务串起来。
 
 3)、JTA实现多服务的分布式事务
 ![binaryTree](img/JTA实现多服务的分布式事务.png "binaryTree")
@@ -340,6 +338,7 @@ JTA是在单个服务当中如果有多个数据源的情况下，实现分布�
 5.1.3、不使用JTA
 1)、为什么不使用JTA?
 性能问题，两阶段提交——事务时间可能会很长。
+
 2)、不使用JTA如何保证多个数据源上事务的正确性？
 ![binaryTree](img/不使用JTA依次提交两事务.png "binaryTree")
 问题：在第6步出现问题，数据库已提交。
