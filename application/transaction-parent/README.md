@@ -28,11 +28,12 @@
   d、SERIALIZABLE——线性读：所有的事务操作必须是线性执行，想当于排队执行，隔离级别最高。
  
  设置脏读：SET SESSION TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
-[Spring 事务机制详解](https://juejin.im/post/5a3b1dc4f265da43333e9049)
+
 [Java中的事务——JDBC事务和JTA事务](http://www.hollischuang.com/archives/1658)
 [MySQL 笔记 - 事务&锁](https://juejin.im/post/5b76938de51d45664715fba8)
 
 2、Docker
+[如何通俗解释Docker是什么？](https://www.zhihu.com/question/28300645)
 2.1、Docker介绍
   Docker是一种轻量级的容器。它是使用操作系统级别的虚拟化技术对进程、软件系统和网络之类的资源，进行封装和隔离。
   看起来就好像一个独立的系统，所以它也叫做容器。
@@ -68,17 +69,17 @@ c、方便的与Spring框架集成
 d、多个资源的事务管理、同步
 
 3.1.2、Spring事务抽象
-a、 ：
-提供事务管理器的接口，不管使用的是什么样的事务管理器的实现，但是我们都可以用这个接口来进行事务的管理。
+[Spring 事务机制详解](https://juejin.im/post/5a3b1dc4f265da43333e9049)
+a、PlatformTransactionManager：
+PlatformTransactionManager是Spring事务管理的核心接口。
+提供事务管理器的接口，不管使用的是什么样的事务管理器的实现，我们都可以用这个接口来进行事务的管理。
 包括：事务的开启、提交、回滚等操作。
 ![binaryTree](img/事务管理器.png "binaryTree")
 
 b、TransactionDefinition
-事务的定义。我们可以创建一个TransactionDefinition，然后给它设置一些事务的属性，
-包括：传播属性、隔离属性等等。在通过这个定义创建一个具体的实例。
+事务的定义。我们可以创建一个TransactionDefinition，然后给它设置一些事务的属性。
+包括：返回事务的传播行为、返回事务的隔离级别、返回事务必须在多少秒内完成、事务是否只读等等。在通过这个定义创建一个具体的实例。
 ![binaryTree](img/事务定义.png "binaryTree")
-![binaryTree](img/事务隔离机制.png "binaryTree")
-![binaryTree](img/事务传播机制.png "binaryTree")
 
 c、TransactionStatus
 事务的运行状态，或者是运行的有状态的事务。
