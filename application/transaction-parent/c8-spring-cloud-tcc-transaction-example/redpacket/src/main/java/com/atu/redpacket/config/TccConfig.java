@@ -1,8 +1,9 @@
-package com.atu.capital.config;
+package com.atu.redpacket.config;
 
 import com.google.common.collect.Sets;
 import com.zaxxer.hikari.HikariDataSource;
 import org.apache.dubbo.remoting.TimeoutException;
+import org.mengyun.tcctransaction.OptimisticLockException;
 import org.mengyun.tcctransaction.spring.recover.DefaultRecoverConfig;
 import org.mengyun.tcctransaction.spring.repository.SpringJdbcTransactionRepository;
 import org.springframework.context.annotation.Bean;

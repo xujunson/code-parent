@@ -1,4 +1,4 @@
-package com.atu.capital.config;
+package com.atu.order.config;
 
 import com.google.common.collect.Sets;
 import com.zaxxer.hikari.HikariDataSource;
