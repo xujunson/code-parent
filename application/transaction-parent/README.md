@@ -1,3 +1,4 @@
+[理解分布式事务](https://juejin.im/post/5c0e5bf8e51d45063322fe50#heading-28)
 分布式事务实践
 1、事务原则与实现
 1.1、事务
