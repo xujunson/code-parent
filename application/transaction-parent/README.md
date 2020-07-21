@@ -245,6 +245,7 @@ P：分区容错性
 
 4.1 Spring Cloud微服务架构
 [Spring Cloud](https://www.cnblogs.com/Java3y/p/9540386.html)
+[Spring Cloud netflix概览和架构设计](https://www.imooc.com/article/37674)
 
  1)、微服务架构组成
     a、服务
@@ -302,6 +303,7 @@ P：分区容错性
   甚至还有一些人工干预去处理达到最终一致性。
  
 5.1、Spring分布式事务实现
+[Spring分布式事务实现概览](https://www.imooc.com/article/38925)
 内容:
 1)、回顾JTA与XA
 2)、介绍Spring JTA分布式事务实现
@@ -502,6 +504,7 @@ c5-3-spring-dtx-jms-db
 也保证了方法的幂等性等等操作。
 
 7、 分布式事务实现：事件溯源
+[深入浅出Event Sourcing和CQRS](https://www.imooc.com/article/40858)
 7.1、事件溯源模式介绍
 1)、消息驱动(msg-driven or event-driven)
  a、事件不要求持久化保存
