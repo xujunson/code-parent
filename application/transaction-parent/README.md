@@ -724,9 +724,9 @@ c7-2-spring-cloud-axon-example
 
 8.1.9、实现TCC模式的框架
  实现服务接口规范、协调器
- https://github.com/liuyangming/ByteTCC
- https://github.com/QNJR-GROUP/EasyTransaction
- https://github.com/changmingxie/tcc-transaction
+https://github.com/liuyangming/ByteTCC
+https://github.com/QNJR-GROUP/EasyTransaction
+[tcc-transaction](https://github.com/changmingxie/tcc-transaction)
 
 8.2、 微服务架构的设计模式
 8.2.1、微服务系统的分布式事务实现
