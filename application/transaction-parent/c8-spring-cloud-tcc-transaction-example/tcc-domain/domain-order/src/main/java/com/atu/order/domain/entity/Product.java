@@ -1,12 +1,13 @@
 package com.atu.order.domain.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-/**
- * Created by twinkle.zhou on 16/11/10.
- */
+@Entity
 public class Product implements Serializable{
+    @Id
     private long productId;
 
     private long shopId;

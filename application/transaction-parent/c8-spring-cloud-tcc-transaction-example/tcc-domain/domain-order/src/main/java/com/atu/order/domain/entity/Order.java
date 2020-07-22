@@ -1,15 +1,19 @@
 package com.atu.order.domain.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Transient;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
-
+@Entity
 public class Order implements Serializable {
 
     private static final long serialVersionUID = -5908730245224893590L;
+    @Id
     private long id;
 
     private long payerUserId;
@@ -26,6 +30,7 @@ public class Order implements Serializable {
 
     private long version = 1l;
 
+    @Transient
     private List<OrderLine> orderLines = new ArrayList<OrderLine>();
 
     public Order() {

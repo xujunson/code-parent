@@ -1,9 +1,13 @@
 package com.atu.redpacket.domain.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.math.BigDecimal;
 
+@Entity
 public class TradeOrder {
 
+    @Id
     private long id;
 
     private long selfUserId;

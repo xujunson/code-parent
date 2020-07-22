@@ -1,10 +1,11 @@
 package com.atu.order.domain.entity;
 
-/**
- * Created by changming.xie on 4/1/16.
- */
-public class Shop {
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
+@Entity
+public class Shop {
+    @Id
     private long id;
 
     private long ownerUserId;

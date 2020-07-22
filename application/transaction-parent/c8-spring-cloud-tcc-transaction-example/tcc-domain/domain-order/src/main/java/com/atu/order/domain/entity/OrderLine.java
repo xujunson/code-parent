@@ -1,14 +1,15 @@
 package com.atu.order.domain.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-/**
- * Created by changming.xie on 4/1/16.
- */
+@Entity
 public class OrderLine implements Serializable {
 
     private static final long serialVersionUID = 2300754647209250837L;
+    @Id
     private long id;
 
     private long productId;
