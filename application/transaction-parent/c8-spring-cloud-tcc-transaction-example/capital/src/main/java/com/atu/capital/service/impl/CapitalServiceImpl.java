@@ -1,8 +1,7 @@
-package com.atu.redpacket.service.impl;
+package com.atu.capital.service.impl;
 
-import com.atu.capital.domain.model.CapitalAccount;
 import com.atu.capital.domain.service.CapitalAccountService;
-import com.atu.redpacket.service.CapitalService;
+import com.atu.capital.service.CapitalService;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
 

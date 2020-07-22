@@ -1,6 +1,6 @@
 package com.atu.order.service;
 
-import com.atu.redpacket.service.CapitalService;
+import com.atu.capital.service.CapitalService;
 import com.atu.redpacket.service.RedPacketAccountService;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;

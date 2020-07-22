@@ -1,6 +1,6 @@
-package com.atu.redpacket.service;
+package com.atu.capital.service;
 
-import com.atu.redpacket.service.dto.CapitalTradeOrderDto;
+import com.atu.capital.service.dto.CapitalTradeOrderDto;
 import org.mengyun.tcctransaction.api.Compensable;
 
 /**
