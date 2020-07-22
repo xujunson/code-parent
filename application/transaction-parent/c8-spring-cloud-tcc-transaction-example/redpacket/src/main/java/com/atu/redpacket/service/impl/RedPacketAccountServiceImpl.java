@@ -1,7 +1,7 @@
-package com.atu.redpacket.service;
+package com.atu.redpacket.service.impl;
 
-import com.atu.redpacket.api.service.RedPacketAccountService;
 import com.atu.redpacket.domain.service.RedPacketService;
+import com.atu.redpacket.service.RedPacketAccountService;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
 

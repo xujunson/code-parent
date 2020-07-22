@@ -1,4 +1,4 @@
-package com.atu.redpacket.api.service;
+package com.atu.redpacket.service;
 
 import java.math.BigDecimal;
 
@@ -7,7 +7,7 @@ import java.math.BigDecimal;
  * @date: 2020-07-21 17:26
  * @description:
  */
-public interface CapitalAccountService {
+public interface CapitalService {
 
     BigDecimal getCapitalAccountByUserId(long userId);
 }

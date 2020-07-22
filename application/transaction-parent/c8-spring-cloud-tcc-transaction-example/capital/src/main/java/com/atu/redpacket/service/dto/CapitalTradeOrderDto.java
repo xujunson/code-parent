@@ -1,4 +1,4 @@
-package com.atu.redpacket.api.service.dto;
+package com.atu.redpacket.service.dto;
 
 import java.io.Serializable;
 import java.math.BigDecimal;

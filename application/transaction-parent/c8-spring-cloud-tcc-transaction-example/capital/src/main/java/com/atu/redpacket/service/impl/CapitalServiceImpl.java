@@ -1,6 +1,8 @@
 package com.atu.redpacket.service.impl;
 
+import com.atu.capital.domain.model.CapitalAccount;
 import com.atu.capital.domain.service.CapitalAccountService;
+import com.atu.redpacket.service.CapitalService;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -12,7 +14,7 @@ import java.math.BigDecimal;
  * @description:
  */
 @DubboService
-public class CapitalAccountServiceImpl implements com.atu.redpacket.api.service.CapitalAccountService {
+public class CapitalServiceImpl implements CapitalService {
 
     @Autowired
     CapitalAccountService capitalAccountService;

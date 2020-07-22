@@ -1,8 +1,8 @@
 package com.atu.order.service;
 
+import com.atu.redpacket.service.CapitalService;
+import com.atu.redpacket.service.RedPacketAccountService;
 import org.apache.dubbo.config.annotation.DubboService;
-import org.mengyun.tcctransaction.sample.dubbo.capital.api.CapitalAccountService;
-import org.mengyun.tcctransaction.sample.dubbo.redpacket.api.RedPacketAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
@@ -19,7 +19,7 @@ public class AccountServiceImpl {
     RedPacketAccountService redPacketAccountService;
 
     @Autowired
-    CapitalAccountService capitalAccountService;
+    CapitalService capitalService;
 
 
     public BigDecimal getRedPacketAccountByUserId(long userId) {
@@ -27,6 +27,6 @@ public class AccountServiceImpl {
     }
 
     public BigDecimal getCapitalAccountByUserId(long userId) {
-        return capitalAccountService.getCapitalAccountByUserId(userId);
+        return capitalService.getCapitalAccountByUserId(userId);
     }
 }

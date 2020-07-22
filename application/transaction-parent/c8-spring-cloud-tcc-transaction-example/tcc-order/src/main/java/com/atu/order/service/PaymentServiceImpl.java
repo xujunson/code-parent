@@ -3,14 +3,14 @@ package com.atu.order.service;
 
 import com.atu.order.domain.entity.Order;
 import com.atu.order.domain.service.OrderDomainService;
+import com.atu.redpacket.service.CapitalTradeOrderService;
+import com.atu.redpacket.service.RedPacketTradeOrderService;
+import com.atu.redpacket.service.dto.CapitalTradeOrderDto;
+import com.atu.redpacket.service.dto.RedPacketTradeOrderDto;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.mengyun.tcctransaction.api.Compensable;
 import org.mengyun.tcctransaction.api.UniqueIdentity;
-import org.mengyun.tcctransaction.sample.dubbo.capital.api.CapitalTradeOrderService;
-import org.mengyun.tcctransaction.sample.dubbo.capital.api.dto.CapitalTradeOrderDto;
-import org.mengyun.tcctransaction.sample.dubbo.redpacket.api.RedPacketTradeOrderService;
-import org.mengyun.tcctransaction.sample.dubbo.redpacket.api.dto.RedPacketTradeOrderDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.OptimisticLockingFailureException;
 

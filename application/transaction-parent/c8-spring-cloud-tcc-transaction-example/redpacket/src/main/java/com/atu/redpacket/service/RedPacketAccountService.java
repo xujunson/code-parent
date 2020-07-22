@@ -1,4 +1,4 @@
-package com.atu.redpacket.api.service;
+package com.atu.redpacket.service;
 
 import java.math.BigDecimal;
 
