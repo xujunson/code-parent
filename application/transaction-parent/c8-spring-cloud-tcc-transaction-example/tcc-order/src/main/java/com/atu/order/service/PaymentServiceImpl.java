@@ -1,8 +1,10 @@
 package com.atu.order.service;
 
-import com.atu.order.entity.Order;
-import com.atu.order.repository.OrderRepository;
+
+import com.atu.order.domain.entity.Order;
+import com.atu.order.domain.service.OrderDomainService;
 import org.apache.commons.lang3.time.DateFormatUtils;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.mengyun.tcctransaction.api.Compensable;
 import org.mengyun.tcctransaction.api.UniqueIdentity;
 import org.mengyun.tcctransaction.sample.dubbo.capital.api.CapitalTradeOrderService;
@@ -11,7 +13,6 @@ import org.mengyun.tcctransaction.sample.dubbo.redpacket.api.RedPacketTradeOrder
 import org.mengyun.tcctransaction.sample.dubbo.redpacket.api.dto.RedPacketTradeOrderDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.OptimisticLockingFailureException;
-import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.net.SocketTimeoutException;
@@ -22,7 +23,7 @@ import java.util.Calendar;
  * @date: 2020-07-21 17:35
  * @description:
  */
-@Service
+@DubboService
 public class PaymentServiceImpl {
 
     @Autowired
@@ -32,18 +33,18 @@ public class PaymentServiceImpl {
     RedPacketTradeOrderService redPacketTradeOrderService;
 
     @Autowired
-    OrderRepository orderRepository;
+    OrderDomainService orderDomainService;
 
     @Compensable(confirmMethod = "confirmMakePayment", cancelMethod = "cancelMakePayment", asyncConfirm = false, delayCancelExceptions = {SocketTimeoutException.class, org.apache.dubbo.remoting.TimeoutException.class})
     public void makePayment(@UniqueIdentity String orderNo, BigDecimal redPacketPayAmount, BigDecimal capitalPayAmount) {
         System.out.println("order try make payment called.time seq:" + DateFormatUtils.format(Calendar.getInstance(), "yyyy-MM-dd HH:mm:ss"));
 
-        Order order = orderRepository.findByMerchantOrderNo(orderNo);
+        Order order = orderDomainService.findOrderByMerchantOrderNo(orderNo);
         //check if the order status is DRAFT, if no, means that another call makePayment for the same order happened, ignore this call makePayment.
         if (order.getStatus().equals("DRAFT")) {
             order.pay(redPacketPayAmount, capitalPayAmount);
             try {
-                orderRepository.updateOrder(order);
+                orderDomainService.updateOrder(order);
             } catch (OptimisticLockingFailureException e) {
                 //ignore the concurrently update order exception, ensure idempotency.
             }
@@ -64,12 +65,12 @@ public class PaymentServiceImpl {
 
         System.out.println("order confirm make payment called. time seq:" + DateFormatUtils.format(Calendar.getInstance(), "yyyy-MM-dd HH:mm:ss"));
 
-        Order foundOrder = orderRepository.findByMerchantOrderNo(orderNo);
+        Order foundOrder = orderDomainService.findOrderByMerchantOrderNo(orderNo);
 
         //check if the trade order status is PAYING, if no, means another call confirmMakePayment happened, return directly, ensure idempotency.
         if (foundOrder != null && foundOrder.getStatus().equals("PAYING")) {
             foundOrder.confirm();
-            orderRepository.updateOrder(foundOrder);
+            orderDomainService.updateOrder(foundOrder);
         }
     }
 
@@ -83,12 +84,12 @@ public class PaymentServiceImpl {
 
         System.out.println("order cancel make payment called.time seq:" + DateFormatUtils.format(Calendar.getInstance(), "yyyy-MM-dd HH:mm:ss"));
 
-        Order foundOrder = orderRepository.findByMerchantOrderNo(orderNo);
+        Order foundOrder = orderDomainService.findOrderByMerchantOrderNo(orderNo);
 
         //check if the trade order status is PAYING, if no, means another call cancelMakePayment happened, return directly, ensure idempotency.
         if (foundOrder != null && foundOrder.getStatus().equals("PAYING")) {
             foundOrder.cancelPayment();
-            orderRepository.updateOrder(foundOrder);
+            orderDomainService.updateOrder(foundOrder);
         }
     }
 

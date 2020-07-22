@@ -1,9 +1,9 @@
 package com.atu.redpacket.service;
 
-import com.atu.capital.repository.RedPacketAccountRepository;
 import com.atu.redpacket.api.service.RedPacketAccountService;
+import com.atu.redpacket.domain.service.RedPacketService;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 
@@ -12,14 +12,14 @@ import java.math.BigDecimal;
  * @date: 2020-07-21 17:35
  * @description:
  */
-@Service("redPacketAccountService")
+@DubboService
 public class RedPacketAccountServiceImpl implements RedPacketAccountService {
 
     @Autowired
-    RedPacketAccountRepository redPacketAccountRepository;
+    RedPacketService redPacketService;
 
     @Override
     public BigDecimal getRedPacketAccountByUserId(long userId) {
-        return redPacketAccountRepository.findByUserId(userId).getBalanceAmount();
+        return redPacketService.findByUserId(userId).getBalanceAmount();
     }
 }

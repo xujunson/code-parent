@@ -1,14 +1,14 @@
 package com.atu.order.web.controller;
 
-import com.atu.order.entity.Order;
-import com.atu.order.entity.Product;
-import com.atu.order.repository.ProductRepository;
+
+import com.atu.order.domain.entity.Order;
+import com.atu.order.domain.entity.Product;
+import com.atu.order.domain.service.OrderDomainService;
+import com.atu.order.domain.service.ProductService;
 import com.atu.order.service.AccountServiceImpl;
-import com.atu.order.service.OrderServiceImpl;
 import com.atu.order.service.PlaceOrderServiceImpl;
 import com.atu.order.web.controller.vo.PlaceOrderRequest;
 import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.security.InvalidParameterException;
 import java.util.List;
@@ -30,17 +31,17 @@ import java.util.List;
 @RequestMapping("")
 public class OrderController {
 
-    @Autowired
+    @Resource
     PlaceOrderServiceImpl placeOrderService;
 
-    @Autowired
-    ProductRepository productRepository;
+    @Resource
+    ProductService productService;
 
-    @Autowired
+    @Resource
     AccountServiceImpl accountService;
 
-    @Autowired
-    OrderServiceImpl orderService;
+    @Resource
+    OrderDomainService orderService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView index() {
@@ -51,7 +52,7 @@ public class OrderController {
     @RequestMapping(value = "/user/{userId}/shop/{shopId}", method = RequestMethod.GET)
     public ModelAndView getProductsInShop(@PathVariable long userId,
                                           @PathVariable long shopId) {
-        List<Product> products = productRepository.findByShopId(shopId);
+        List<Product> products = productService.findByShopId(shopId);
 
         ModelAndView mv = new ModelAndView("/shop");
 
@@ -72,7 +73,7 @@ public class OrderController {
         mv.addObject("capitalAmount", accountService.getCapitalAccountByUserId(userId));
         mv.addObject("redPacketAmount", accountService.getRedPacketAccountByUserId(userId));
 
-        mv.addObject("product", productRepository.findById(productId));
+        mv.addObject("product", productService.findById(productId));
 
         mv.addObject("userId", userId);
         mv.addObject("shopId", shopId);

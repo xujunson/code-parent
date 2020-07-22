@@ -1,13 +1,15 @@
 package com.atu.order.service;
 
-import com.atu.order.entity.Order;
-import com.atu.order.entity.Shop;
-import com.atu.order.repository.ShopRepository;
+import com.atu.order.domain.entity.Order;
+import com.atu.order.domain.entity.Shop;
+import com.atu.order.domain.service.OrderDomainService;
+import com.atu.order.domain.service.ShopService;
 import org.apache.commons.lang3.tuple.Pair;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.mengyun.tcctransaction.CancellingException;
 import org.mengyun.tcctransaction.ConfirmingException;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -17,20 +19,20 @@ import java.util.List;
  * @date: 2020-07-21 17:35
  * @description:
  */
-@Service
+@DubboService
 public class PlaceOrderServiceImpl {
 
     @Autowired
-    ShopRepository shopRepository;
+    ShopService shopService;
 
     @Autowired
-    OrderServiceImpl orderService;
+    OrderDomainService orderService;
 
     @Autowired
     PaymentServiceImpl paymentService;
 
     public String placeOrder(long payerUserId, long shopId, List<Pair<Long, Integer>> productQuantities, final BigDecimal redPacketPayAmount) {
-        Shop shop = shopRepository.findById(shopId);
+        Shop shop = shopService.findById(shopId);
 
         final Order order = orderService.createOrder(payerUserId, shop.getOwnerUserId(), productQuantities);
 
