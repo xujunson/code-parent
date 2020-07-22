@@ -1,8 +1,8 @@
 package com.atu.order.service.impl;
 
 import com.atu.order.service.AccountService;
-import com.atu.domaincapital.service.CapitalService;
-import com.atu.domainredpacket.service.RedPacketAccountService;
+import com.atu.capital.service.CapitalService;
+import com.atu.redpacket.service.RedPacketAccountService;
 import org.apache.dubbo.config.annotation.DubboService;
 
 import javax.annotation.Resource;

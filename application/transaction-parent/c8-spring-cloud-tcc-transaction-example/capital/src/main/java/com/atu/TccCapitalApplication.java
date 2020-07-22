@@ -1,20 +1,19 @@
-package com.atu.order;
+package com.atu;
 
 import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
  * @author: Tom
- * @date: 2020-07-22 17:41
+ * @date: 2020-07-22 11:07
  * @description:
  */
+@EnableDubbo
 @SpringBootApplication
-@EnableDiscoveryClient
-@EnableDubbo             //启动dubbo配置与注解
-public class AppOrderApplication {
+public class TccCapitalApplication {
     public static void main(String[] args) {
-        SpringApplication.run(AppOrderApplication.class, args);
+        SpringApplication.run(TccCapitalApplication.class, args);
     }
+
 }
