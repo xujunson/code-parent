@@ -16,14 +16,11 @@
 
     <modules>
         <module>capital</module>
-
         <module>redpacket</module>
-
-        <module>tcc-order</module>
         <module>tcc-domain</module>
+        <module>order-app</module>
     </modules>
     <properties>
-
         <java.src.version>1.8</java.src.version>
         <java.target.version>1.8</java.target.version>
         <project.encoding>UTF-8</project.encoding>

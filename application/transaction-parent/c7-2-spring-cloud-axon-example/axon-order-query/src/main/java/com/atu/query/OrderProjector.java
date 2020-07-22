@@ -1,8 +1,8 @@
 package com.atu.query;
 
-import com.atu.order.event.saga.OrderFailedEvent;
-import com.atu.order.event.saga.OrderFinishedEvent;
-import com.atu.order.event.saga.OrderCreatedEvent;
+import com.atu.domaincapital.event.saga.OrderFailedEvent;
+import com.atu.domaincapital.event.saga.OrderFinishedEvent;
+import com.atu.domaincapital.event.saga.OrderCreatedEvent;
 import org.axonframework.config.ProcessingGroup;
 import org.axonframework.eventhandling.EventHandler;
 import org.axonframework.eventsourcing.EventSourcingHandler;
