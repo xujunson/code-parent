@@ -16,9 +16,9 @@
 
     <modules>
         <module>capital</module>
-        <module>capital-api</module>
+
         <module>redpacket</module>
-        <module>redpacket-api</module>
+
         <module>tcc-order</module>
         <module>tcc-domain</module>
     </modules>

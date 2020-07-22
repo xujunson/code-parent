@@ -1,19 +1,20 @@
-package com.atu.order.service;
+package com.atu.order.service.impl;
 
 
+import com.atu.capital.service.CapitalTradeOrderService;
+import com.atu.capital.service.dto.CapitalTradeOrderDto;
 import com.atu.order.domain.entity.Order;
 import com.atu.order.domain.service.OrderDomainService;
-import com.atu.capital.service.CapitalTradeOrderService;
+import com.atu.order.service.PaymentService;
 import com.atu.redpacket.service.RedPacketTradeOrderService;
-import com.atu.capital.service.dto.CapitalTradeOrderDto;
 import com.atu.redpacket.service.dto.RedPacketTradeOrderDto;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.mengyun.tcctransaction.api.Compensable;
 import org.mengyun.tcctransaction.api.UniqueIdentity;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.OptimisticLockingFailureException;
 
+import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.net.SocketTimeoutException;
 import java.util.Calendar;
@@ -24,17 +25,18 @@ import java.util.Calendar;
  * @description:
  */
 @DubboService
-public class PaymentServiceImpl {
+public class PaymentServiceImpl implements PaymentService {
 
-    @Autowired
+    @Resource
     CapitalTradeOrderService capitalTradeOrderService;
 
-    @Autowired
+    @Resource
     RedPacketTradeOrderService redPacketTradeOrderService;
 
-    @Autowired
+    @Resource
     OrderDomainService orderDomainService;
 
+    @Override
     @Compensable(confirmMethod = "confirmMakePayment", cancelMethod = "cancelMakePayment", asyncConfirm = false, delayCancelExceptions = {SocketTimeoutException.class, org.apache.dubbo.remoting.TimeoutException.class})
     public void makePayment(@UniqueIdentity String orderNo, BigDecimal redPacketPayAmount, BigDecimal capitalPayAmount) {
         System.out.println("order try make payment called.time seq:" + DateFormatUtils.format(Calendar.getInstance(), "yyyy-MM-dd HH:mm:ss"));

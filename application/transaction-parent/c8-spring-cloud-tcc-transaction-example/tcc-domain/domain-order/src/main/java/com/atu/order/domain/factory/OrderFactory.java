@@ -4,9 +4,9 @@ import com.atu.order.domain.entity.Order;
 import com.atu.order.domain.entity.OrderLine;
 import com.atu.order.domain.repository.ProductRepository;
 import org.apache.commons.lang3.tuple.Pair;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -15,7 +15,7 @@ import java.util.List;
 @Component
 public class OrderFactory {
 
-    @Autowired
+    @Resource
     ProductRepository productRepository;
 
     public Order buildOrder(long payerUserId, long payeeUserId, List<Pair<Long, Integer>> productQuantities) {

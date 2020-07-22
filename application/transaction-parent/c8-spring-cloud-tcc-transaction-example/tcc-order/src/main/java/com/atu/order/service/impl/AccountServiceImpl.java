@@ -1,10 +1,11 @@
-package com.atu.order.service;
+package com.atu.order.service.impl;
 
 import com.atu.capital.service.CapitalService;
+import com.atu.order.service.AccountService;
 import com.atu.redpacket.service.RedPacketAccountService;
 import org.apache.dubbo.config.annotation.DubboService;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.annotation.Resource;
 import java.math.BigDecimal;
 
 /**
@@ -13,19 +14,20 @@ import java.math.BigDecimal;
  * @description:
  */
 @DubboService
-public class AccountServiceImpl {
+public class AccountServiceImpl implements AccountService {
 
-    @Autowired
+    @Resource
     RedPacketAccountService redPacketAccountService;
 
-    @Autowired
+    @Resource
     CapitalService capitalService;
 
-
+    @Override
     public BigDecimal getRedPacketAccountByUserId(long userId) {
         return redPacketAccountService.getRedPacketAccountByUserId(userId);
     }
 
+    @Override
     public BigDecimal getCapitalAccountByUserId(long userId) {
         return capitalService.getCapitalAccountByUserId(userId);
     }

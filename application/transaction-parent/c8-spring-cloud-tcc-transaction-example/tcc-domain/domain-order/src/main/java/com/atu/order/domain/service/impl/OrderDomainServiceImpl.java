@@ -8,10 +8,10 @@ import com.atu.order.domain.service.OrderDomainService;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.dubbo.config.annotation.DubboService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -20,11 +20,11 @@ import java.util.List;
 @DubboService
 public class OrderDomainServiceImpl implements OrderDomainService {
 
-    @Autowired
+    @Resource
     OrderRepository orderRepository;
-    @Autowired
+    @Resource
     OrderLineRepository orderLineRepository;
-    @Autowired
+    @Resource
     OrderFactory orderFactory;
 
     @Transactional

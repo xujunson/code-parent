@@ -3,8 +3,8 @@ package com.atu.capital.service.impl;
 import com.atu.capital.domain.service.CapitalAccountService;
 import com.atu.capital.service.CapitalService;
 import org.apache.dubbo.config.annotation.DubboService;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.annotation.Resource;
 import java.math.BigDecimal;
 
 /**
@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 @DubboService
 public class CapitalServiceImpl implements CapitalService {
 
-    @Autowired
+    @Resource
     CapitalAccountService capitalAccountService;
 
     @Override

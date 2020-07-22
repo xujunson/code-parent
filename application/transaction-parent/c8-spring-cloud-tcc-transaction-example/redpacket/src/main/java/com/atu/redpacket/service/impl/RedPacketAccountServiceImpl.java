@@ -3,8 +3,8 @@ package com.atu.redpacket.service.impl;
 import com.atu.redpacket.domain.service.RedPacketService;
 import com.atu.redpacket.service.RedPacketAccountService;
 import org.apache.dubbo.config.annotation.DubboService;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.annotation.Resource;
 import java.math.BigDecimal;
 
 /**
@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 @DubboService
 public class RedPacketAccountServiceImpl implements RedPacketAccountService {
 
-    @Autowired
+    @Resource
     RedPacketService redPacketService;
 
     @Override

@@ -5,8 +5,8 @@ import com.atu.order.domain.entity.Order;
 import com.atu.order.domain.entity.Product;
 import com.atu.order.domain.service.OrderDomainService;
 import com.atu.order.domain.service.ProductService;
-import com.atu.order.service.AccountServiceImpl;
-import com.atu.order.service.PlaceOrderServiceImpl;
+import com.atu.order.service.AccountService;
+import com.atu.order.service.PlaceOrderService;
 import com.atu.order.web.controller.vo.PlaceOrderRequest;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.springframework.stereotype.Controller;
@@ -32,13 +32,13 @@ import java.util.List;
 public class OrderController {
 
     @Resource
-    PlaceOrderServiceImpl placeOrderService;
+    PlaceOrderService placeOrderService;
 
     @Resource
     ProductService productService;
 
     @Resource
-    AccountServiceImpl accountService;
+    AccountService accountService;
 
     @Resource
     OrderDomainService orderService;

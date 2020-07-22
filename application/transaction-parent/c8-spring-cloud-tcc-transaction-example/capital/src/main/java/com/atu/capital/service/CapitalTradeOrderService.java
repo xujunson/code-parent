@@ -1,7 +1,6 @@
 package com.atu.capital.service;
 
 import com.atu.capital.service.dto.CapitalTradeOrderDto;
-import org.mengyun.tcctransaction.api.Compensable;
 
 /**
  * @author: Tom
@@ -9,6 +8,5 @@ import org.mengyun.tcctransaction.api.Compensable;
  * @description:
  */
 public interface CapitalTradeOrderService {
-    @Compensable
     public String record(CapitalTradeOrderDto tradeOrderDto);
 }

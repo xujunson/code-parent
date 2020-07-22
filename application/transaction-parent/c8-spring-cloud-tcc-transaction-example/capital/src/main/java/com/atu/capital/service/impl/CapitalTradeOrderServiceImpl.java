@@ -10,10 +10,10 @@ import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.mengyun.tcctransaction.api.Compensable;
 import org.mengyun.tcctransaction.context.MethodTransactionContextEditor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.Calendar;
 
 /**
@@ -24,10 +24,10 @@ import java.util.Calendar;
 @DubboService
 public class CapitalTradeOrderServiceImpl implements CapitalTradeOrderService {
 
-    @Autowired
+    @Resource
     CapitalAccountService capitalAccountService;
 
-    @Autowired
+    @Resource
     TradeOrderService tradeOrderService;
 
     @Override
