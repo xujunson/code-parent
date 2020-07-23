@@ -13,8 +13,6 @@ import org.mengyun.tcctransaction.api.Compensable;
 import org.mengyun.tcctransaction.context.MethodTransactionContextEditor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.transaction.annotation.Transactional;
-
-import javax.annotation.Resource;
 import java.util.Calendar;
 
 /**

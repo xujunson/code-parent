@@ -2,6 +2,7 @@ package com.atu.order.app.service.impl;
 
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.dubbo.remoting.TimeoutException;
 import com.atu.capital.service.CapitalTradeOrderService;
 import com.atu.capital.service.dto.CapitalTradeOrderDto;
@@ -14,7 +15,6 @@ import org.apache.commons.lang3.time.DateFormatUtils;
 import org.mengyun.tcctransaction.api.Compensable;
 import org.mengyun.tcctransaction.api.UniqueIdentity;
 import org.springframework.dao.OptimisticLockingFailureException;
-import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.net.SocketTimeoutException;

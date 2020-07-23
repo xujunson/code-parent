@@ -1,7 +1,7 @@
 package com.atu.order.app.service.impl;
 
-
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.alibaba.dubbo.config.annotation.Service;
 import com.atu.domain.order.entity.Order;
 import com.atu.domain.order.entity.Shop;
 import com.atu.domain.order.service.OrderDomainService;
@@ -11,7 +11,6 @@ import com.atu.order.app.service.PlaceOrderService;
 import org.apache.commons.lang3.tuple.Pair;
 import org.mengyun.tcctransaction.CancellingException;
 import org.mengyun.tcctransaction.ConfirmingException;
-import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;

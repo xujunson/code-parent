@@ -1,5 +1,6 @@
 package com.atu.redpacket.service.impl;
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.dubbo.remoting.TimeoutException;
 import com.atu.domain.redpacket.model.RedPacketAccount;
@@ -13,7 +14,6 @@ import org.mengyun.tcctransaction.api.Compensable;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
 import java.net.SocketTimeoutException;
 import java.util.Calendar;
 
@@ -25,10 +25,10 @@ import java.util.Calendar;
 @Service
 public class RedPacketTradeOrderServiceImpl implements RedPacketTradeOrderService {
 
-    @Resource
+    @Reference
     RedPacketService redPacketService;
 
-    @Resource
+    @Reference
     TradeOrderServiceT tradeOrderServiceT;
 
     @Override

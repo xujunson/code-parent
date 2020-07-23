@@ -4,8 +4,6 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.atu.capital.service.CapitalService;
 import com.atu.domain.capital.service.CapitalAccountService;
-
-import javax.annotation.Resource;
 import java.math.BigDecimal;
 
 /**

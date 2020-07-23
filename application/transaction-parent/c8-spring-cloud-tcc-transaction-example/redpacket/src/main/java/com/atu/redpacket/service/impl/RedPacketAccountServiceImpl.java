@@ -1,10 +1,10 @@
 package com.atu.redpacket.service.impl;
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.atu.domain.redpacket.service.RedPacketService;
 import com.atu.redpacket.service.RedPacketAccountService;
 
-import javax.annotation.Resource;
 import java.math.BigDecimal;
 
 /**
@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 @Service
 public class RedPacketAccountServiceImpl implements RedPacketAccountService {
 
-    @Resource
+    @Reference
     RedPacketService redPacketService;
 
     @Override

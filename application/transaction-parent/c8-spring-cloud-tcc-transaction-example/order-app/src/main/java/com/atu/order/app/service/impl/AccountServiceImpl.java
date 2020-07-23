@@ -1,12 +1,10 @@
 package com.atu.order.app.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.alibaba.dubbo.config.annotation.Service;
 import com.atu.capital.service.CapitalService;
 import com.atu.order.app.service.AccountService;
 import com.atu.redpacket.service.RedPacketAccountService;
-
-import org.springframework.stereotype.Service;
-
 import java.math.BigDecimal;
 
 /**
