@@ -1,4 +1,4 @@
-package com.atu.order.service.impl;
+package com.atu.order.app.service.impl;
 
 
 import com.alibaba.dubbo.config.annotation.Reference;
@@ -6,8 +6,8 @@ import com.atu.domain.order.entity.Order;
 import com.atu.domain.order.entity.Shop;
 import com.atu.domain.order.service.OrderDomainService;
 import com.atu.domain.order.service.ShopService;
-import com.atu.order.service.PaymentService;
-import com.atu.order.service.PlaceOrderService;
+import com.atu.order.app.service.PaymentService;
+import com.atu.order.app.service.PlaceOrderService;
 import org.apache.commons.lang3.tuple.Pair;
 import org.mengyun.tcctransaction.CancellingException;
 import org.mengyun.tcctransaction.ConfirmingException;

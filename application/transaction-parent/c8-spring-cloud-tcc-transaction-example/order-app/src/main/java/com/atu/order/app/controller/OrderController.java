@@ -1,25 +1,21 @@
-package com.atu.order.web.controller;
+package com.atu.order.app.controller;
 
 
-import com.atu.domain.redpacket.model.TradeOrder;
-import com.atu.domain.redpacket.service.TradeOrderServiceT;
-import com.atu.order.service.AccountService;
-import com.atu.order.service.PlaceOrderService;
-import com.atu.order.web.controller.vo.PlaceOrderRequest;
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.atu.domain.order.entity.Order;
 import com.atu.domain.order.entity.Product;
 import com.atu.domain.order.service.OrderDomainService;
 import com.atu.domain.order.service.ProductService;
+import com.atu.domain.redpacket.model.TradeOrder;
+import com.atu.domain.redpacket.service.TradeOrderServiceT;
+import com.atu.order.app.controller.vo.PlaceOrderRequest;
+import com.atu.order.app.service.AccountService;
+import com.atu.order.app.service.PlaceOrderService;
 import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.security.InvalidParameterException;
 import java.util.List;
@@ -29,22 +25,23 @@ import java.util.List;
  * @date: 2020-07-21 17:35
  * @description:
  */
-@Controller
+@RestController
 public class OrderController {
 
-    @Resource
+    @Reference
     PlaceOrderService placeOrderService;
 
-    @Resource
+    @Reference
     ProductService productService;
 
-    @Resource
+    @Reference
     AccountService accountService;
 
-    @Resource
+    @Reference
     OrderDomainService orderService;
-    @Resource
+    @Reference
     private TradeOrderServiceT tradeOrderServiceT;
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView index() {
         ModelAndView mv = new ModelAndView("/index");

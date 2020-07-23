@@ -4,11 +4,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Entity
 @Table(name = "RED_TRADE_ORDER")
-public class TradeOrder {
+public class TradeOrder implements Serializable {
 
     @Id
     @Column(name = "ID")

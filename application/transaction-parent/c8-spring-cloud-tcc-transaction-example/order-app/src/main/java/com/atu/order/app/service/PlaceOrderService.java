@@ -1,4 +1,4 @@
-package com.atu.order.service;
+package com.atu.order.app.service;
 
 import org.apache.commons.lang3.tuple.Pair;
 

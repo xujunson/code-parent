@@ -1,4 +1,4 @@
-package com.atu.order.web.controller.vo;
+package com.atu.order.app.controller.vo;
 
 import org.apache.commons.lang3.tuple.Pair;
 
