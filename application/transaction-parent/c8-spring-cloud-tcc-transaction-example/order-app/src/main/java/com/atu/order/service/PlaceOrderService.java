@@ -10,6 +10,7 @@ import java.util.List;
  * @date: 2020-07-22 16:36
  * @description:
  */
-public interface PlaceOrderService {  public String placeOrder(long payerUserId, long shopId, List<Pair<Long, Integer>> productQuantities, final BigDecimal redPacketPayAmount);
+public interface PlaceOrderService {
+    public String placeOrder(long payerUserId, long shopId, List<Pair<Long, Integer>> productQuantities, final BigDecimal redPacketPayAmount);
 
 }

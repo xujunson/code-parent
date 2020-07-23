@@ -1,8 +1,6 @@
 package com.atu.domain.order.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -10,24 +8,26 @@ import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 @Entity
+@Table(name = "ORD_ORDER")
 public class Order implements Serializable {
 
     private static final long serialVersionUID = -5908730245224893590L;
     @Id
+    @Column(name = "ORDER_ID")
     private long id;
-
+    @Column(name = "PAYER_USER_ID")
     private long payerUserId;
-
+    @Column(name = "PAYEE_USER_ID")
     private long payeeUserId;
-
+    @Column(name = "RED_PACKET_PAY_AMOUNT")
     private BigDecimal redPacketPayAmount;
-
+    @Column(name = "CAPITAL_PAY_AMOUNT")
     private BigDecimal capitalPayAmount;
-
+    @Column(name = "STATUS")
     private String status = "DRAFT";
-
+    @Column(name = "MERCHANT_ORDER_NO")
     private String merchantOrderNo;
-
+    @Column(name = "VERSION")
     private long version = 1l;
 
     @Transient

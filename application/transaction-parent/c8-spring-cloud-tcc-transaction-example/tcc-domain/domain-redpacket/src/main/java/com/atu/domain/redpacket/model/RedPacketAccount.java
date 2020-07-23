@@ -2,18 +2,22 @@ package com.atu.domain.redpacket.model;
 
 import com.atu.common.exception.InsufficientBalanceException;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Entity
+@Table(name = "RED_RED_PACKET_ACCOUNT")
 public class RedPacketAccount implements Serializable {
     @Id
+    @Column(name = "RED_PACKET_ACCOUNT_ID")
     private long id;
-
+    @Column(name = "USER_ID")
     private long userId;
-
+    @Column(name = "BALANCE_AMOUNT")
     private BigDecimal balanceAmount;
 
     public long getUserId() {

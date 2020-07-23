@@ -1,20 +1,21 @@
 package com.atu.order.service.impl;
 
 
-import com.atu.order.service.PaymentService;
+import com.alibaba.dubbo.config.annotation.Reference;
+import com.alibaba.dubbo.remoting.TimeoutException;
 import com.atu.capital.service.CapitalTradeOrderService;
 import com.atu.capital.service.dto.CapitalTradeOrderDto;
 import com.atu.domain.order.entity.Order;
 import com.atu.domain.order.service.OrderDomainService;
+import com.atu.order.service.PaymentService;
 import com.atu.redpacket.service.RedPacketTradeOrderService;
 import com.atu.redpacket.service.dto.RedPacketTradeOrderDto;
 import org.apache.commons.lang3.time.DateFormatUtils;
-import org.apache.dubbo.config.annotation.DubboService;
 import org.mengyun.tcctransaction.api.Compensable;
 import org.mengyun.tcctransaction.api.UniqueIdentity;
 import org.springframework.dao.OptimisticLockingFailureException;
+import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.net.SocketTimeoutException;
 import java.util.Calendar;
@@ -24,20 +25,20 @@ import java.util.Calendar;
  * @date: 2020-07-21 17:35
  * @description:
  */
-@DubboService
+@Service
 public class PaymentServiceImpl implements PaymentService {
 
-    @Resource
+    @Reference
     CapitalTradeOrderService capitalTradeOrderService;
 
-    @Resource
+    @Reference
     RedPacketTradeOrderService redPacketTradeOrderService;
 
-    @Resource
+    @Reference
     OrderDomainService orderDomainService;
 
     @Override
-    @Compensable(confirmMethod = "confirmMakePayment", cancelMethod = "cancelMakePayment", asyncConfirm = false, delayCancelExceptions = {SocketTimeoutException.class, org.apache.dubbo.remoting.TimeoutException.class})
+    @Compensable(confirmMethod = "confirmMakePayment", cancelMethod = "cancelMakePayment", asyncConfirm = false, delayCancelExceptions = {SocketTimeoutException.class, TimeoutException.class})
     public void makePayment(@UniqueIdentity String orderNo, BigDecimal redPacketPayAmount, BigDecimal capitalPayAmount) {
         System.out.println("order try make payment called.time seq:" + DateFormatUtils.format(Calendar.getInstance(), "yyyy-MM-dd HH:mm:ss"));
 

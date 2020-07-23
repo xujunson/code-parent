@@ -1,8 +1,8 @@
 package com.atu.redpacket.service.impl;
 
+import com.alibaba.dubbo.config.annotation.Service;
 import com.atu.domain.redpacket.service.RedPacketService;
 import com.atu.redpacket.service.RedPacketAccountService;
-import org.apache.dubbo.config.annotation.DubboService;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
@@ -12,7 +12,7 @@ import java.math.BigDecimal;
  * @date: 2020-07-21 17:35
  * @description:
  */
-@DubboService
+@Service
 public class RedPacketAccountServiceImpl implements RedPacketAccountService {
 
     @Resource

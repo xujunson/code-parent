@@ -2,23 +2,23 @@ package com.atu.domain.capital.model;
 
 import com.atu.common.exception.InsufficientBalanceException;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.math.BigDecimal;
 
-/**
- * Created by changming.xie on 4/2/16.
- */
-@Entity
+@Entity(name = "CAP_CAPITAL_ACCOUNT")
 public class CapitalAccount {
 
     @Id
+    @Column(name = "CAPITAL_ACCOUNT_ID")
     private long id;
 
+    @Column(name = "USER_ID")
     private long userId;
 
+    @Column(name = "BALANCE_AMOUNT")
     private BigDecimal balanceAmount;
 
+    @Transient
     private BigDecimal transferAmount = BigDecimal.ZERO;
 
     public long getUserId() {

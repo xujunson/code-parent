@@ -1,9 +1,9 @@
 package com.atu.domain.capital.service.impl;
 
+import com.alibaba.dubbo.config.annotation.Service;
 import com.atu.domain.capital.model.TradeOrder;
 import com.atu.domain.capital.repository.TradeOrderRepository;
 import com.atu.domain.capital.service.TradeOrderService;
-import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.util.StringUtils;
 
@@ -14,7 +14,7 @@ import javax.annotation.Resource;
  * @date: 2020-07-22 14:27
  * @description:
  */
-@DubboService
+@Service
 public class TradeOrderServiceImpl implements TradeOrderService {
     @Resource
     TradeOrderRepository tradeOrderRepository;

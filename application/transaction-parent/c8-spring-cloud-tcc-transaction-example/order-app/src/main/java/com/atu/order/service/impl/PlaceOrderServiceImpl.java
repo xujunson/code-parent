@@ -1,16 +1,18 @@
 package com.atu.order.service.impl;
 
 
+import com.alibaba.dubbo.config.annotation.Reference;
+import com.atu.domain.order.entity.Order;
+import com.atu.domain.order.entity.Shop;
+import com.atu.domain.order.service.OrderDomainService;
+import com.atu.domain.order.service.ShopService;
 import com.atu.order.service.PaymentService;
 import com.atu.order.service.PlaceOrderService;
-import com.atu.domain.order.entity.Order;
-import com.atu.domain.order.service.OrderDomainService;
 import org.apache.commons.lang3.tuple.Pair;
-import org.apache.dubbo.config.annotation.DubboService;
 import org.mengyun.tcctransaction.CancellingException;
 import org.mengyun.tcctransaction.ConfirmingException;
+import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -19,23 +21,23 @@ import java.util.List;
  * @date: 2020-07-21 17:35
  * @description:
  */
-@DubboService
+@Service
 public class PlaceOrderServiceImpl implements PlaceOrderService {
 
-//    @Resource
-//    ShopService shopService;
+    @Reference
+    ShopService shopService;
 
-    @Resource
+    @Reference
     OrderDomainService orderService;
 
-    @Resource
+    @Reference
     PaymentService paymentService;
 
     @Override
     public String placeOrder(long payerUserId, long shopId, List<Pair<Long, Integer>> productQuantities, final BigDecimal redPacketPayAmount) {
-        //Shop shop = shopService.findById(shopId);
+        Shop shop = shopService.findById(shopId);
 
-        final Order order = orderService.createOrder(payerUserId, 123L, productQuantities);
+        final Order order = orderService.createOrder(payerUserId, shop.getOwnerUserId(), productQuantities);
 
         Boolean result = false;
 

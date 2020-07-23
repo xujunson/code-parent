@@ -1,10 +1,10 @@
 package com.atu.domain.capital.service.impl;
 
+import com.alibaba.dubbo.config.annotation.Service;
 import com.atu.common.exception.InsufficientBalanceException;
 import com.atu.domain.capital.model.CapitalAccount;
 import com.atu.domain.capital.repository.CapitalAccountRepository;
 import com.atu.domain.capital.service.CapitalAccountService;
-import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
@@ -14,7 +14,7 @@ import javax.annotation.Resource;
  * @date: 2020-07-22 14:27
  * @description:
  */
-@DubboService
+@Service
 public class CapitalAccountServiceImpl implements CapitalAccountService {
     @Resource
     CapitalAccountRepository capitalAccountRepository;

@@ -1,9 +1,11 @@
 package com.atu.order;
 
-import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
+
+import com.alibaba.dubbo.config.spring.context.annotation.EnableDubbo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.context.annotation.ComponentScan;
+
 
 /**
  * @author: Tom
@@ -11,8 +13,8 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  * @description:
  */
 @SpringBootApplication
-@EnableDiscoveryClient
 @EnableDubbo             //启动dubbo配置与注解
+@ComponentScan(basePackages = {"com.atu.redpacket.service","com.atu.domain.redpacket.service"})
 public class AppOrderApplication {
     public static void main(String[] args) {
         SpringApplication.run(AppOrderApplication.class, args);

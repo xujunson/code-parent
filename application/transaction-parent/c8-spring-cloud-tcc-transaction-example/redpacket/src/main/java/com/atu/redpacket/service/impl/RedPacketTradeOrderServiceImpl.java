@@ -1,5 +1,7 @@
 package com.atu.redpacket.service.impl;
 
+import com.alibaba.dubbo.config.annotation.Service;
+import com.alibaba.dubbo.remoting.TimeoutException;
 import com.atu.domain.redpacket.model.RedPacketAccount;
 import com.atu.domain.redpacket.model.TradeOrder;
 import com.atu.domain.redpacket.service.RedPacketService;
@@ -7,7 +9,6 @@ import com.atu.domain.redpacket.service.TradeOrderServiceT;
 import com.atu.redpacket.service.RedPacketTradeOrderService;
 import com.atu.redpacket.service.dto.RedPacketTradeOrderDto;
 import org.apache.commons.lang3.time.DateFormatUtils;
-import org.apache.dubbo.config.annotation.DubboService;
 import org.mengyun.tcctransaction.api.Compensable;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,7 +22,7 @@ import java.util.Calendar;
  * @date: 2020-07-21 17:35
  * @description:
  */
-@DubboService
+@Service
 public class RedPacketTradeOrderServiceImpl implements RedPacketTradeOrderService {
 
     @Resource
@@ -31,7 +32,7 @@ public class RedPacketTradeOrderServiceImpl implements RedPacketTradeOrderServic
     TradeOrderServiceT tradeOrderServiceT;
 
     @Override
-    @Compensable(confirmMethod = "confirmRecord", cancelMethod = "cancelRecord", delayCancelExceptions = {SocketTimeoutException.class, org.apache.dubbo.remoting.TimeoutException.class})
+    @Compensable(confirmMethod = "confirmRecord", cancelMethod = "cancelRecord", delayCancelExceptions = {SocketTimeoutException.class, TimeoutException.class})
     @Transactional
     public String record(RedPacketTradeOrderDto tradeOrderDto) {
 

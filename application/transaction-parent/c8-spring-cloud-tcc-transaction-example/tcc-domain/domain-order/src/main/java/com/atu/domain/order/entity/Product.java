@@ -1,19 +1,23 @@
 package com.atu.domain.order.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Entity
+@Table(name = "ORD_PRODUCT")
 public class Product implements Serializable{
     @Id
+    @Column(name = "PRODUCT_ID")
     private long productId;
-
+    @Column(name = "SHOP_ID")
     private long shopId;
-
+    @Column(name = "PRODUCT_NAME")
     private String productName;
-
+    @Column(name = "PRICE")
     private BigDecimal price;
 
     public Product() {

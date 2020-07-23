@@ -1,13 +1,13 @@
 package com.atu.domain.order.service.impl;
 
+import com.alibaba.dubbo.config.annotation.Service;
 import com.atu.domain.order.entity.Order;
 import com.atu.domain.order.factory.OrderFactory;
-import com.atu.domain.order.repository.OrderRepository;
 import com.atu.domain.order.repository.OrderLineRepository;
+import com.atu.domain.order.repository.OrderRepository;
 import com.atu.domain.order.service.OrderDomainService;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.tuple.Pair;
-import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * Created by changming.xie on 3/25/16.
  */
-@DubboService
+@Service
 public class OrderDomainServiceImpl implements OrderDomainService {
 
     @Resource

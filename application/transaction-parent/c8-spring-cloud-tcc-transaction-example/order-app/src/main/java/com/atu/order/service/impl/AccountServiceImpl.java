@@ -1,11 +1,12 @@
 package com.atu.order.service.impl;
 
-import com.atu.order.service.AccountService;
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.atu.capital.service.CapitalService;
+import com.atu.order.service.AccountService;
 import com.atu.redpacket.service.RedPacketAccountService;
-import org.apache.dubbo.config.annotation.DubboService;
 
-import javax.annotation.Resource;
+import org.springframework.stereotype.Service;
+
 import java.math.BigDecimal;
 
 /**
@@ -13,13 +14,13 @@ import java.math.BigDecimal;
  * @date: 2020-07-21 17:35
  * @description:
  */
-@DubboService
+@Service
 public class AccountServiceImpl implements AccountService {
 
-    @Resource
+    @Reference
     RedPacketAccountService redPacketAccountService;
 
-    @Resource
+    @Reference
     CapitalService capitalService;
 
     @Override

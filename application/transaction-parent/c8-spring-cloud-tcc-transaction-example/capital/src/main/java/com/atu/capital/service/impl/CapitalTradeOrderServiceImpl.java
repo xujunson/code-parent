@@ -1,13 +1,14 @@
 package com.atu.capital.service.impl;
 
+import com.alibaba.dubbo.config.annotation.Reference;
+import com.alibaba.dubbo.config.annotation.Service;
+import com.atu.capital.service.CapitalTradeOrderService;
+import com.atu.capital.service.dto.CapitalTradeOrderDto;
 import com.atu.domain.capital.model.CapitalAccount;
 import com.atu.domain.capital.model.TradeOrder;
 import com.atu.domain.capital.service.CapitalAccountService;
 import com.atu.domain.capital.service.TradeOrderService;
-import com.atu.capital.service.CapitalTradeOrderService;
-import com.atu.capital.service.dto.CapitalTradeOrderDto;
 import org.apache.commons.lang3.time.DateFormatUtils;
-import org.apache.dubbo.config.annotation.DubboService;
 import org.mengyun.tcctransaction.api.Compensable;
 import org.mengyun.tcctransaction.context.MethodTransactionContextEditor;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -21,13 +22,13 @@ import java.util.Calendar;
  * @date: 2020-07-21 17:24
  * @description:
  */
-@DubboService
+@Service
 public class CapitalTradeOrderServiceImpl implements CapitalTradeOrderService {
 
-    @Resource
+    @Reference
     CapitalAccountService capitalAccountService;
 
-    @Resource
+    @Reference
     TradeOrderService tradeOrderService;
 
     @Override

@@ -1,9 +1,9 @@
 package com.atu.domain.order.service.impl;
 
+import com.alibaba.dubbo.config.annotation.Service;
 import com.atu.domain.order.entity.Shop;
 import com.atu.domain.order.repository.ShopRepository;
 import com.atu.domain.order.service.ShopService;
-import org.apache.dubbo.config.annotation.DubboService;
 
 import javax.annotation.Resource;
 
@@ -12,7 +12,7 @@ import javax.annotation.Resource;
  * @date: 2020-07-22 15:23
  * @description:
  */
-@DubboService
+@Service
 public class ShopServiceImpl implements ShopService {
     @Resource
     ShopRepository shopRepository;

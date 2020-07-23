@@ -1,25 +1,29 @@
 package com.atu.domain.redpacket.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import java.math.BigDecimal;
 
 @Entity
+@Table(name = "RED_TRADE_ORDER")
 public class TradeOrder {
 
     @Id
+    @Column(name = "ID")
     private long id;
-
+    @Column(name = "SELF_USER_ID")
     private long selfUserId;
-
+    @Column(name = "OPPOSITE_USER_ID")
     private long oppositeUserId;
-
+    @Column(name = "MERCHANT_ORDER_NO")
     private String merchantOrderNo;
-
+    @Column(name = "AMOUNT")
     private BigDecimal amount;
-
+    @Column(name = "STATUS")
     private String status = "DRAFT";
-
+    @Column(name = "VERSION")
     private long version = 1l;
 
     public TradeOrder() {

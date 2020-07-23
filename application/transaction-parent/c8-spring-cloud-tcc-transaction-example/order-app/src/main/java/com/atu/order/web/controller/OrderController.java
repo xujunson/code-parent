@@ -1,6 +1,8 @@
 package com.atu.order.web.controller;
 
 
+import com.atu.domain.redpacket.model.TradeOrder;
+import com.atu.domain.redpacket.service.TradeOrderServiceT;
 import com.atu.order.service.AccountService;
 import com.atu.order.service.PlaceOrderService;
 import com.atu.order.web.controller.vo.PlaceOrderRequest;
@@ -28,7 +30,6 @@ import java.util.List;
  * @description:
  */
 @Controller
-@RequestMapping("")
 public class OrderController {
 
     @Resource
@@ -42,7 +43,8 @@ public class OrderController {
 
     @Resource
     OrderDomainService orderService;
-
+    @Resource
+    private TradeOrderServiceT tradeOrderServiceT;
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView index() {
         ModelAndView mv = new ModelAndView("/index");
@@ -61,6 +63,13 @@ public class OrderController {
         mv.addObject("shopId", shopId);
 
         return mv;
+    }
+
+    @RequestMapping(value = "/test", method = RequestMethod.GET)
+    public String getProductsInShop() {
+        TradeOrder tradeOrder = tradeOrderServiceT.findByMerchantOrderNo("f91bb32479ee4779a6cc266c3657ac96");
+        System.out.println(tradeOrder.toString());
+        return "123";
     }
 
     @RequestMapping(value = "/user/{userId}/shop/{shopId}/product/{productId}/confirm", method = RequestMethod.GET)
