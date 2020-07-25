@@ -36,9 +36,9 @@ public class TccConfig {
         //tcc所需分布式事务日志数据源（也可以使用其他数据源框架）
         HikariDataSource hikariDataSource = new HikariDataSource();
         hikariDataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        hikariDataSource.setJdbcUrl("jdbc:mysql://39.97.114.213:3306/tcc?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=CTT");
+        hikariDataSource.setJdbcUrl("jdbc:mysql://127.0.0.1:3306/tcc?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=CTT");
         hikariDataSource.setUsername("root");
-        hikariDataSource.setPassword("Atu-1995");
+        hikariDataSource.setPassword("123456");
         springJdbcTransactionRepository.setDataSource(hikariDataSource);
 
         return springJdbcTransactionRepository;
