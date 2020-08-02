@@ -383,5 +383,17 @@ HTTP和HTTPS的区别：
 6、HTTPS真的很安全吗？
 那倒未必。
  1)、浏览器默认填充http://，请求需要进行跳转，有被劫持的风险；
- 2)、可以使用HSTS(HTTP Strict Transport Security)优化
- 3)、
+ 2)、可以使用HSTS(HTTP Strict Transport Security)优化。
+
+### 8.socket相关
+两个进程如果需要通信最基本的一个前提是能够唯一的标识一个进程。在本地进程通信中我们可以使用PID来唯一标识一个进程，
+但是PID只在本地唯一，网络中的两个进程PID冲突的几率还是有的，此时就需要另辟蹊径。
+
+IP层的IP地址可以唯一标识一台主机，而TCP协议和端口号可以唯一标识主机的一个进程，这样我们可以利用IP+协议+端口号来唯一标识网络中的一个进程。
+能够标识之后，它们就可以用socket进行通信了。
+![binaryTree](../atu/img/Socket简介.png "binaryTree")
+
+![binaryTree](../atu/img/Socket通信流程.png "binaryTree")
+
+Socket相关的面试题：
+![binaryTree](../atu/img/Socket相关面试题.png "binaryTree")
