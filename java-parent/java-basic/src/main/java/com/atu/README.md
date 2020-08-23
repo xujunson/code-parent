@@ -632,3 +632,15 @@ InnoDB：
   b、不走索引：当当前读不走索引的时候，它会对所有的Gap都上锁；这种情况要避免，会降低数据库效率。
   
  总结：innodb RR级别主要通过引用next-key锁来避免幻读问题。
+
+#### 2.3 重点语法(*)
+ 1)、GROUP BY：分组统计
+  a、满足"SELECT子句中的列名必须为分组列或列函数"；
+  b、列函数对于group by子句定义的每个组各返回一个结果；
+ 2)、HAVING：
+  a、通常与GROUP BY子句一起使用，当它在GROUP BY子句使用时，我们可以应用它在GROUP BY子句之后来指定过滤的条件，
+   如果省略了GROUP BY子句，HAVING子句的行为就想WHERE子句一样，HAVING支持所有WHERE操作符；
+  b、WHERE过滤行，HAVING过滤组；
+  c、出现在同一SQL的顺序：WHERE>GROUP BY>HAVING
+ 3)、统计相关：COUNT、SUM、MAX、MIN、AVG
+ 
