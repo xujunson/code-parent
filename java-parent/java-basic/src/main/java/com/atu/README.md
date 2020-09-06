@@ -902,3 +902,65 @@ Hash环的数据倾斜问题。
  即对每一个服务器节点计算多个Hash。
 
 结合Redis集群技术，我们还可以在期间引入主从同步，redis哨兵机制，来进一步确保集群的高可用。
+
+### 4.Linux
+#### 4.1 Linux的体系结构
+ a、体系结构主要分为用户态(用户上层活动)和内核态
+ b、内核：本质是一段管理计算机硬件设备的程序
+ c、系统调用：内核的访问接口，是一种不能在简化的操作
+ d、公共函数库：系统调用的组合拳
+ e、Shell(*)：命令解释器，可编程
+
+#### 4.2 查找特定文件
+find：find path [options] params
+ 作用：在指定目录下查找文件；
+  a、find ~ -name "fineName"：精准查找文件
+  b、find ~ -name "target*"：模糊查找文件
+  c、find ~ -iname "target*"：不区分文件名大小写去查找文件
+  d、man find：更多关于find指令的使用说明
+
+#### 4.3 检索文件内容
+grep：grep [options] pattern file
+ 全称：Global Regular Expression Print
+ 作用：查找文件里符合条件的字符串
+
+管道操作符 |：
+ a、可将指令连接起来，前一个指令的输出作为后一个指令的输入
+ b、需要注意的是只处理前一个命令正确输出，不处理错误输出
+ c、管道命令右边的命令必须能够接收标准输入流，否则传递过程中数据会被抛弃
+
+面试里常用的方式：
+ a、grep 'partial\[true\]' bsc-plat-al-data.info.log
+  作用：在内容里面查找包含某个字段的文件，并将相关行给展示出来
+ b、grep -o 'engine\[[0-9a-z]*\]'
+  作用：通过选择 -o选项，筛选出相关的符合正则表达式的内容；
+ c、grep -v 'grep'
+  作用：过滤掉包含相关字符串的内容
+
+#### 4.4 对日志内容做统计
+awk：awk [options] 'cmd' file
+ a、一次读取一行文本，按输入分隔符进行切片，切成多个组成部分
+ b、将切片直接保存在内建的变量中，$1，$2...($0表示行的全部)
+ c、支持对单个切片的判断，支持循环判断，默认分隔符为空格
+
+面试里常用的方式：
+ a、awk '{print $1,$4}' xxx.txt
+  作用：筛选出文件内容里某些列的数据
+ b、awk '$1=="tcp"' && $2==1{print $0}' xxx.txt
+  作用：依据一定条件筛选出文件内容里某些列的数据
+ c、awk '{enginearr[$1]++}END{for{i in enginearr}print i"\t"enginearr[i]}'
+  作用：对内容逐行做统计操作，并列出对应的统计结果
+ 
+#### 4.5 批量替换文件内容
+sed：sed [option] 'sed command' filename
+ a、全名stream editor，流编辑器
+ b、适合用于对文本的行内容进行处理
+
+面试里常用的方式
+ a、sed -i 's/^Str/String/' xxx.java
+  作用：筛选出以Str打头的行，并将Str替换成String，-i直接在目标文本去修改
+ b、sed -i's/\.$/\;/' xxx.java
+  作用：筛选出 . 结尾的行，并将 . 替换成 ; 
+ c、sed -j's/Jack/me/g' xxx.java
+  作用：筛选出包含Jack的行，并将该字符串替换成me，g指的是对整行Jack都进行替换，没有g表示只替换该行第一次的Jack
+ d、sed还能进行删除行操作
