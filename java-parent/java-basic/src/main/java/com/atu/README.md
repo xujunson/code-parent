@@ -964,3 +964,18 @@ sed：sed [option] 'sed command' filename
  c、sed -j's/Jack/me/g' xxx.java
   作用：筛选出包含Jack的行，并将该字符串替换成me，g指的是对整行Jack都进行替换，没有g表示只替换该行第一次的Jack
  d、sed还能进行删除行操作
+
+### 5. Java底层知识：JVM
+问题：谈谈你对Java的理解
+ a、平台无关性
+ b、GC
+ c、语言特性
+ d、面向对象
+ e、类库
+ f、异常处理
+#### 5.1 Java如何实现平台无关
+Compile Once, Run Anywhere如何实现？
+ a、编译时：使用javac指令，编译的是java源码，即将源码编译生成字节码，并存入到对应的.class文件中；
+  class文件保存的就是java文件翻译成的二进制字节码，也就是说java类文件中的属性、方法、以及类中的常量信息都会分别存储在.class文件中；
+  
+ b、运行时
