@@ -975,9 +975,34 @@ sed：sed [option] 'sed command' filename
  d、面向对象
  e、类库
  f、异常处理
+
 #### 5.1 Java如何实现平台无关
-Compile Once, Run Anywhere如何实现？
- a、编译时：使用javac指令，编译的是java源码，即将源码编译生成字节码，并存入到对应的.class文件中；
+1、Compile Once, Run Anywhere如何实现？
+![binaryTree](../atu/img/Java实现平台无关.png "binaryTree")
+ a、编译时：使用javac指令，编译的是java源码，即将源码编译生成字节码，并存入到对应的 .class文件中；
   class文件保存的就是java文件翻译成的二进制字节码，也就是说java类文件中的属性、方法、以及类中的常量信息都会分别存储在.class文件中；
-  
+
  b、运行时
+ 
+  如何查看字节码：idea中使用javap指令
+  
+2、为什么JVM不直接将源码解析成机器码去执行？ 
+ a、准备工作：每次执行都需要各种检查，整体性能受到影响
+ b、兼容性：也可以将别的语言解析成字节码
+
+#### 5.2 JVM如何加载 .class文件
+1、Java虚拟机
+ 虚拟机是一种抽象化的计算机，通过在实际的计算机上仿真模拟各种计算机功能来实现的，
+JVM有自己完善的硬件架构，如处理器、堆、栈、寄存器等，还具有相应的指令系统。
+Java虚拟机屏蔽了与具体操作系统平台相关的信息，使得Java程序只需生成在Java虚拟机上运行的目标代码(字节码)，
+就可以在多种平台上不加修改地运行。
+
+JVM的两块核心：JVM内存结构模型、GC。
+JVM是一个内存中的虚拟机，也就意味着JVM的存储就是内存，我们所写的所有类、常量、变量、方法都在内存中，
+这决定着我们程序是否运行的健壮，是否高效。
+
+![binaryTree](../atu/img/Java虚拟机.png "binaryTree")
+
+2、JVM如何加载 .class文件？
+ JVM主要有 Class Loader、Runtime Data Area、Execution Engine以及Native Interface这四部分组成，
+它主要通过Class Loader将符合其格式要求的class文件加载到内存，并通过Execution Engine去解析class文件的字节码并提交给操作系统去执行。
