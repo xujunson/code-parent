@@ -1006,3 +1006,11 @@ JVM是一个内存中的虚拟机，也就意味着JVM的存储就是内存，�
 2、JVM如何加载 .class文件？
  JVM主要有 Class Loader、Runtime Data Area、Execution Engine以及Native Interface这四部分组成，
 它主要通过Class Loader将符合其格式要求的class文件加载到内存，并通过Execution Engine去解析class文件的字节码并提交给操作系统去执行。
+
+#### 5.3 什么是反射
+ Java反射机制是在运行状态中，对于任意一个类，都能够知道这个类恶毒所有属性和方法；
+对于任何一个对象，都能够调用它的任意方法和属性；这种动态获取信息以及动态调用对象方法的功能成为java语言的反射机制。
+
+1、写一个反射的例子
+ReflectSample.java
+通过例子可以了解到，反射就是把java类中的各种成分映射成一个个的java对象。
