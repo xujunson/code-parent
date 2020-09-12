@@ -1014,3 +1014,49 @@ JVM是一个内存中的虚拟机，也就意味着JVM的存储就是内存，�
 1、写一个反射的例子
 ReflectSample.java
 通过例子可以了解到，反射就是把java类中的各种成分映射成一个个的java对象。
+
+#### 5.4 谈谈ClassLoader
+1、类从编译到执行的过程
+ a、编译器将Robot.java源文件编译为Robot.class字节码文件
+ b、ClassLoader——类加载器将字节码转换为JVM中的Class<Robot>对象
+ c、JVM利用Class<Robot>对象实例化为Robot对象
+
+2、谈谈ClassLoader
+ ClassLoader在Java中有着非常重要的作用，它主要工作在Class装载的加载阶段，其主要作用是从系统外部获得Class二进制数据流。
+它是Java的核心组件，所有的Class都是由ClassLoader进行加载的，ClassLoader负责通过将Class文件里的二进制数据流装载进系统，
+然后交给Java虚拟机进行连接，初始化等操作。
+
+3、ClassLoader的种类
+ a、BootStrapClassLoader：C++编写，加载核心库java.*
+ b、ExtClassLoader：Java编写，加载扩展库javax.*
+ c、AppClassLoader：Java编写，加载程序所在目录
+ d、自定义ClassLoader：Java编写，定制化加载
+
+4、自定义ClassLoader实现
+MyClassLoader.java
+ 关键函数：findClass、defineClass
+
+#### 5.5 谈谈ClassLoader的双亲委派机制
+![binaryTree](../atu/img/类加载器的双亲委派机制.png "binaryTree")
+为什么要使用双亲委派机制去加载类？
+ 避免多份同样字节码的加载
+
+#### 5.6 loadClass和forName的区别
+1、类的加载方式
+ a、隐式加载：new
+ b、显式加载：loadClass，forName等
+ 对于显式加载来讲，当我们获取到class对象之后需要调用class对象的newInstance方法来生成对象的实例，
+而通过new来隐式加载则无需调用类对象的newInstance方法即可获取实例，并且new支持调用带参数的构造器，
+生成带参数的实例，而class对象的newInstance方法不支持传入参数，需要通过反射调用构造器对象的newInstance方法才能支持参数。
+
+2、loadClass和forName的区别
+ 首先，它们都能在运行时对任意一个类，都能够知道该类的所有属性和方法，对于任意一个对象，都能调用它的任意方法和属性。
+Class.forName得到的class是已经初始化完成的，而Classloader.loadClass得到的class是还没有链接的，
+
+3、类的装载过程(class对象的生成过程)：
+ a、加载：通过ClassLoader加载class文件字节码，生成Class对象
+ b、链接：
+  (1)、校验：检查加载的class的正确性和安全性
+  (2)、准备：为类变量(static变量)分配存储空间并设置类变量初始值
+  (3)、解析(可选)：JVM将常量池内的符号引用转换为直接引用
+ c、初始化：执行类变量赋值和静态代码块
