@@ -1377,3 +1377,24 @@ JVM的运行模式：
  c、每个进程对应一个JVM实例，多个线程共享JVM里的堆
  d、Java采用单线程编程模型，程序会自动创建主线程
  e、主线程可以创建子线程，原则上要后于子线程完成执行
+
+#### 7.2 Thread中的start和run方法的区别
+ a、调用start()方法会创建一个新的子线程并启动
+ b、run()方法只是Thread的一个普通方法的调用
+
+#### 7.3 Thread和Runnable是什么关系
+ a、Thread是实现了Runnable接口的类，使得run支持多线程
+ b、因类的单一继承原则，推荐多使用Runnable接口
+
+#### 7.4 如何处实现处理线程的返回值
+ 1、如何给run()方法传参？
+  a、构造函数传参
+  b、成员变量传参
+  c、回调函数传参
+ 2、如何实现处理线程的返回值？
+  a、主线程等待法——CycleWait.java
+   缺点：循环多久不确定
+  b、使用Thread类的join()阻塞当前线程以等待子线程处理完毕
+   比主线程等待更精准，缺点：粒度不够细
+  c、通过Callable接口实现：通过FutureTask Or线程池获取
+   FutureTaskDemo.java、ThreadPoolDemo.java
