@@ -1398,3 +1398,34 @@ JVM的运行模式：
    比主线程等待更精准，缺点：粒度不够细
   c、通过Callable接口实现：通过FutureTask Or线程池获取
    FutureTaskDemo.java、ThreadPoolDemo.java
+
+#### 7.5 线程的状态
+![binaryTree](../atu/img/线程的状态.png "binaryTree")
+
+#### 7.6 sleep和wait的区别
+ 基本的差别：
+  a、sleep是Thread类的方法，wait是Object类中定义的方法；
+  b、sleep()方法可以在任何地方使用
+  c、wait()方法只能在synchronized方法或者synchronized块中使用
+ 最主要的本质区别
+  a、Thread.sleep只会让出CPU,不会导致锁行为额度改变
+  b、Object.wait不仅让出CPU,还会释放已占有的同步资源锁
+  WaitSleepDemo.java
+
+#### 7.7 notify和notifyAll的区别
+两个概念：
+ a、锁池EntryList
+ b、等待池WaitSet
+![binaryTree](../atu/img/锁池.png "binaryTree")
+![binaryTree](../atu/img/等待池.png "binaryTree")
+
+区别：
+ a、notifyAll会让所有处于等待池的线程全部进入锁池去竞争获取锁的机会；
+ b、notify只会随机选取一个处于等待池中的线程进入锁池去竞争获取锁的机会；
+ NotificationDemo.java
+ 
+#### 7.8 yield函数
+YieldDemo.java
+#### 7.9 如何中断线程
+InterruptDemo.java
+#### 7.10 前述方法及线程状态总结
