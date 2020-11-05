@@ -1429,3 +1429,21 @@ YieldDemo.java
 #### 7.9 如何中断线程
 InterruptDemo.java
 #### 7.10 前述方法及线程状态总结
+
+### 8.Java多线程与并发-原理
+#### 8.1 synchronized
+1、线程安全的主要诱因：
+ a、存在共享数据(也称临界资源)
+ b、存在多条线程共同操作这些共享数据
+ 
+2、解决问题的根本方法：
+ 同一时刻有且只有一个线程在操作共享数据，其他线程必须等到该线程处理完数据后再对共享数据进行操作。
+
+3、互斥锁的特性
+ 互斥性、可见性
+![binaryTree](../atu/img/互斥锁的特性.png "binaryTree")
+ synchronized锁的不是代码，锁的是对象。
+ 
+4、根据获取的锁的分类：获取对象锁和获取类锁
+![binaryTree](../atu/img/获取对象锁和获取类锁.png "binaryTree")
+![binaryTree](../atu/img/对象锁和类锁的总结.png "binaryTree")
