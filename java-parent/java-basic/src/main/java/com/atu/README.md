@@ -1476,3 +1476,20 @@ ReentrantLockDemo.java
 ![binaryTree](../atu/img/ReentrantLock将锁对象化.png "binaryTree")
 ![binaryTree](../atu/img/synchronized和ReentrantLock的区别-总结.png "binaryTree")
 
+#### 8.4 jmm的内存可见性
+![binaryTree](../atu/img/Java内存模型JMM.png "binaryTree")
+![binaryTree](../atu/img/JMM-主内存.png "binaryTree")
+![binaryTree](../atu/img/JMM-工作内存.png "binaryTree")
+![binaryTree](../atu/img/主内存与工作内存的数据存储类型以及操作方式归纳.png "binaryTree")
+![binaryTree](../atu/img/JMM如何解决可见性问题.png "binaryTree")
+![binaryTree](../atu/img/happens-before的八大原则.png "binaryTree")
+![binaryTree](../atu/img/happens-before的概念.png "binaryTree")
+![binaryTree](../atu/img/volatile.png "binaryTree")
+![binaryTree](../atu/img/volatile的可见性1.png "binaryTree")
+![binaryTree](../atu/img/volatile的可见性2.png "binaryTree")
+![binaryTree](../atu/img/volatile变量为何立即可见.png "binaryTree")
+![binaryTree](../atu/img/volatile如何禁止重排序优化.png "binaryTree")
+![binaryTree](img/单例双重检测实现-问题.png "binaryTree")
+![binaryTree](../atu/img/单例的双重检测实现-解决.png "binaryTree")
+
+![binaryTree](img/volatile和sychronized的区别.png "binaryTree")
