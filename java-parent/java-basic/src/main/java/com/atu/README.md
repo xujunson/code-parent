@@ -1447,3 +1447,26 @@ InterruptDemo.java
 4、根据获取的锁的分类：获取对象锁和获取类锁
 ![binaryTree](../atu/img/获取对象锁和获取类锁.png "binaryTree")
 ![binaryTree](../atu/img/对象锁和类锁的总结.png "binaryTree")
+
+#### 8.2 synchronized底层实现原理
+1、对象在内存中的布局
+ a、对象头
+ b、实例数据
+ c、对齐填充
+
+2、对象头
+![binaryTree](../atu/img/对象头的结构.png "binaryTree")
+![binaryTree](../atu/img/MarkWord.png "binaryTree")
+
+Monitor：每个Java对象天生自带了一把看不见的锁。
+![binaryTree](../atu/img/Monitor锁的竞争、获取与释放.png "binaryTree")
+Monitor对象存在于每个Java对象的对象头中，synchronized便是通过这种方式去获取锁的，这也是Java中任意对象可以作为锁的原因。
+![binaryTree](../atu/img/什么是重入.png "binaryTree")
+
+3、锁
+![binaryTree](../atu/img/偏向锁.png "binaryTree")
+![binaryTree](../atu/img/轻量级锁.png "binaryTree")
+![binaryTree](../atu/img/锁的内存语义.png "binaryTree")
+![binaryTree](../atu/img/偏向锁、轻量级锁、重量级锁的汇总.png "binaryTree")
+
+
