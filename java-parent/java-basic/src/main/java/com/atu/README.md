@@ -1469,4 +1469,10 @@ Monitor对象存在于每个Java对象的对象头中，synchronized便是通过
 ![binaryTree](../atu/img/锁的内存语义.png "binaryTree")
 ![binaryTree](../atu/img/偏向锁、轻量级锁、重量级锁的汇总.png "binaryTree")
 
+#### 8.3 synchronized和ReentrantLock
+![binaryTree](../atu/img/synchronized和ReentrantLock的区别.png "binaryTree")
+![binaryTree](../atu/img/ReentrantLock公平性的设置.png "binaryTree")
+ReentrantLockDemo.java
+![binaryTree](../atu/img/ReentrantLock将锁对象化.png "binaryTree")
+![binaryTree](../atu/img/synchronized和ReentrantLock的区别-总结.png "binaryTree")
 
