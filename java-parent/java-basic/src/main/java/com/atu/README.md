@@ -1493,3 +1493,30 @@ ReentrantLockDemo.java
 ![binaryTree](../atu/img/单例的双重检测实现-解决.png "binaryTree")
 
 ![binaryTree](img/volatile和sychronized的区别.png "binaryTree")
+
+#### 8.5 CAS
+ Compare and Swap，一阵高效实现线程安全的方法。
+  a、支持原子更新操作，适用于计数器，序列发生器等场景；
+  b、属于乐观锁机制，号称lock-free；
+  c、CAS操作失败时由开发者决定是继续尝试，还是执行别的操作；
+ 
+ 缺点：
+  a、若循环时间长，则开销很大
+  b、只能保证一个共享变量的原子操作
+  c、ABA问题
+
+#### 8.6 Java线程池
+![binaryTree](img/Java线程池.png "binaryTree")
+![binaryTree](img/Fork_Join框架.png "binaryTree")
+为什么要使用线程池？
+ a、降低资源消耗
+ b、提高线程的可管理性
+![binaryTree](img/JUC的三个Executor接口.png "binaryTree")
+![binaryTree](img/ThreadPoolExecutor的构造函数.png "binaryTree")
+![binaryTree](img/handler-线程池饱和策略.png "binaryTree")
+![binaryTree](img/新任务提交execute执行后的判断.png "binaryTree")
+![binaryTree](img/线程池的状态.png "binaryTree")
+![binaryTree](img/状态转换图.png "binaryTree")
+![binaryTree](img/工作线程的生命周期.png "binaryTree")
+![binaryTree](img/线程池大小如何选定.png "binaryTree")
+
