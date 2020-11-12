@@ -1520,3 +1520,34 @@ ReentrantLockDemo.java
 ![binaryTree](img/工作线程的生命周期.png "binaryTree")
 ![binaryTree](img/线程池大小如何选定.png "binaryTree")
 
+### 9.Java常用类库与技巧
+#### 9.1 Java异常体系
+1、异常处理机制主要回答了三个问题：
+ a、What：异常类型回答了什么被抛出
+ b、Where：异常堆栈跟踪回答了在哪抛出
+ c、Why：异常信息回答了为什么被抛出
+
+2、Error和Exception的区别
+ a、Error：程序无法处理的系统错误，编译器不做检查
+ b、Exception：程序可以处理的异常，捕获后可能恢复
+ c、总结：前者是程序无法处理的错误，后者是可以处理的异常
+
+3、Java的异常体系
+![binaryTree](img/Java的异常体系1.png "binaryTree")
+![binaryTree](img/Java的异常体系2.png "binaryTree")
+![binaryTree](img/常见Error以及Exception.png "binaryTree")
+
+#### 9.2 Java的异常处理机制
+1、Java的异常处理机制
+ a、抛出异常：创建异常对象，交由运行时系统处理
+ b、捕获异常：寻找适合的异常处理器处理异常，否则终止运行
+    注意：finally是先于return执行的逻辑。
+
+2、Java异常的处理原则
+![binaryTree](img/Java异常的处理原则.png "binaryTree")
+
+3、高效主流的异常处理框架
+![binaryTree](img/高效主流的异常处理框架.png "binaryTree")
+![binaryTree](img/try-catch的性能.png "binaryTree")
+建议，仅捕获可能出现异常的必要的代码段，不要用一个大try包，去包住整个代码段；
+异常的效率远没有if-else switch效率高。
