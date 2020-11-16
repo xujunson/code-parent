@@ -1551,3 +1551,24 @@ ReentrantLockDemo.java
 ![binaryTree](img/try-catch的性能.png "binaryTree")
 建议，仅捕获可能出现异常的必要的代码段，不要用一个大try包，去包住整个代码段；
 异常的效率远没有if-else switch效率高。
+
+#### 9.3 Collection体系
+![binaryTree](img/数据结构考点.png "binaryTree")
+![binaryTree](img/算法考点.png "binaryTree")
+![binaryTree](img/集合之List和Set.png "binaryTree")
+
+#### 9.4 HashMap-非线程安全
+(面试题) HashMap、HashTable、ConcurrentHashMap的区别？
+![binaryTree](img/HashMap_HashTable_ConcurrentHashMap的区别.png "binaryTree")
+![binaryTree](img/hashmap-put逻辑.png "binaryTree")
+HashMap：从获取hash到散列的过程
+![binaryTree](img/hashmap-扩容问题.png "binaryTree")
+![binaryTree](img/hashmap知识点.png "binaryTree")
+
+#### 9.5 ConcurrentHashMap
+早期的ConcurrentHashMap通过分段锁Segment实现——数组+链表。
+当前的ConcurrentHashMap：CAS+synchronized使锁更细化。数组+链表+红黑树。
+![binaryTree](img/ConcurrentHashMap-put的逻辑.png "binaryTree")
+![binaryTree](img/ConcurrentHashMap-总结.png "binaryTree")
+![binaryTree](img/ConcurrentHashMap-其他需要注意的点.png "binaryTree")
+
