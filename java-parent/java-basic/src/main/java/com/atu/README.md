@@ -1572,3 +1572,38 @@ HashMap：从获取hash到散列的过程
 ![binaryTree](img/ConcurrentHashMap-总结.png "binaryTree")
 ![binaryTree](img/ConcurrentHashMap-其他需要注意的点.png "binaryTree")
 
+#### 9.6 J.U.C知识点梳理
+java.util.concurrent：提供了并发编程的解决方案
+ a、CAS是java.util.concurrent.atomic包的基础
+ b、AQS是java.util.concurrent.locks包以及一些常用类比如Semophore，ReentrantLock等类的基础；
+
+J.U.C包的分类：
+ a、线程执行器executor
+ b、锁locks
+ c、原子变量类atomic
+ d、并发工具类tools
+ e、并发集合collections
+ 
+并发工具类：
+ 1)、闭锁 CountDownLatch：让主线程等待一组事件发生后继续执行
+  a、事件指的是CountDownLatch里的countDown()方法
+  
+ 2)、栅栏 CyclicBarrier：阻塞当前线程、等待其他线程
+  a、等待其它线程，且会阻塞自己当前线程，所有线程必须同时到达栅栏位置后，才能继续执行；
+  b、所有线程到达栅栏处，可以出发执行另外一个预先设置的线程；
+ 3)、信号量 Semaphore：控制某个资源可被同时访问的线程个数；
+ 4)、交换器 Exchanger：两个线程到达同步点后，相互交换数据
+
+队列：
+ 1)、BlockingQueue：提供可阻塞的入队和出队操作
+  主要用于生产者-消费者模式，在多线程场景时生产者线程在队列尾部添加元素，而消费者线程则在队列头部消费元素，
+  通过这种方式能够达到将任务的生成和消费进行隔离的目的。
+  ![binaryTree](img/BlockQueue实现.png "binaryTree")
+  
+#### 9.7 Java的IO机制
+(面试题) BIO、NIO、AIO区别？
+![binaryTree](img/BIO、NIO、AIO区别.png "binaryTree")
+1)、Block-IO：InputStream和OutputStream，Reader和Writer
+2)、NonBlock-IO：构建多路复用的、同步分阻塞的IO操作，由Channels、Buffers、Selectors核心组成；
+select、poll、epoll的区别；
+3)、Asynchronous IO：基于事件和回调机制
