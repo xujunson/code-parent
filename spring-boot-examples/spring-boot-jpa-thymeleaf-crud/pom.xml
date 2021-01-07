@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.atu</groupId>
-    <artifactId>sprint-boot-jpa-thymeleaf-curd</artifactId>
+    <artifactId>spring-boot-jpa-thymeleaf-curd</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>sprint-boot-jpa-thymeleaf-curd</name>
     <description>Demo project for Spring Boot</description>
