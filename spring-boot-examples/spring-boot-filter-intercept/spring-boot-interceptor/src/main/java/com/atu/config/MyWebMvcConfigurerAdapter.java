@@ -7,12 +7,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+
 @Configuration
 public class MyWebMvcConfigurerAdapter extends WebMvcConfigurerAdapter {
 
@@ -34,8 +29,9 @@ public class MyWebMvcConfigurerAdapter extends WebMvcConfigurerAdapter {
     /**
      * 以前要访问一个页面需要先创建个Controller控制类，在写方法跳转到页面
      * 在这里配置后就不需要那么麻烦了，直接访问http://localhost:8080/toLogin就跳转到login.html页面了
-     *  addViewController("/toLogin")，是URL路径，就是http://localhost:8080/toLogin
-     *  setViewName("/login")是HTML或JSP页面名称   login.html或login.jsp。
+     * addViewController("/toLogin")，是URL路径，就是http://localhost:8080/toLogin
+     * setViewName("/login")是HTML或JSP页面名称   login.html或login.jsp。
+     *
      * @param registry
      */
     @Override

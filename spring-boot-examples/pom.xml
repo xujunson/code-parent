@@ -34,5 +34,7 @@
         <module>spring-boot-jpa-demo</module>
         <module>spring-boot-rocketmq</module>
         <module>spring-boot-rocketmq-plus</module>
+        <module>spring-boot-filter_intercept/spring-boot-filter</module>
+        <module>spring-boot-filter-intercept/spring-boot-filter</module>
     </modules>
 </project>
