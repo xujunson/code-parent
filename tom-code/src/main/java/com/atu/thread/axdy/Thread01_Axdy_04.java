@@ -1,44 +1,46 @@
-package com.atu.thread.Axdy;
+package com.atu.thread.axdy;
 
-import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.Semaphore;
 
 /**
  * @author: Tom
- * @date: 2021-01-25 13:58
- * @description: CountDownLatch(减法计数器)
+ * @date: 2021-01-25 11:23
+ * @description: semaphore信号量
  */
-public class Thread01_Axdy_05 {
-    CountDownLatch countDownLatch12, countDownLatch23;
+public class Thread01_Axdy_04 {
+    Semaphore semaphore12, semaphore23;
 
-    public Thread01_Axdy_05() {
-        countDownLatch12 = new CountDownLatch(1);
-        countDownLatch23 = new CountDownLatch(1);
+    public Thread01_Axdy_04() {
+        //初始的允许请求均设为0
+        semaphore12 = new Semaphore(0);
+        semaphore23 = new Semaphore(0);
     }
 
     public void first(Runnable printFirst) throws InterruptedException {
-
         // printFirst.run() outputs "first". Do not change or remove this line.
         printFirst.run();
-        countDownLatch12.countDown();
+        //释放一个12的信号量
+        semaphore12.release();
     }
 
     public void second(Runnable printSecond) throws InterruptedException {
-        //等待计数器归零再向下执行
-        countDownLatch12.await();
+        //获取一个12的信号量，没有则阻塞
+        semaphore12.acquire();
         // printSecond.run() outputs "second". Do not change or remove this line.
         printSecond.run();
-        countDownLatch23.countDown();
+        //释放一个23的信号量
+        semaphore23.release();
     }
 
     public void third(Runnable printThird) throws InterruptedException {
-        //等待计数器归零再向下执行
-        countDownLatch23.await();
+        //获取一个23的信号量，没有则阻塞
+        semaphore23.acquire();
         // printThird.run() outputs "third". Do not change or remove this line.
         printThird.run();
     }
 
     public static void main(String[] args) {
-        final Thread01_Axdy_05 axdy_03 = new Thread01_Axdy_05();
+        final Thread01_Axdy_04 axdy_03 = new Thread01_Axdy_04();
 
 
         new Thread(new Runnable() {

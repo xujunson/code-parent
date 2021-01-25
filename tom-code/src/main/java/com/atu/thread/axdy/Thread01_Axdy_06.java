@@ -1,4 +1,4 @@
-package com.atu.thread.Axdy;
+package com.atu.thread.axdy;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.SynchronousQueue;
