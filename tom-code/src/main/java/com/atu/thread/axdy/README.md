@@ -21,8 +21,4 @@
 解释: 
 输入 [1,3,2] 表示线程 A 将会调用 first() 方法，线程 B 将会调用 third() 方法，线程 C 将会调用 second() 方法。
 正确的输出是 "firstsecondthird"。
-
-来源：力扣（LeetCode）
-链接：https://leetcode-cn.com/problems/print-in-order
-著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 ```
