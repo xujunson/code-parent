@@ -15,6 +15,9 @@ public class Test {
         melons.add(new Melon("羊角蜜", 1, "泰国"));
         melons.add(new Melon("西瓜", 2, "三亚"));
         melons.add(new Melon("黄河蜜", 3, "兰州"));
+
+
+        //注意：lambda表达式只能在函数式接口的上下文中使用
         List<Melon> watermelons = Filters.filter(melons, (Melon m) ->
                 "西瓜".equalsIgnoreCase(m.getType())
         );
