@@ -1,7 +1,6 @@
 package com.atu.design.codeoptimize.service;
 
 import com.atu.design.codeoptimize.enums.CompanyEnum;
-import com.atu.design.codeoptimize.service.AbstractCompanyCommonService;
 import com.atu.design.codeoptimize.vo.Request;
 import com.atu.design.codeoptimize.vo.Response;
 

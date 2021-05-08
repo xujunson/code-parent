@@ -14,6 +14,7 @@ import javax.annotation.Resource;
 public class CompanyHandler implements RequestHandler {
     @Resource
     CompanyServiceFactory companyServiceFactory;
+
     @Override
     public Response handler(Request request) {
         return companyServiceFactory.handler(request);

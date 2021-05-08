@@ -8,7 +8,7 @@ import com.atu.design.codeoptimize.vo.Response;
 /**
  * @Author: Tom
  * @Date: 2021/5/7 5:47 下午
- * @Description:
+ * @Description: 策略模式：定义个方法/接口，让子类自己去实现
  */
 public class CompanyCServiceImpl  extends AbstractCompanyCommonService {
     @Override

@@ -11,6 +11,7 @@
 [一段代码被老大要求重构了六次,我心态崩了](https://mp.weixin.qq.com/s/xenmzc30MHIW3_pqpBlg9A)
 
 设计二：codeoptimize
+
 [一次代码优化实践，用了模板方法+策略+工厂方法模式](https://mp.weixin.qq.com/s/3KPUyKCYyBvPudote-I58w)
 
 先来了解一下类似的业务场景，简言之，就是：多个商户接入我们系统，都是走一个类似的流程通过http请求出去的。
