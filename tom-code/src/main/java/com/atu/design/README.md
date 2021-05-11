@@ -8,8 +8,6 @@
 5. 一次性加了100个过滤条件
 6. 引入泛型
 
-[一段代码被老大要求重构了六次,我心态崩了](https://mp.weixin.qq.com/s/xenmzc30MHIW3_pqpBlg9A)
-
 设计二：codeoptimize
 
 [一次代码优化实践，用了模板方法+策略+工厂方法模式](https://mp.weixin.qq.com/s/3KPUyKCYyBvPudote-I58w)
