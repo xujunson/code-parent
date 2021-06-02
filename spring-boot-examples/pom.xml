@@ -36,5 +36,8 @@
         <module>spring-boot-rocketmq-plus</module>
         <module>spring-boot-filter_intercept/spring-boot-filter</module>
         <module>spring-boot-filter-intercept/spring-boot-filter</module>
+        <module>spring-boot-admin</module>
+        <module>spring-boot-admin/spring-boot-admin-server</module>
+        <module>spring-boot-admin/spring-boot-admin-client_a</module>
     </modules>
 </project>
