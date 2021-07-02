@@ -38,5 +38,6 @@
         <module>spring-boot-admin/spring-boot-admin-server</module>
         <module>spring-boot-admin/spring-boot-admin-client_a</module>
         <module>spring-boot-admin/spring-boot-actuator</module>
+        <module>webflux/webflux-helloworld</module>
     </modules>
 </project>
