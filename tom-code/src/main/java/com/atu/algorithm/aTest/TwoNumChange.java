@@ -1,4 +1,4 @@
-package com.atu.algorithm;
+package com.atu.algorithm.aTest;
 
 /**
  * @Author: Tom
