@@ -1,5 +1,7 @@
 package com.atu.algorithm.bLinked;
 
+import com.atu.algorithm.bLinked.vo.ListNode;
+
 /**
  * @Author: Tom
  * @Date: 2021/7/8 5:44 下午
@@ -50,11 +52,3 @@ public class ReverseList {
     }
 }
 
-class ListNode {
-    int val;
-    ListNode next = null;
-
-    ListNode(int val) {
-        this.val = val;
-    }
-}
