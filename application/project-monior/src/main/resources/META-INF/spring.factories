@@ -1,0 +1,5 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.souche.monitor.scheduled.CheckTask,\
+  com.souche.monitor.config.SigarConfig,\
+  com.souche.monitor.service.ResourceCheckService,\
+  com.souche.monitor.config.AppConfig
