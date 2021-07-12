@@ -5,8 +5,10 @@ import org.junit.Test;
 import reactor.core.publisher.Flux;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 import static java.lang.Thread.sleep;
 
@@ -52,8 +54,15 @@ public class ReactorTests {
 
     @Test
     public void testInterval() {
-        Flux.interval(Duration.ofSeconds(1))
-                .subscribe(System.out::println);
+        /*Flux.interval(Duration.ofSeconds(1))
+                .subscribe(System.out::println);*/
+
+        List<Integer> list = new ArrayList<>();
+        list.add(1);
+        Stream<Integer> stream = list.stream()
+                .map(a -> a = a + 2)
+                .map(a -> a = a / 2).map(a->a*3);
+        System.out.println(stream.findFirst().orElse(0));
     }
 
 
