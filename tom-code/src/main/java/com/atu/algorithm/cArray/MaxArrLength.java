@@ -17,6 +17,7 @@ public class MaxArrLength {
      * @return int整型
      */
     public static int maxLength(int[] arr) {
+        //解法1：双指针法
         if (null == arr) return 0;
         int maxVal = 0;
         Map<Integer, Integer> map = new HashMap<>();
