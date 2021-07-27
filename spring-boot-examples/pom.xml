@@ -40,5 +40,6 @@
         <module>spring-boot-admin/spring-boot-actuator</module>
         <module>webflux/webflux-helloworld</module>
         <module>spring-boot-advice</module>
+        <module>spring-boot-kakfa/spring-boot-kakfa-demo</module>
     </modules>
 </project>
