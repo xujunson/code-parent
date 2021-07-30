@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 public class GetLeastNumbers {
     public ArrayList<Integer> getLeastNumbers(int[] input, int k) {
-        //解法1：冒泡排序
+        //解法1：冒泡排序 每次比较两个相邻的元素，如果它们的顺序错误就把它们交换过来。
         if (input == null) return null;
 
         // 不能把基本数据类型转化为列表
