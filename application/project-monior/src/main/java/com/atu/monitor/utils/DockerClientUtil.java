@@ -1,10 +1,12 @@
 package com.atu.monitor.utils;
 
-import com.alibaba.fastjson.JSON;
+
 import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.github.dockerjava.api.DockerClient;
 import com.github.dockerjava.api.command.CreateContainerResponse;
 import com.github.dockerjava.api.command.DockerCmdExecFactory;
+import com.github.dockerjava.api.command.StatsCmd;
 import com.github.dockerjava.api.model.ExposedPort;
 import com.github.dockerjava.api.model.Info;
 import com.github.dockerjava.api.model.Ports;
@@ -31,7 +33,7 @@ public class DockerClientUtil {
          *         apiVersion：dockerAPI的版本，通过docker version命令在docker服务器上获取版本号
          */
         DockerClientConfig config = DefaultDockerClientConfig.createDefaultConfigBuilder().withDockerTlsVerify(true)
-                .withDockerCertPath("D:/docker-java/").withDockerHost("tcp://192.168.184.128:2375")
+                .withDockerCertPath("D:/docker-java/").withDockerHost("tcp://192.168.137.140:2375")
                 .withDockerConfig("D:/docker-java/").withApiVersion("1.40").withRegistryUrl("https://index.docker.io/v1/")
                 .withRegistryUsername("dockeruser").withRegistryPassword("ilovedocker")
                 .withRegistryEmail("dockeruser@github.com").build();
@@ -43,7 +45,15 @@ public class DockerClientUtil {
         // 连接
         DockerClient dockerClient = DockerClientBuilder.getInstance(config).withDockerCmdExecFactory(dockerCmdExecFactory).build();
         Info info = dockerClient.infoCmd().exec();
-        log.info("docker的环境信息如下：=================", JSONObject.toJSON(info));
+
+        return dockerClient;
+    }
+    public DockerClient connectDockerAndLog(){
+        DockerClient dockerClient = DockerClientBuilder.getInstance("tcp://192.168.137.140:2375").build();
+        Info info = dockerClient.infoCmd().exec();
+
+        log.info("docker的环境信息如下:{}", JSONObject.toJSONString(info));
+        System.out.println(JSONObject.toJSONString(info));
         return dockerClient;
     }
 
@@ -106,9 +116,14 @@ public class DockerClientUtil {
     }
 
     public static void main(String[] args) {
-        DockerClient dockerClient = DockerClientBuilder.getInstance("http://10.104.6.208:2376").build();
+        /*DockerClient dockerClient = DockerClientBuilder.getInstance("tcp://192.168.137.140:2375").build();
         Info info = dockerClient.infoCmd().exec();
-        System.out.print(info);
+        System.out.print(info);*/
+        DockerClientUtil dockerClientService =new DockerClientUtil();
+        //连接docker服务器
+        DockerClient client = dockerClientService.connectDockerAndLog();
+        StatsCmd statsCmd = client.statsCmd("bd77fab91456");
+        System.out.println(JSONObject.toJSONString(statsCmd));
     }
 
 }
