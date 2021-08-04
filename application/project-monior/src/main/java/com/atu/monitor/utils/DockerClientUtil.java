@@ -4,17 +4,24 @@ package com.atu.monitor.utils;
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.github.dockerjava.api.DockerClient;
+import com.github.dockerjava.api.async.ResultCallback;
 import com.github.dockerjava.api.command.CreateContainerResponse;
 import com.github.dockerjava.api.command.DockerCmdExecFactory;
 import com.github.dockerjava.api.command.StatsCmd;
 import com.github.dockerjava.api.model.ExposedPort;
 import com.github.dockerjava.api.model.Info;
 import com.github.dockerjava.api.model.Ports;
+import com.github.dockerjava.api.model.Statistics;
 import com.github.dockerjava.core.DefaultDockerClientConfig;
 import com.github.dockerjava.core.DockerClientBuilder;
 import com.github.dockerjava.core.DockerClientConfig;
 import com.github.dockerjava.jaxrs.JerseyDockerCmdExecFactory;
 import lombok.extern.slf4j.Slf4j;
+
+import java.io.BufferedReader;
+import java.io.Closeable;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 /**
  * @Author: Tom
@@ -23,6 +30,8 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 public class DockerClientUtil {
+    private static String stats;
+
     public DockerClient connectDocker() {
         /**
          * 连接docker服务器(安全认证方式)
@@ -48,7 +57,8 @@ public class DockerClientUtil {
 
         return dockerClient;
     }
-    public DockerClient connectDockerAndLog(){
+
+    public DockerClient connectDockerAndLog() {
         DockerClient dockerClient = DockerClientBuilder.getInstance("tcp://192.168.137.140:2375").build();
         Info info = dockerClient.infoCmd().exec();
 
@@ -115,15 +125,73 @@ public class DockerClientUtil {
         client.removeImageCmd(imageId).exec();
     }
 
+    public void stat() {
+
+        new Thread(new Runnable() {
+            public void run() {
+                try {
+                    System.out.println("开始监控程序...");
+                    String statCmd = "docker stats ";
+                    BufferedReader br = new BufferedReader(
+                            new InputStreamReader(Runtime.getRuntime().exec(statCmd).getInputStream()));
+                    // StringBuffer b = new StringBuffer();
+                    String line = null;
+                    StringBuffer b = new StringBuffer();
+                    while ((line = br.readLine()) != null) {
+                        if (line.indexOf("NAME") != -1 && b.length() != 0) {
+                            stats = b.toString();
+                            System.out.println("监控结果：" + stats);
+                            b.delete(0, b.length());
+                            b.append(
+                                    "<span style='background-color: #0033dd;font-size:20px'>CONTAINER ID        NAME             CPU %           MEM USAGE / LIMIT     MEM %               NET I/O             BLOCK I/O     PIDS</span><br/>");
+                        } else {
+                            b.append(line + "<br/>");
+                        }
+
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+        //statsbegin = true;
+
+    }
+
+
     public static void main(String[] args) {
         /*DockerClient dockerClient = DockerClientBuilder.getInstance("tcp://192.168.137.140:2375").build();
         Info info = dockerClient.infoCmd().exec();
         System.out.print(info);*/
-        DockerClientUtil dockerClientService =new DockerClientUtil();
+        DockerClientUtil dockerClientService = new DockerClientUtil();
         //连接docker服务器
         DockerClient client = dockerClientService.connectDockerAndLog();
-        StatsCmd statsCmd = client.statsCmd("bd77fab91456");
-        System.out.println(JSONObject.toJSONString(statsCmd));
+        ResultCallback<Statistics> result = client.statsCmd("bd77fab91456").exec(new ResultCallback<Statistics>() {
+
+            @Override
+            public void close() throws IOException {
+
+            }
+
+            @Override
+            public void onStart(Closeable closeable) {
+
+            }
+
+            @Override
+            public void onNext(Statistics statistics) {
+                log.info("statistics", JSONObject.toJSONString(statistics));
+            }
+
+            @Override
+            public void onError(Throwable throwable) {
+            }
+
+            @Override
+            public void onComplete() {
+            }
+        });
+        System.out.println(JSONObject.toJSONString(result));
     }
 
 }
