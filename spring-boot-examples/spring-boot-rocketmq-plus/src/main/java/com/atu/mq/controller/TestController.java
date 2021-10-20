@@ -1,6 +1,6 @@
 package com.atu.mq.controller;
 
-import com.atu.mq.send.SendMessageService;
+import com.atu.mq.send.ProducerSchedule;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,10 +15,10 @@ import javax.annotation.Resource;
 @RestController
 public class TestController {
     @Resource
-    private SendMessageService sendMessageService;
+    private ProducerSchedule producerSchedule;
 
     @RequestMapping(value = "/rocketTest", method = {RequestMethod.POST})
-    public void approveInfoQuery() {
-        sendMessageService.sendMessage("1222");
+    public void rocketTest() {
+        producerSchedule.send("atu-topic", "123456");
     }
 }
