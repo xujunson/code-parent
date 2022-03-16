@@ -7,7 +7,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.slf4j.MDC;
 
 @Slf4j
-@Activate(group = {Constants.CONSUMER})
 public class ConsumerFilter implements Filter {
 
     @Override

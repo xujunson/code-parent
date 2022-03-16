@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class HelloService {
 
-    @Reference(filter = {"ConsumerFilter.class"})
+    @Reference(filter = {"ConsumerFilter"})
     private TestService testService;
 
     public String hello(){
