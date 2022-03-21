@@ -25,12 +25,6 @@
         <module>spring-boot-web</module>
         <module>sprint-boot-jpa-thymeleaf-crud</module>
         <module>sprint-boot-ws</module>
-        <module>spring-boot-dubbo/dubbo-client</module>
-        <module>spring-boot-dubbo/dubbo-interface</module>
-        <module>spring-boot-dubbo/dubbo-service</module>
-        <module>spring-boot-dubbo2/dubbo-demo2-interface</module>
-        <module>spring-boot-dubbo2/dubbo-demo2-service</module>
-        <module>spring-boot-dubbo2/dubbo-demo2-client</module>
         <module>spring-boot-jpa-demo</module>
         <module>spring-boot-rocketmq</module>
         <module>spring-boot-rocketmq-plus</module>
