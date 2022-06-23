@@ -1,5 +1,6 @@
-package com.atu.service;
+package com.atu.service.impl;
 
+import com.atu.service.ArithmeticCalculator;
 import org.springframework.stereotype.Service;
 
 /**
@@ -11,25 +12,25 @@ import org.springframework.stereotype.Service;
 public class ArithmeticCalculatorImpl implements ArithmeticCalculator {
     @Override
     public int add(int i, int j) {
-        int relust = i + j;
-        return relust;
+        int result = i + j;
+        return result;
     }
 
     @Override
     public int sub(int i, int j) {
-        int relust = i - j;
-        return relust;
+        int result = i - j;
+        return result;
     }
 
     @Override
     public int mul(int i, int j) {
-        int relust = i * j;
-        return relust;
+        int result = i * j;
+        return result;
     }
 
     @Override
     public int div(int i, int j) {
-        int relust = i / j;
-        return relust;
+        int result = i / j;
+        return result;
     }
 }
