@@ -8,23 +8,25 @@ import com.atu.common.model.SysOperLog;
 import com.atu.common.utils.IPUtils;
 import com.atu.common.utils.ServletUtils;
 import com.atu.service.impl.AsyncService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.AfterThrowing;
-import org.aspectj.lang.annotation.Aspect;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.*;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.HandlerMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -32,11 +34,43 @@ import java.util.Map;
  * @Date: 2022/6/23 11:25
  * @Description:
  */
-
+@Slf4j
 @Aspect
 @Component
 public class LogAspect {
-    private static final Logger log = LoggerFactory.getLogger(LogAspect.class);
+
+    @Pointcut("execution(* com.atu.web.LogController..*(..))")
+    public void requestServer() {
+    }
+
+    @Before("requestServer()")
+    public void doBefore(JoinPoint joinPoint) {
+        ServletRequestAttributes attributes = (ServletRequestAttributes)
+                RequestContextHolder.getRequestAttributes();
+        HttpServletRequest request = attributes.getRequest();
+
+        log.info("===============================Start========================");
+        log.info("IP                 : {}", request.getRemoteAddr());
+        log.info("URL                : {}", request.getRequestURL().toString());
+        log.info("HTTP Method        : {}", request.getMethod());
+        log.info("Class Method       : {}.{}", joinPoint.getSignature().getDeclaringTypeName(), joinPoint.getSignature().getName());
+    }
+
+    @Around("requestServer()")
+    public Object doAround(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+        long start = System.currentTimeMillis();
+        Object result = proceedingJoinPoint.proceed();
+        log.info("Request Params       : {}", getRequestParams(proceedingJoinPoint));
+        log.info("Result               : {}", result);
+        log.info("Time Cost            : {} ms", System.currentTimeMillis() - start);
+
+        return result;
+    }
+
+    @After("requestServer()")
+    public void doAfter(JoinPoint joinPoint) {
+        log.info("===============================End========================");
+    }
 
     /**
      * 处理完请求后执行
@@ -177,5 +211,28 @@ public class LogAspect {
         }
         return o instanceof MultipartFile || o instanceof HttpServletRequest || o instanceof HttpServletResponse
                 || o instanceof BindingResult;
+    }
+
+    private Map<String, Object> getRequestParams(ProceedingJoinPoint proceedingJoinPoint) {
+        Map<String, Object> requestParams = new HashMap<>();
+
+        //参数名
+        String[] paramNames = ((MethodSignature) proceedingJoinPoint.getSignature()).getParameterNames();
+        //参数值
+        Object[] paramValues = proceedingJoinPoint.getArgs();
+
+        for (int i = 0; i < paramNames.length; i++) {
+            Object value = paramValues[i];
+
+            //如果是文件对象
+            if (value instanceof MultipartFile) {
+                MultipartFile file = (MultipartFile) value;
+                value = file.getOriginalFilename();  //获取文件名
+            }
+
+            requestParams.put(paramNames[i], value);
+        }
+
+        return requestParams;
     }
 }
