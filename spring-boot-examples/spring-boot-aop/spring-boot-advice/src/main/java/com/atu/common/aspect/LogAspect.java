@@ -120,7 +120,7 @@ public class LogAspect {
             AsyncService.me().execute(AsyncFactory.recordOper(operLog));
         } catch (Exception exp) {
             // 记录本地异常日志
-            log.error("==前置通知异常==");
+            log.error("==处理完请求后执行异常==");
             log.error("异常信息:{}", exp.getMessage());
             exp.printStackTrace();
         }
