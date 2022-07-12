@@ -23,8 +23,6 @@
         <module>spring-boot-scheduler</module>
         <module>spring-boot-shiro</module>
         <module>spring-boot-web</module>
-        <module>sprint-boot-jpa-thymeleaf-crud</module>
-        <module>sprint-boot-ws</module>
         <module>spring-boot-jpa-demo</module>
         <module>spring-boot-rocketmq</module>
         <module>spring-boot-rocketmq-plus</module>
@@ -33,7 +31,6 @@
         <module>spring-boot-admin/spring-boot-admin-client_a</module>
         <module>spring-boot-admin/spring-boot-actuator</module>
         <module>webflux/webflux-helloworld</module>
-        <module>spring-boot-advice</module>
         <module>spring-boot-kakfa/spring-boot-kakfa-demo</module>
         <module>spring-boot-sentinel/spring-boot-sentinel-demo</module>
         <module>spring-boot-es/spring-boot-es-demo</module>
