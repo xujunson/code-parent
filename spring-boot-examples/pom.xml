@@ -34,5 +34,7 @@
         <module>spring-boot-kakfa/spring-boot-kakfa-demo</module>
         <module>spring-boot-sentinel/spring-boot-sentinel-demo</module>
         <module>spring-boot-es/spring-boot-es-demo</module>
+        <module>spring-boot-mongodb</module>
+        <module>spring-boot-global-exception</module>
     </modules>
 </project>
