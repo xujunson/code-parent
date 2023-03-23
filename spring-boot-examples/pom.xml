@@ -10,31 +10,11 @@
     <name>spring-boot-examples</name>
     <description>spring-boot-examples parent!</description>
     <modules>
-        <module>spring-boot-async</module>
-        <module>spring-boot-extensible</module>
-        <module>spring-boot-file-upload</module>
-        <module>spring-boot-mail</module>
         <module>spring-boot-mybatis/spring-boot-mybatis-annotation</module>
         <module>spring-boot-mybatis/spring-boot-mybatis-annotation-mulidatasource</module>
         <module>spring-boot-mybatis/spring-boot-mybatis-xml</module>
         <module>spring-boot-mybatis/spring-boot-mybatis-xml-mulidatasource</module>
-        <module>spring-boot-rabbitmq</module>
-        <module>spring-boot-redis</module>
-        <module>spring-boot-scheduler</module>
-        <module>spring-boot-shiro</module>
         <module>spring-boot-web</module>
-        <module>spring-boot-jpa-demo</module>
-        <module>spring-boot-rocketmq</module>
-        <module>spring-boot-rocketmq-plus</module>
-        <module>spring-boot-filter-intercept/spring-boot-filter</module>
-        <module>spring-boot-admin/spring-boot-admin-server</module>
-        <module>spring-boot-admin/spring-boot-admin-client_a</module>
-        <module>spring-boot-admin/spring-boot-actuator</module>
         <module>webflux/webflux-helloworld</module>
-        <module>spring-boot-kakfa/spring-boot-kakfa-demo</module>
-        <module>spring-boot-sentinel/spring-boot-sentinel-demo</module>
-        <module>spring-boot-es/spring-boot-es-demo</module>
-        <module>spring-boot-mongodb</module>
-        <module>spring-boot-global-exception</module>
     </modules>
 </project>

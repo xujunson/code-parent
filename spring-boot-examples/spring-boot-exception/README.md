@@ -1,1 +1,0 @@
-Spring Boot全局异常处理整理：http://tengj.top/2018/05/16/springboot13/

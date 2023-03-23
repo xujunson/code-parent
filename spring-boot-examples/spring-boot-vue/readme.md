@@ -1,1 +1,0 @@
-springboot+vue+nginx简单实现前后端分离：https://zhuanlan.zhihu.com/p/60108135

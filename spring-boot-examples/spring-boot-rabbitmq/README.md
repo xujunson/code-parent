@@ -1,1 +1,0 @@
-rabbitMQ教程:https://www.cnblogs.com/dwlsxj/p/RabbitMQ.html
