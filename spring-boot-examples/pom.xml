@@ -16,5 +16,6 @@
         <module>spring-boot-mybatis/spring-boot-mybatis-xml-mulidatasource</module>
         <module>spring-boot-web</module>
         <module>webflux/webflux-helloworld</module>
+        <module>spring-boot-design/spring-boot-shardingsphere</module>
     </modules>
 </project>
