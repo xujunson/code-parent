@@ -13,7 +13,7 @@ public class CyclicBarrierDemo {
         CyclicBarrier cyclicBarrier = new CyclicBarrier(5, new Runnable() {
             @Override
             public void run() {
-                System.out.println("所有人都到场了， 大家统一出发！");
+                System.out.println("5 个人都已到达会议室");
             }
         });
 
@@ -34,17 +34,20 @@ public class CyclicBarrierDemo {
 
         @Override
         public void run() {
-            System.out.println("线程" + id + "现在前往集合地点");
+            System.out.println("第" + id + "出发去会议室");
+
             try {
                 Thread.sleep((long) (Math.random() * 10000));
-                System.out.println("线程" + id + "到了集合地点，开始等待其他人到达");
+                System.out.println("第" + id + "个人到达会议室");
+
+                // 等待其他人到会议室
                 cyclicBarrier.await();
-                System.out.println("线程" + id + "出发了");
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } catch (BrokenBarrierException e) {
                 e.printStackTrace();
             }
+            System.out.println(Thread.currentThread().getName()+"开始开会");
         }
     }
 }
