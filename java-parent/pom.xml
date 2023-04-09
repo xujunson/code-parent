@@ -14,6 +14,8 @@
         <module>java-high-concurrency/java-high-concurrency-core</module>
         <module>java-high-concurrency/java-high-concurrency-tools</module>
         <module>java-high-concurrency/hashmapendlessloop</module>
+        <module>java-agent/javaagent-demo</module>
+        <module>javaagent-example</module>
     </modules>
     <packaging>pom</packaging>
 
