@@ -1,0 +1,104 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>javaagent-demo01</artifactId>
+    <name>javaagent-demo01</name>
+    <groupId>com.atu</groupId>
+    <packaging>jar</packaging>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>javassist</groupId>
+            <artifactId>javassist</artifactId>
+            <version>3.12.1.GA</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>net.bytebuddy</groupId>
+            <artifactId>byte-buddy</artifactId>
+            <version>1.8.20</version>
+        </dependency>
+        <dependency>
+            <groupId>net.bytebuddy</groupId>
+            <artifactId>byte-buddy-agent</artifactId>
+            <version>1.8.20</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.1.1</version>
+                <configuration>
+                    <descriptorRefs>
+                        <!--将应用的所有依赖包都打到jar包中。如果依赖的是 jar 包，jar 包会被解压开，平铺到最终的 uber-jar 里去。输出格式为 jar-->
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                    <archive>
+                        <!-- 设置manifest配置文件-->
+                        <manifestEntries>
+                            <!--Premain-Class: 代表 Agent 静态加载时会调用的类全路径名。-->
+                            <Premain-Class>com.atu.agent.MyAgent</Premain-Class>
+                            <!--Agent-Class: 代表 Agent 动态加载时会调用的类全路径名。-->
+                            <Agent-Class>com.atu.agent.MyAgent</Agent-Class>
+                            <!--Can-Redefine-Classes: 是否可进行类定义。-->
+                            <Can-Redefine-Classes>true</Can-Redefine-Classes>
+                            <!--Can-Retransform-Classes: 是否可进行类转换。-->
+                            <Can-Retransform-Classes>true</Can-Retransform-Classes>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+                <executions>
+                    <execution>
+                        <!--绑定到package生命周期阶段上-->
+                        <phase>package</phase>
+                        <goals>
+                            <!--绑定到package生命周期阶段上-->
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <artifactSet>
+                        <includes>
+                            <include>javassist:javassist:jar:</include>
+                            <include>net.bytebuddy:byte-buddy-agent:jar:</include>
+                        </includes>
+                    </artifactSet>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
