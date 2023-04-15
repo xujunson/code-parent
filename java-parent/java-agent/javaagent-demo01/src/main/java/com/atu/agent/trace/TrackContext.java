@@ -1,10 +1,10 @@
-package com.atu.config;
+package com.atu.agent.trace;
 
 /**
  * @author: Tom
- * @create: 2023-04-14 00:00
- * @Description:
- */
+ * @date: 2023/4/15 13:57
+ * @description: TODO
+ **/
 public class TrackContext {
 
     private static final ThreadLocal<String> trackLocal = new ThreadLocal<String>();
@@ -22,3 +22,4 @@ public class TrackContext {
     }
 
 }
+
